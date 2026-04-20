@@ -57,3 +57,10 @@ _build/
 
 
 output/
+
+# MinerU setup script artifacts
+.venv/
+activate_mineru.sh
+test_output/
+htmlcov/
+.coverage
