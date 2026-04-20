@@ -1,0 +1,3034 @@
+[
+    {
+        "type": "text",
+        "text": "保密",
+        "bbox": [
+            184,
+            418,
+            231,
+            436
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "久谦论坛调研周度小结",
+        "text_level": 1,
+        "bbox": [
+            186,
+            470,
+            522,
+            495
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "二六年四月",
+        "bbox": [
+            184,
+            526,
+            285,
+            541
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "本报告仅基于迄今为止可获得的信息编写。未经久谦中台事先书面同意，任何其它人士或实体不得使用本报告，本报告亦不能用于任何其它目的。即使在经久谦论坛同意的情况下向任何其它人士或实体披露了本报告，久谦中台不会就本报告的内容对该等其它人士和实体承担任何责任。",
+        "bbox": [
+            183,
+            669,
+            810,
+            736
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "久谦论坛",
+        "bbox": [
+            863,
+            110,
+            932,
+            124
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            48,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_number",
+        "text": "久谦| 0",
+        "bbox": [
+            885,
+            960,
+            939,
+            973
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "¶ 本周板块观点",
+        "text_level": 1,
+        "bbox": [
+            55,
+            43,
+            200,
+            60
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "整体观点：本周市场在美伊临时停火和谈的背景下，三大指数继续大幅反弹，都收 3%以上的周阳线；纳斯达克和标普 500指数基本收复 2月 28日战争以来的跌幅，反弹到前期密集成交区；10年美债利率从开战前的低于 4.0上涨到4.33；基本面情况不支持指数直接创新高。战争烈度上升的尾部风险并未解除，且 4月份面临财报季，战争带来的通胀对大厂下一个季度的业绩指引可能有负面影响。中期宏观还是存在不确定性的，机会聚焦在与战争相关性更低、估值合理的科技板块，中期未到转入右侧的时候，反弹到高位建议谨慎。科技板块中，半导体指数已经创出新高，一直看好的存储、光通、设备表现都比较强势；上周新提示的无 HBM 叠加CXL内存池化的新技术趋势相关股票本周表现较好（MRVL，ALAB），持续看好，是新的弹性方向。随着算力持续供不应求，产业链利润分配开始向算力提供方倾斜，New Cloud（CRWV，NBIS等）弹性较大，重点关注。中期看，战争带来的中东主权基金对 AI 的大力投入信心以及 CSP 大厂传统业务可能受通胀影响，对 AI 总量的回答处于逆风期，预计市场仍会聚焦于细分景气度高的环节，但也要关注交易的拥挤度。如果中东建设 AIDC受阻，会加剧北美的基建压力，电力是 AIDC建设最卡脖子环节，“缺电”带来的燃气轮机、储能、变压器、柴发等电力设备高景气公司受益面将进一步扩散、且持续时间有望进一步拉长；储能需要关注在北美 AIDC 落地进度不及预期，以及 Q1 出口退税有抢装的背景下，5、6月份的真实需求能否继续爆发，如果欧洲、澳洲、国内的装机需求如调研的比较旺盛，储能（电芯及上游锂电材料）还有一波投资机会。美股生物医药板块（XBI指数）在新的收购大幅溢价带动下，有向上突破趋势，部分短期有并购预期且潜在收益空间较大的公司继续关注；随着并购落地，龙头大药企的收入持续性担忧得到缓解，等市场情绪好转时，有估值修复机会。",
+        "bbox": [
+            72,
+            67,
+            944,
+            434
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Semi 观点： 战争扰动出现转折点，市场重新回归 AI 主线。从基本面看，当前 AI 模型公司收入仍然维持高速增长，开始缓和整体 AI capex持续性的担忧并给整体 AI硬件带来beta提升。 细分方向上，我们判断光、存和设备大票 EPS 快速超预期增长已经走到中后期, EPS 26-27年的预期差基本较小，超预期空间相对有限，后续版块继续上涨需要远期增长或盈利能力的确定性。存储版块，近期消息面不断有 LTA的公开信息开始在市场发酵，我们预计随着 LTA 基本接近签署完毕，存储公司在财报业绩会或成为 LTA官方细节的公开披露的关键催化剂，同时 LTA确定后由于 capex扩产受限于洁净室和设备产能，存储公司产生大量现金，股东回报或成为另一个关键催化点，板块修复逻辑仍在加强。算力层面，推理供不应求且算力可直接带来客观收入回报驱动整体算力估值回暖，我们继续强调由于 cowos 和HBM 的产能限制下，无 HBM 版本芯片以及 CXL 内存池化带来的创新会是重点新增逻辑版块，并带来新一轮产业链变化并带动相关公司 MRVL 和 ALAB 的持续上修，但技术变化存在不确定性，后续需要持续追踪供应链投片进度和测试反馈。通信层面，本周 lite已经演绎较为充分，当前股价已经对应 27年30x，短期进一步向上的空间有限，需要等待下一波催化，而 cohr 当前股价对应仅 20x，考虑到 cohr 或有可能在二三季度产能爆发，因此这个位置我们更看好 cohr，除此之外，本周npo 在国内发酵，根据我们的调研，亚马逊的 npo 大概率是用于 trn 4 的 scale up，这意味着 npo 正式进入 scale up，未来的空间极大，因此 tsem 更有可能演绎出我们此前的 bull case，27 年 eps 可以看到 11 块，估值也有进一步向上的空间，我们调整排序为 cohr>tsem>lite，若我们观察到北美也发酵 npo，则会把 tsem 的排序进一步靠前。设备层面，三星Foundry、Intel的先进封装产能均收到来自谷歌等大厂的问询，特斯拉Terafab 也和 INTC合作进行落地加速，在台积电产能受限的情况下，其余 foundry和 OSAT 厂商持续积极扩产满足溢出需求，将持续带动设备高景气，短期台积电建设超预期加速，叠加三月底海力士和三星 EUV加单，ASML业绩和指引或1超预期概率较大，但预计由于政治敏感性，中国区业务不会 guide up，整体预计小幅 beat 市场预期。综01合板块排序：算力新方案 > 存储 > 光通 > 设备。8",
+        "bbox": [
+            72,
+            438,
+            941,
+            895
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "▪ 市场聚焦的分支：DCI和 OCS。可插拔光模块A股龙头本周随着北美大票反弹+创业板新政策有利于权5重股的影响下，本周有明显上涨，考虑 27年的估值还有一定空间。CPO产业趋势确定，但 A股预期较满，后面需要等业绩进入兑现期。OFC 大会之后，DCI 和 OCS 成了产业共识度最高的新方向。美股和A 股都给了 DCI、OCS 龙头较高成长溢价，但短期美股、A 股光通交易都比较拥挤，不建议继续追高，估值较低的 Nokia 仍重点关注",
+        "bbox": [
+            72,
+            898,
+            934,
+            938
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "page_number",
+        "text": "1 / 25 ",
+        "bbox": [
+            473,
+            960,
+            532,
+            973
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            90,
+            42,
+            926,
+            103
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ 综合考虑估值及确定性,北美及 AH 股综合排序如下:",
+        "bbox": [
+            73,
+            108,
+            515,
+            124
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1） 美股大票:MRVL>TSM >AVGO >NV > INTC>ASML > AMAT> LRCX",
+            "ii 美股小票: NOK >ALAB >CLS>COHR>TSEM >LITE>CIEN> TER>MKSI> RMBS >FLEX ",
+            "i)存储： SNDK>Kioxia(铠侠)>三星电子>SK海力士 >MU",
+            "iv)A/H 股硬件:中际旭创>新易盛>兆易创新>立讯精密>英维克>德科立>欧科亿>超颖电子>沪电股份>胜宏科技>麦格米特",
+            "美股应用大票：AMZN>GOOG>META>MSFT"
+        ],
+        "bbox": [
+            92,
+            129,
+            922,
+            256
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/8afeb1f03ecbe228c91263e67521d3ea77ea27f8510cfe056cb3e70831eae1c4.jpg",
+        "table_caption": [
+            "AI 硬件总表"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>所属板块</td><td>股票代码</td><td>公司名称</td><td>最新市值(美 金)</td><td>最新股价</td><td>24年EPS</td><td>25年预期 EPS</td><td>26年预期 EPS</td><td>27年预期 EPS</td><td>25PE</td><td>26PE</td><td>27PE</td><td>25年利润增速</td><td>26年利润增速</td><td>27年利润增速</td><td>周度涨跌</td></tr><tr><td rowspan=\"5\">AI芯片(GPGPU+ASIC)</td><td>NVDA.O</td><td>英伟达</td><td>45,837</td><td>188.63</td><td>3.0</td><td>4.8</td><td>9.5</td><td>15.2</td><td>39.3</td><td>19.9</td><td>12.4</td><td>60%</td><td>98%</td><td>60%</td><td>6%</td></tr><tr><td>AVGO.O</td><td>博通</td><td>17,592</td><td>371.55</td><td>4.8</td><td>6.8</td><td>12.0</td><td>21.0</td><td>54.6</td><td>31.0</td><td>17.7</td><td>42%</td><td>76%</td><td>75%</td><td>18%</td></tr><tr><td>AMD.O</td><td>超威半导体</td><td>3,995</td><td>245.04</td><td>3.4</td><td>4.2</td><td>8.0</td><td>12.0</td><td>58.3</td><td>30.6</td><td>20.4</td><td>24%</td><td>90%</td><td>50%</td><td>13%</td></tr><tr><td>MRVLO</td><td>迈威尔科技</td><td>1,123</td><td>128.49</td><td>1.6</td><td>2.9</td><td>3.2</td><td>6.0</td><td>44.3</td><td>40.2</td><td>21.4</td><td>85%</td><td>10%</td><td>88%</td><td>20%</td></tr><tr><td>3661.TW</td><td>世芯-KY</td><td>77</td><td>3,025</td><td>72.0</td><td>72.0</td><td>200.0</td><td></td><td>42.0</td><td>15.1</td><td></td><td>0%</td><td>178%</td><td></td><td>12%</td></tr><tr><td rowspan=\"8\">内存</td><td>MU.O</td><td>*美光科技</td><td>4,743</td><td>420.59</td><td>1.3</td><td>10.5</td><td>80.0</td><td>123.0</td><td>40.1</td><td>5.3</td><td>3.4</td><td>708%</td><td>662%</td><td>54%</td><td>15%</td></tr><tr><td>000660.KS</td><td>*SK海力士</td><td>4,939</td><td>1,027,000</td><td>2718</td><td>53434</td><td>264679</td><td>347277</td><td>19.2</td><td>3.9</td><td>3.0</td><td>1866%</td><td>395%</td><td>31%</td><td>17%</td></tr><tr><td>005930.KS</td><td>*三星电子</td><td>8,229</td><td>206,000</td><td>4956</td><td>5968</td><td>46580</td><td>61029</td><td>34.5</td><td>4.4</td><td>3.4</td><td>20%</td><td>680%</td><td>31%</td><td>11%</td></tr><tr><td>SNDK.O</td><td>闪迪</td><td>1,257</td><td>851.77</td><td>3.2</td><td>6.5</td><td>122.0</td><td>164.0</td><td>131.0</td><td>7.0</td><td>5.2</td><td>103%</td><td>1777%</td><td>34%</td><td>21%</td></tr><tr><td>285A.T</td><td>KIOXIA</td><td>1,031</td><td>30,140.00</td><td>515.0</td><td>311.0</td><td>5731.0</td><td>8684.0</td><td>96.9</td><td>5.3</td><td>3.5</td><td>-40%</td><td>1743%</td><td>52%</td><td>38%</td></tr><tr><td>STX.O</td><td>希捷科技</td><td>1,097</td><td>503</td><td>1.8</td><td>10.0</td><td>18.4</td><td>27.4</td><td>50.3</td><td>27.3</td><td>18.4</td><td>456%</td><td>84%</td><td>49%</td><td>17%</td></tr><tr><td>WDC.O</td><td>西部数据</td><td>1,164</td><td>343</td><td>-2.3</td><td>6.9</td><td>12.7</td><td>18.5</td><td>49.8</td><td>27.0</td><td>18.6</td><td>-400%</td><td>84%</td><td>46%</td><td>16%</td></tr><tr><td>603986.SH</td><td>兆易创新</td><td>275</td><td>265</td><td>1.6</td><td>2.4</td><td>10.3</td><td>17.3</td><td>112.8</td><td>25.7</td><td>15.3</td><td>50%</td><td>338%</td><td>68%</td><td>6%</td></tr><tr><td rowspan=\"7\">互联网络</td><td>ALAB.O</td><td>ASTERA LABS</td><td>254</td><td>149.05</td><td>0.8</td><td>1.6</td><td>4.4</td><td>8.5</td><td>93.2</td><td>33.9</td><td>17.5</td><td>93%</td><td>175%</td><td>93%</td><td>27%</td></tr><tr><td>CRDO.O</td><td>CREDO TECHNO</td><td>221</td><td>119.59</td><td>0.1</td><td>0.6</td><td>2.6</td><td></td><td>213.6</td><td>46.0</td><td></td><td>522%</td><td>364%</td><td></td><td>18%</td></tr><tr><td>CSCO.O</td><td>思科</td><td>3,248</td><td>82.22</td><td>3.7</td><td>3.9</td><td>4.3</td><td></td><td>21.0</td><td>19.1</td><td></td><td>7%</td><td>10%</td><td></td><td>4%</td></tr><tr><td>ANET.N</td><td>*ARISTA网络</td><td>1,852</td><td>147.35</td><td>2.2</td><td>2.8</td><td>3.3</td><td></td><td>52.6</td><td>44.7</td><td></td><td>27%</td><td>18%</td><td></td><td>16%</td></tr><tr><td>NOK.N</td><td>诺基亚</td><td>543</td><td>9.46</td><td>0.3</td><td>0.2</td><td>0.4</td><td>0.5</td><td>60.7</td><td>25.6</td><td>18.7</td><td>-54%</td><td>137%</td><td>36%</td><td>7%</td></tr><tr><td>CIEN.N</td><td>CIENA科技</td><td>701</td><td>496.02</td><td>1.8</td><td>2.5</td><td>6.1</td><td>9.3</td><td>198.4</td><td>81.3</td><td>53.3</td><td>39%</td><td>144%</td><td>52%</td><td>11%</td></tr><tr><td>688205.SH</td><td>德科立</td><td>54</td><td>236.30</td><td>0.8</td><td>0.5</td><td>3.4</td><td>8.7</td><td>472.6</td><td>69.5</td><td>27.2</td><td>-38%</td><td>580%</td><td>156%</td><td>-4%</td></tr><tr><td rowspan=\"5\">光模块</td><td>COHR.N</td><td>COHERENT</td><td>577</td><td>307.50</td><td>1.2</td><td>3.8</td><td>8.5</td><td>15.6</td><td>80.9</td><td>36.2</td><td>19.7</td><td>214%</td><td>124%</td><td>84%</td><td>19%</td></tr><tr><td>LITE.O</td><td>LUMENTUM</td><td>641</td><td>897.30</td><td>0.6</td><td>6.0</td><td>12.0</td><td>29.5</td><td>149.6</td><td>74.8</td><td>30.4</td><td>953%</td><td>100%</td><td>146%</td><td>9%</td></tr><tr><td>TSEM.O</td><td>TOWER半导体</td><td>228</td><td>203.59</td><td>1.9</td><td>2.3</td><td>4.5</td><td>10.8</td><td>88.5</td><td>45.2</td><td>18.9</td><td>21%</td><td>96%</td><td>140%</td><td>3%</td></tr><tr><td>300502.SZ</td><td>新易盛</td><td>757</td><td>522.50</td><td>4.0</td><td>9.0</td><td>23.5</td><td>62.0</td><td>58.1</td><td>22.2</td><td>8.4</td><td>125%</td><td>161%</td><td>164%</td><td>15%</td></tr><tr><td>300308.SZ</td><td>中际旭创</td><td>1,189</td><td>734.65</td><td>4.7</td><td>10.0</td><td>37.0</td><td>81.0</td><td>73.5</td><td>19.9</td><td>9.1</td><td>112%</td><td>270%</td><td>119%</td><td>21%</td></tr><tr><td>消费电子</td><td>002475.SZ</td><td>立讯精密</td><td>617</td><td>58.18</td><td>1.9</td><td>2.3</td><td>3.0</td><td>4.0</td><td>25.3</td><td>19.6</td><td>14.4</td><td>24%</td><td>29%</td><td>36%</td><td>19%</td></tr><tr><td rowspan=\"6\">PCB</td><td>TTMI.O</td><td>迅达科技</td><td>126</td><td>121.49</td><td>1.7</td><td>2.1</td><td>2.7</td><td></td><td>57.9</td><td>45.0</td><td></td><td>24%</td><td>29%</td><td></td><td>25%</td></tr><tr><td>2383.TW</td><td>*台光电子</td><td>384</td><td>3,420.00</td><td>27.3</td><td>44.6</td><td>60.9</td><td></td><td>76.7</td><td>56.2</td><td></td><td>63%</td><td>37%</td><td></td><td>23%</td></tr><tr><td>603175.SH</td><td>超颖电子</td><td>56</td><td>87.19</td><td>0.6</td><td>0.5</td><td>1.3</td><td>5.2</td><td>165.5</td><td>69.5</td><td>16.7</td><td>-16%</td><td>138%</td><td>316%</td><td>15%</td></tr><tr><td>002463.SZ</td><td>沪电股份</td><td>248</td><td>88.32</td><td>1.4</td><td>2.2</td><td>3.3</td><td>4.8</td><td>40.1</td><td>26.8</td><td>18.4</td><td>63%</td><td>50%</td><td>45%</td><td>16%</td></tr><tr><td>300476.SZ</td><td>胜宏科技</td><td>368</td><td>289.77</td><td>1.3</td><td>5.0</td><td>12.9</td><td>21.1</td><td>58.0</td><td>22.5</td><td>13.7</td><td>273%</td><td>158%</td><td>64%</td><td>10%</td></tr><tr><td>688308.SH</td><td>欧科亿</td><td>22</td><td>95.40</td><td>0.4</td><td>0.7</td><td>5.3</td><td>7.9</td><td>146.8</td><td>17.9</td><td>12.0</td><td>81%</td><td>720%</td><td>49%</td><td>13%</td></tr><tr><td rowspan=\"4\">液冷</td><td>VRT.N</td><td>*VERTIV</td><td>1,129</td><td>295.11</td><td>2.9</td><td>3.5</td><td>4.8</td><td>6.6</td><td>83.6</td><td>61.6</td><td>45.1</td><td>24%</td><td>36%</td><td>37%</td><td>13%</td></tr><tr><td>002837.SZ</td><td>英维克</td><td>141</td><td>99.05</td><td>0.6</td><td>0.7</td><td>2.7</td><td>4.2</td><td>137.6</td><td>37.1</td><td>23.8</td><td>18%</td><td>271%</td><td>56%</td><td>18%</td></tr><tr><td>000811.SZ</td><td>冰轮环境</td><td>27</td><td>18.66</td><td>0.8</td><td>0.7</td><td>1.0</td><td>1.3</td><td>28.3</td><td>18.7</td><td>14.4</td><td>-20%</td><td>51%</td><td>29%</td><td>11%</td></tr><tr><td>0179.HK</td><td>德昌电机控股</td><td>31</td><td>26.26</td><td>1.8</td><td>2.0</td><td>2.7</td><td></td><td>13.0</td><td>9.7</td><td></td><td>15%</td><td>34%</td><td></td><td>9%</td></tr><tr><td rowspan=\"4\">电源</td><td>2308.TW</td><td>*台达电</td><td>1,413</td><td>1,735.00</td><td>13.5</td><td>20.4</td><td>25.5</td><td></td><td>84.9</td><td>68.0</td><td></td><td>51%</td><td>25%</td><td></td><td>21%</td></tr><tr><td>2301.TW</td><td>*光宝科技</td><td>119</td><td>161.50</td><td>5.2</td><td>6.1</td><td>7.3</td><td></td><td>26.4</td><td>22.1</td><td></td><td>19%</td><td>20%</td><td></td><td>11%</td></tr><tr><td>002851.SZ</td><td>麦格米特</td><td>89</td><td>105.11</td><td>0.9</td><td>0.6</td><td>2.7</td><td>7.0</td><td>172.3</td><td>38.9</td><td>15.0</td><td>-29%</td><td>343%</td><td>159%</td><td>11%</td></tr><tr><td>300870.SZ</td><td>欧陆通</td><td>50</td><td>314.00</td><td>2.7</td><td>2.1</td><td>7.1</td><td>12.4</td><td>148.9</td><td>44.5</td><td>25.4</td><td>-22%</td><td>235%</td><td>75%</td><td>20%</td></tr><tr><td rowspan=\"4\">服务器</td><td>CLS.N</td><td>天弘科技</td><td>404</td><td>351.31</td><td>4.0</td><td>5.6</td><td>10.0</td><td>15.0</td><td>63.2</td><td>35.1</td><td>23.4</td><td>41%</td><td>80%</td><td>50%</td><td>19%</td></tr><tr><td>SANM.O</td><td>新美亚电子</td><td>81</td><td>147.76</td><td>4.0</td><td>4.9</td><td>9.3</td><td>16.0</td><td>30.2</td><td>15.9</td><td>9.2</td><td>23%</td><td>90%</td><td>72%</td><td>13%</td></tr><tr><td>FLEX.O</td><td>伟创力</td><td>282</td><td>76.74</td><td>2.7</td><td>3.2</td><td>4.0</td><td>5.5</td><td>24.4</td><td>19.2</td><td>14.0</td><td>17%</td><td>27%</td><td>38%</td><td>12%</td></tr><tr><td>601138.SH</td><td>工业富联</td><td>1,634</td><td>56.52</td><td>1.2</td><td>1.8</td><td>3.7</td><td></td><td>31.4</td><td>15.3</td><td></td><td>54%</td><td>106%</td><td></td><td>8%</td></tr><tr><td rowspan=\"2\">内存接口芯片</td><td>RMBS.O</td><td>蓝博士半导体</td><td>119</td><td>110.44</td><td>1.7</td><td>2.6</td><td>3.2</td><td>6.0</td><td>43.1</td><td>34.5</td><td>18.4</td><td>53%</td><td>25%</td><td>88%</td><td>19%</td></tr><tr><td>688008.SH</td><td>澜起科技</td><td>259</td><td>143.53</td><td>1.3</td><td>2.6</td><td>3.4</td><td>4.2</td><td>54.8</td><td>42.6</td><td>34.2</td><td>109%</td><td>29%</td><td>25%</td><td>13%</td></tr><tr><td rowspan=\"9\">芯片测试设备</td><td>ASML.O</td><td>阿斯麦</td><td>5,822</td><td>1,478.28</td><td>19.2</td><td>24.9</td><td>34.0</td><td>51.0</td><td>59.4</td><td>43.5</td><td>29.0</td><td>29%</td><td>37%</td><td>50%</td><td>12%</td></tr><tr><td>LRCX.O</td><td>拉姆研究</td><td>3,293</td><td>263.66</td><td>3.4</td><td>4.8</td><td>6.3</td><td>8.6</td><td>54.9</td><td>41.9</td><td>30.7</td><td>41%</td><td>31%</td><td>37%</td><td>21%</td></tr><tr><td>AMAT.O</td><td>应用材料</td><td>3,170</td><td>399.49</td><td>8.7</td><td>9.4</td><td>11.4</td><td>14.5</td><td>42.5</td><td>35.0</td><td>27.6</td><td>8%</td><td>21%</td><td>27%</td><td>15%</td></tr><tr><td>MKSI.O</td><td>MKS</td><td>181</td><td>268.77</td><td>6.6</td><td>7.5</td><td>11.6</td><td>14.2</td><td>35.8</td><td>23.2</td><td>18.9</td><td>14%</td><td>55%</td><td>22%</td><td>15%</td></tr><tr><td>KLAC.O</td><td>科天半导体</td><td>2,277</td><td>1,737.28</td><td>23.8</td><td>35.3</td><td>41.9</td><td>48.7</td><td>49.2</td><td>41.5</td><td>35.7</td><td>49%</td><td>19%</td><td>16%</td><td>15%</td></tr><tr><td>ONTO.N</td><td>ONTO INNOVAT</td><td>128</td><td>257.14</td><td>5.3</td><td>5.1</td><td>6.8</td><td></td><td>50.4</td><td>37.8</td><td></td><td>-4%</td><td>33%</td><td></td><td>19%</td></tr><tr><td>KLIC.O</td><td>库力索法半导体</td><td>41</td><td>77.46</td><td>0.0</td><td>0.2</td><td>2.0</td><td></td><td>368.9</td><td>38.7</td><td></td><td>600%</td><td>852%</td><td></td><td>21%</td></tr><tr><td>TER.O</td><td>泰瑞达</td><td>576</td><td>367.99</td><td>3.2</td><td>3.2</td><td>6.2</td><td>11.4</td><td>115.0</td><td>59.4</td><td>32.3</td><td>0%</td><td>94%</td><td>84%</td><td>19%</td></tr><tr><td>6857.T</td><td>*爱德万测试</td><td>1,147</td><td>24,990</td><td>84.2</td><td>218.0</td><td>410.0</td><td>538.1</td><td>114.6</td><td>61.0</td><td>46.4</td><td>159%</td><td>88%</td><td>31%</td><td>16%</td></tr></table>",
+        "bbox": [
+            73,
+            279,
+            963,
+            929
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            48,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "page_number",
+        "text": "2 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/0c81880a4a36515da9624a204dfa8741387a4ac789724bee6388628b70ad2041.jpg",
+        "table_caption": [
+            "电力板块 "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>所属板块</td><td>股票代码</td><td>公司名称</td><td>最新市值(美金)</td><td>最新股价</td><td>24年EPS</td><td>25年实际/预期EPS</td><td>26年预期EPS</td><td>27年预期EPS</td><td>25PE</td><td>26PE</td><td>27PE</td><td>CAGR</td><td>PEG</td><td>25年利润增速</td><td>26年利润增速</td><td>27年利润增速</td><td>周度涨跌</td></tr><tr><td rowspan=\"5\">变压器</td><td>ETN.N</td><td>* 伊顿</td><td>1,564</td><td>403.00</td><td>11.1</td><td>12.2</td><td>13.3</td><td>15.5</td><td>33.1</td><td>30.3</td><td>26.0</td><td>12.9%</td><td>2.4</td><td>9%</td><td>9%</td><td>17%</td><td>12%</td></tr><tr><td>002028.SZ</td><td>思源电气</td><td>239</td><td>210.33</td><td>2.6</td><td>4.1</td><td>5.4</td><td>7.0</td><td>51.8</td><td>39.1</td><td>29.9</td><td>31.7%</td><td>1.2</td><td>54%</td><td>32%</td><td>31%</td><td>0%</td></tr><tr><td>300617.SZ</td><td>安靠智电</td><td>14</td><td>58.31</td><td>1.1</td><td>0.5</td><td>1.5</td><td>3.0</td><td>128.8</td><td>38.6</td><td>19.3</td><td>158.2%</td><td>0.2</td><td>-60%</td><td>233%</td><td>100%</td><td>15%</td></tr><tr><td>688676.SH</td><td>金盘科技</td><td>56</td><td>84.34</td><td>1.2</td><td>1.4</td><td>2.1</td><td>3.2</td><td>58.6</td><td>40.8</td><td>26.7</td><td>48.0%</td><td>0.9</td><td>15%</td><td>43%</td><td>53%</td><td>17%</td></tr><tr><td>002270.SZ</td><td>* 华明装备</td><td>37</td><td>28.20</td><td>0.7</td><td>0.8</td><td>1.2</td><td>1.5</td><td>35.7</td><td>24.4</td><td>18.8</td><td>37.6%</td><td>0.6</td><td>14%</td><td>46%</td><td>30%</td><td>7%</td></tr><tr><td rowspan=\"4\">储能</td><td>300014.SZ</td><td>亿纬锂能</td><td>211</td><td>69.08</td><td>2.0</td><td>2.0</td><td>4.0</td><td>6.1</td><td>34.2</td><td>17.3</td><td>11.3</td><td>4.0%</td><td>0.2</td><td>2%</td><td>98%</td><td>53%</td><td>15%</td></tr><tr><td>300274.SZ</td><td>阳光电源</td><td>395</td><td>130.79</td><td>5.3</td><td>6.6</td><td>8.0</td><td>9.1</td><td>20.0</td><td>16.4</td><td>14.4</td><td>17.7%</td><td>0.9</td><td>23%</td><td>22%</td><td>14%</td><td>6%</td></tr><tr><td>300750.SZ</td><td>* 宁德时代</td><td>2,807</td><td>416.00</td><td>11.6</td><td>16.1</td><td>21.3</td><td>26.6</td><td>25.8</td><td>19.6</td><td>15.7</td><td>28.3%</td><td>0.7</td><td>39%</td><td>32%</td><td>25%</td><td>8%</td></tr><tr><td>605117.SH</td><td>* 德业股份</td><td>185</td><td>139.60</td><td>4.8</td><td>3.5</td><td>6.5</td><td>8.9</td><td>39.8</td><td>21.5</td><td>15.7</td><td>59.0%</td><td>0.4</td><td>-26%</td><td>85%</td><td>36%</td><td>15%</td></tr><tr><td rowspan=\"6\">燃气轮机</td><td>GEV.N</td><td>GE VERNOVA</td><td>2,665</td><td>991.32</td><td>5.6</td><td>7.1</td><td>12.6</td><td>18.5</td><td>140.6</td><td>78.8</td><td>53.7</td><td>61.8%</td><td>1.3</td><td>26%</td><td>78%</td><td>47%</td><td>10%</td></tr><tr><td>002353.SZ</td><td>杰瑞股份</td><td>175</td><td>117.46</td><td>2.6</td><td>3.0</td><td>4.2</td><td>5.9</td><td>38.7</td><td>28.2</td><td>20.0</td><td>38.9%</td><td>0.7</td><td>17%</td><td>37%</td><td>41%</td><td>9%</td></tr><tr><td>600875.SH</td><td>东方电气</td><td>196</td><td>39.51</td><td>0.8</td><td>1.2</td><td>1.4</td><td>1.7</td><td>34.4</td><td>28.5</td><td>22.8</td><td>22.8%</td><td>1.2</td><td>36%</td><td>21%</td><td>25%</td><td>7%</td></tr><tr><td>002126.SZ</td><td>银轮股份</td><td>57</td><td>45.85</td><td>1.0</td><td>1.2</td><td>1.5</td><td>2.1</td><td>39.7</td><td>30.7</td><td>21.4</td><td>36.1%</td><td>0.8</td><td>20%</td><td>29%</td><td>43%</td><td>10%</td></tr><tr><td>603308.SH</td><td>应流股份</td><td>71</td><td>71.41</td><td>0.4</td><td>0.6</td><td>0.8</td><td>1.3</td><td>111.6</td><td>86.0</td><td>56.2</td><td>40.9%</td><td>2.1</td><td>52%</td><td>30%</td><td>53%</td><td>13%</td></tr><tr><td>000534.SZ</td><td>* 万泽股份</td><td>34</td><td>45.68</td><td>0.4</td><td>0.5</td><td>0.7</td><td>0.9</td><td>96.4</td><td>67.3</td><td>53.1</td><td>34.7%</td><td>1.9</td><td>20%</td><td>43%</td><td>27%</td><td>23%</td></tr><tr><td rowspan=\"4\">柴发/内燃机</td><td>CMI.N</td><td>* 康明斯</td><td>852</td><td>616.14</td><td>21.5</td><td>23.5</td><td>26.9</td><td>31.0</td><td>26.2</td><td>22.9</td><td>19.9</td><td>14.8%</td><td>1.5</td><td>9%</td><td>14%</td><td>15%</td><td>12%</td></tr><tr><td>CAT.N</td><td>* 卡特彼勒</td><td>3,679</td><td>790.66</td><td>23.2</td><td>19.1</td><td>21.2</td><td>24.1</td><td>41.4</td><td>37.2</td><td>32.8</td><td>12.4%</td><td>3.0</td><td>-18%</td><td>11%</td><td>14%</td><td>10%</td></tr><tr><td>000338.SZ</td><td>* 潍柴动力</td><td>348</td><td>27.00</td><td>1.2</td><td>1.3</td><td>1.6</td><td>1.8</td><td>21.3</td><td>16.8</td><td>15.1</td><td>18.6%</td><td>0.9</td><td>5%</td><td>27%</td><td>11%</td><td>8%</td></tr><tr><td>600590.SH</td><td>泰豪科技</td><td>18</td><td>14.84</td><td>-1.2</td><td>0.1</td><td>0.5</td><td>0.8</td><td>222.0</td><td>28.1</td><td>18.8</td><td>244.1%</td><td>0.1</td><td>-106%</td><td>689%</td><td>50%</td><td>10%</td></tr><tr><td>航改燃</td><td>FTA1.O</td><td>FTA1 AVIATION</td><td>258</td><td>251.42</td><td>-2.3</td><td>4.6</td><td>7.4</td><td>9.3</td><td>54.7</td><td>34.0</td><td>27.0</td><td>42.2%</td><td>0.8</td><td>-300%</td><td>61%</td><td>26%</td><td>4%</td></tr></table>",
+        "bbox": [
+            33,
+            61,
+            963,
+            282
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "¶前沿趋势 ",
+        "text_level": 1,
+        "bbox": [
+            53,
+            326,
+            171,
+            346
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Dapeng ",
+        "bbox": [
+            55,
+            361,
+            119,
+            376
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "【海外模型】海外头部模型能力仍在快速抬升，Mythos 在 coding/安全上的跃迁说明训练扩容远未见顶，模型代差仍可追赶，算力军备竞赛和推理使用量扩张都将继续强化",
+        "bbox": [
+            55,
+            390,
+            934,
+            429
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) Mythos 在SWE-bench 和网络安全能力上的超级跃迁，说明前沿模型训练带来的能力提升远没有到天花板",
+            "i) Mythos 此次在SWE-bench上的大幅进步，不是线性优化，而更像是一次明显抬升能力上限的跃迁， 接近当年GPT-4相对 ChatGPT-3.5所体现出的代际提升。尤其是其在网络安全任务上的能力外溢，甚至惊动了美国商务部，已经不再只是“编程更强”，而是开始进入更高复杂度、更高风险任务的实战可用区间。这背后更重要的信号不是单一模型领先，而是在Blackwell/TPUv7级别训练和推理资源支撑下，模型能力仍然能被继续显著往上推，意味着训练侧 scaling并未触顶，后续更大集群、更多训练投入依然有望换来可观能力增益",
+            "2) 若 Mythos 模型后续进一步开放，蒸馏和降本会推动中小模型快速逼近当前顶级闭源模型水平，进而再 次放大推理需求 ",
+            "现，迅速把能力向更低成本模型扩散。换句话说，今天只有顶级用户才能用到的高能力模型，后续可能会以更低价格、更多形态进入主流市场，相当于把当前 Claude Opus 4.6 级别的能力进一步降本普及。这会触发非常典型的“能力提升+成本下降→使用量爆发”的过程，符合杰文斯悖论：单位成本下降并不会压缩总需求，反而会让更多高频、长链条、持续运行的 agent型场景跑起来，从而继续推高token 消耗和推理基础设施需求",
+            "3) 模型能力仍未形成显著不可追赶壁垒，领先更多来自资源投入、时间先发和数据飞轮，而非绝对封锁性的护城河，Claude code 的部分工程优势并非不可复制，源码泄露反而可能加速行业对关键能力模块的追赶",
+            "i）从目前渠道反馈看，Claude在coding上的领先，更多还是来自更早、更聚焦、投入更重，而不是已经形成完全无法追赶的生态闭环。所谓的 coding数据飞轮确实存在，但目前还没有强到足以把竞争对手894 永久甩开。特别是 coding 场景本身的工具链、harness、记忆管理、执行环境等，还处于快速演进期，54 工程实现和训练细节都仍然有较强可学习性。这意味着落后公司仍可以通过挖顶级人才、追加训练资"
+        ],
+        "bbox": [
+            72,
+            435,
+            937,
+            933
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "page_number",
+        "text": "3 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "源、补齐工程细节来缩小差距，行业竞争不会因为某一家短期领先就结束，反而会继续强化对更大训练集群和更强推理基础设施的需求",
+        "bbox": [
+            107,
+            43,
+            926,
+            80
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            90,
+            87,
+            919,
+            124
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            90,
+            130,
+            929,
+            190
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4) META 新模型快速追赶到 Gemini 3.1 Pro 附近，再次证明顶级人才+算力投入仍然是决定模型上限的核心变量",
+        "bbox": [
+            72,
+            196,
+            934,
+            233
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "i) META新模型的能力追赶，是这轮竞争里非常关键的验证。它说明即便此前市场一度担心部分公司在模型代际竞争中“掉队”，但只要公司仍具备顶级研究人才、充足训练算力和足够坚定的资源投入，能力追赶依然是可以发生的。这也反过来说明，当前模型竞争的本质仍然是人才密度、算力规模和迭代速度的综合竞争，而不是某一家已经建立了稳固到无法撼动的能力垄断。对产业链而言，这意味着训练投入仍会持续，而不是很快收敛",
+        "bbox": [
+            89,
+            240,
+            929,
+            344
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            72,
+            360,
+            910,
+            379
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "【国产模型】国产大模型正在从“开源拉生态、低价卷调用”转向“最强模型闭源化、按能力分层变现”的阶段；这意味着头部强模型与普通模型的商业模式差距会继续拉大，盈利能力和 token 出海的价值留存都有望明显改善",
+        "bbox": [
+            55,
+            394,
+            931,
+            455
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "1) 现象变化：国内头部厂商开始把最强模型从纯开源体系中抽离出来，最核心的能力层正在优先服务商业化",
+        "bbox": [
+            72,
+            461,
+            929,
+            497
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "i) 最近国内模型更明显地走向“开源做生态、旗舰做收费”的双轨制。阿里当前最强的Qwen3-Max 已放在商业体系里，MiniMax 新一代 M2.7 也明显转向 API/订阅收费逻辑，智谱的 GLM-5 / GLM-5-Turbo 同样更多通过平台和产品化方式输出。这说明行业已经开始承认：最强模型的价值，不应再无差别外溢给生态，而要优先沉淀为商业资产",
+        "bbox": [
+            89,
+            504,
+            926,
+            586
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "2) 商业模式变化：最强模型闭源化之后，模型公司卖的不再只是便宜 token，而是“高能力模型+Agent/企业服务”，这会直接带来盈利分化",
+        "bbox": [
+            72,
+            592,
+            932,
+            630
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "i）开源状态下，商业化更多停留在低价 API、公有云托管和少量私有化部署，模型公司很难持续拿到高溢价；但闭源之后，厂商才能把模型能力真正绑定到 Agent、Coding、企业服务和行业工作流里收拿到更高 ARPU 和更强收费权，国内模型公司的盈利能力也比过去更有改善空间",
+        "bbox": [
+            89,
+            636,
+            929,
+            717
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "3) 出海逻辑变化：最强模型闭源后，token 出海的价值留存会比过去更高，这可能是国产模型盈利改善里最重要的增量",
+        "bbox": [
+            72,
+            722,
+            924,
+            760
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "i）过去国产开源模型出海，很多价值会被海外本地部署方、云厂商和中间平台截走，原始模型厂商很难掌握最终收费权；但最强模型闭源后，海外客户更多只能通过官方 API 或授权渠道接入，模型厂商就能保留更多 token 收入和客户关系。也就是说，闭源不只是改善国内商业化，更提升了国产模型全球变现时的价值留存率1",
+        "bbox": [
+            89,
+            766,
+            937,
+            848
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "¶海外 ",
+        "text_level": 1,
+        "bbox": [
+            55,
+            877,
+            124,
+            897
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Dapeng&Jiahao4 ",
+        "bbox": [
+            55,
+            912,
+            181,
+            926
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "page_number",
+        "text": "4 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "1. 【算力】：模型能力上限、token 消耗和 AI 收入都在继续加速，市场对远期 AI capex 总量的担忧开始缓解；但短期算力供给仍然偏紧，产业正在从“总量焦虑”转向“供给瓶颈下的扩散与再定价”，二线芯片、无 HBM 方案、CXL 以及 NCP 资源的重要性同步提升",
+        "bbox": [
+            57,
+            42,
+            934,
+            105
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "1) 需求侧看，模型能力上限继续抬升、token 与 ARR 持续加速，AI 收入增长正在越来越多地受到算力供给约束，市场对远期总量空间的担忧开始缓解",
+        "bbox": [
+            73,
+            108,
+            934,
+            147
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i）过去市场对 AI算力板块的核心担忧，是远期capex 是否会因为收入兑现不足而掉下来；但随着前沿模型能力继续突破、thinking/coding/agent 持续拉动 token 消耗、头部厂商 ARR 继续加速，市场开始逐步接受 AI 收入不是需求不足，而是越来越受到算力供给限制。也就是说，当前的核心矛盾正在从“有没有需求”转向“能不能供得上”，这对整个算力产业链的中期逻辑是明显改善",
+        "bbox": [
+            89,
+            152,
+            937,
+            235
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "2) 供给仍偏紧的背景下，算力产业开始从头部集中走向边际扩散，二线芯片、无 HBM 方案和 CXL 的逻辑都在强化",
+        "bbox": [
+            73,
+            240,
+            934,
+            278
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i）当头部GPU 供给持续紧张、CoWOs 和 HBM 仍被视为中期瓶颈时，下游客户会更积极地寻找可替代或可补充的算力供给，这使得二线算力厂商的采用率有望继续提升。AWS 的 Trainium、AMD 的MI450 吸引力提升，本质上都反映出客户在寻找“不是最优但足够可用”的新增供给；同样，市场对远期 Cowos/HBM 卡脖子的焦虑，也在强化无 HBM 芯片和 CXL 存算分离方案的产业逻辑largely soldoutTrainium3..isnearlyfully-subscribed,Asignificant chunkofTrainium4..hasalreadybeenreservedAWS CEO 股东信",
+        "bbox": [
+            89,
+            282,
+            937,
+            453
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "3) 在算力资源紧张和建设节奏前置的背景下，NCP 作为 AIDC 建设与承载资源的稀缺性正在提升，条款改善说明其议价权开始显著上升",
+        "bbox": [
+            73,
+            458,
+            929,
+            497
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i）随着训练和推理集群建设越来越大、交付周期越来越长，NCP 这类具备电力、园区、交付和运维能力的资源方，正在从过去偏执行的建设角色，变成更稀缺的卡位资源。IREN 的微软合同已出现 5 年平均期限和 20% 客户预付款，Nebius 也强调只接 favorable unit economics 的长单；与此同时CoreWeave 连续拿到大额融资、无担保债评级抬升，说明园区、电力、交付和承载能力正在被重新定”向“同时抢园区、电力和建设承载能力”扩散的趋势",
+        "bbox": [
+            89,
+            502,
+            937,
+            629
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "【算力】谷歌无HBMLPU预研推进，芯片设计与CXL相关价值量有望在2027年开始显著释放，预计MRVL、ALAB 更受益",
+        "bbox": [
+            73,
+            655,
+            904,
+            694
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "1) 根据供应链调研反馈，谷歌预研的无 HBM LPU芯片预计有望于 2027年量产。由于该方案不再依赖HBM，而是更多引入外置内存扩展，相关增量价值将主要体现在两部分：一是 LPU 芯片本身的设计价值量，二是围绕 CXL 架构新增的 switch 和 memory controller 价值量。若后续项目顺利落地，2027 年开始相关芯片设计公司以及 CXL 互连环节公司都将迎来明显增量空间",
+        "bbox": [
+            73,
+            699,
+            939,
+            782
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "2) TAM 测算：芯片设计 + CXL 价值量同步打开",
+        "bbox": [
+            73,
+            787,
+            487,
+            804
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i）中性情景：假设谷歌LPU在 2027/2028年分别出货 50万颗、200 万颗，对应：",
+        "bbox": [
+            89,
+            809,
+            737,
+            825
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "a)芯片设计TAM：7.5亿美元、30亿美元",
+        "bbox": [
+            110,
+            831,
+            453,
+            847
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "b)CXL相关TAM：2亿美元、11.2亿美元",
+        "bbox": [
+            112,
+            852,
+            455,
+            869
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i乐观情景：假设谷歌LPU在2027/2028年分别出货 200万颗、1000万颗，对应：",
+        "bbox": [
+            89,
+            873,
+            754,
+            891
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "芯片设计TAM：30亿美元、150亿美元",
+        "bbox": [
+            112,
+            897,
+            455,
+            913
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "b)CXL相关TAM：8亿美元、56亿美元",
+        "bbox": [
+            112,
+            917,
+            440,
+            935
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            47,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "page_number",
+        "text": "5 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "i)从量级上看，即使按中性情景，2028年仅CXL相关增量市场空间也已经达到10亿美元级别；若项目推进顺利、出货加速，CXL 相关价值量有机会快速放大到数十亿美元级别",
+        "bbox": [
+            90,
+            43,
+            926,
+            80
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "table",
+        "img_path": "images/823577e89bc0e8ea0ed75e114d081e924dd85c475a5bac73ced43bcb0ef5b5b6.jpg",
+        "table_caption": [
+            "Base Case (中性情景) "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>指标</td><td>27</td><td>28</td></tr><tr><td>芯片数量(k)</td><td>500</td><td>2,000</td></tr><tr><td>芯片设计ASP($)</td><td>1,500</td><td>1,500</td></tr><tr><td>芯片设计TAM(M)</td><td>750</td><td>3,000</td></tr><tr><td>CXL Switch ASP/LPU</td><td>300</td><td>400</td></tr><tr><td>CXL memory controller ASP/LPU</td><td>100</td><td>160</td></tr><tr><td>CXL TAM(M)</td><td>200</td><td>1,120</td></tr></table>",
+        "bbox": [
+            92,
+            105,
+            559,
+            225
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "table",
+        "img_path": "images/8525f43eb705cdf4eb2b213ea39947e1b39b4c72d616a612b5259ab2e20845c5.jpg",
+        "table_caption": [
+            "Bull Case (乐观情景) "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>指标</td><td>27</td><td>28</td></tr><tr><td>芯片数量(k)</td><td>2,000</td><td>10,000</td></tr><tr><td>芯片设计ASP($)</td><td>1,500</td><td>1,500</td></tr><tr><td>芯片设计TAM(M)</td><td>3,000</td><td>15,000</td></tr><tr><td>CXL Switch ASP/LPU</td><td>300</td><td>400</td></tr><tr><td>CXL memory controller ASP/LPU</td><td>100</td><td>160</td></tr><tr><td>CXL TAM(M)</td><td>800</td><td>5,600</td></tr></table>",
+        "bbox": [
+            92,
+            263,
+            559,
+            379
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "3) 核心假设拆解：",
+        "text_level": 1,
+        "bbox": [
+            73,
+            384,
+            235,
+            399
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "出货量假设：乐观情景主要基于供应链反馈，谷歌对相关无HBM芯片的远期规划有明显上修。市场传闻 28年谷歌整体相关芯片规划量级约 3500万颗，而考虑到带HBM 的TPU在28年预计约出货1500万颗，理论上无HBM LPU 在极乐观情况下有机会对应 2000万颗量级。考虑到当前仍处于spec in阶段，我们采用更保守的乐观假设，即 2027年200万颗、2028年1000万颗。中性情景则参考 Trainium 2导入初期节奏，假设2027 年 50万颗、2028年200万颗。",
+            "ii) 单颗芯片ASP假设：根据供应链反馈，由于该LPU不带 HBM，且采用三星4nm工艺，单颗芯片ASP 预计在1000-2000美元区间，我们测算中统一采用 1500美元"
+        ],
+        "bbox": [
+            89,
+            406,
+            937,
+            552
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "iiiCXL单机价值量假设：",
+        "bbox": [
+            90,
+            558,
+            292,
+            574
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "a)根据产业专家反馈，单颗 TPU/LPU预计对应：",
+        "bbox": [
+            110,
+            581,
+            509,
+            596
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1 个 16 lane memory controller ",
+            "· 2 颗 DDR5，占用 32 lane 的 CXL switch 资源"
+        ],
+        "bbox": [
+            129,
+            602,
+            505,
+            640
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "b)按单 lane价格测算：",
+        "bbox": [
+            110,
+            646,
+            294,
+            662
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "CXL memory controller：PCIe 6.0 约 7-8 美元/lane，PCIe 7.0 约 10 美元/lane，对应单颗芯片约 100美元、160 美元",
+            "CXL switch：单 lane 价格略高于 controller，对应单颗芯片约 300 美元、400 美元"
+        ],
+        "bbox": [
+            129,
+            669,
+            924,
+            728
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "4) 对 MRVL 的影响：受益于 LPU 芯片设计与接口相关环节",
+        "text_level": 1,
+        "bbox": [
+            72,
+            734,
+            569,
+            751
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "i）根据供应链调研，Marvell主要参与谷歌LPU项目前后道相关工作，其中前道侧重点在芯片CXL接口设计，后道侧也有较深参与，我们假设该业务毛利率约 30%-40%，净利率约 15%-20%。若后续Marvell拿到该项目主要份额，则有望直接受益于LPU芯片设计价值量释放",
+            "i中性情景下: "
+        ],
+        "bbox": [
+            89,
+            757,
+            934,
+            838
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "a)收入影响：",
+        "bbox": [
+            112,
+            845,
+            216,
+            860
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "2027年收入增量约 7.5 亿美元9",
+            "4 2028年收入增量约 30亿美元"
+        ],
+        "bbox": [
+            129,
+            866,
+            391,
+            904
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "b)对应 EPS 增量约为：",
+        "bbox": [
+            112,
+            910,
+            295,
+            926
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "2027 年：0.25 美元",
+        "bbox": [
+            129,
+            933,
+            302,
+            948
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "page_number",
+        "text": "6 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            47,
+            966,
+            393,
+            977
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "2028 年：0.70 美元",
+        "bbox": [
+            129,
+            43,
+            304,
+            59
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "ii乐观情景下：",
+        "bbox": [
+            90,
+            65,
+            216,
+            80
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "a)收入影响：",
+        "bbox": [
+            112,
+            87,
+            218,
+            102
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2027年收入增量约 30亿美元",
+        "bbox": [
+            129,
+            109,
+            389,
+            124
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2028年收入增量约 150亿美元",
+        "bbox": [
+            129,
+            131,
+            396,
+            147
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "b)对应 EPS 增量约为：",
+        "bbox": [
+            112,
+            153,
+            295,
+            168
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2027 年：0.70 美元",
+        "bbox": [
+            129,
+            175,
+            304,
+            191
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2028 年：3.50 美元",
+        "bbox": [
+            129,
+            197,
+            304,
+            212
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "C）这意味着，如果谷歌无HBMLPU项目按预期推进，MRVL的受益并不只是“跟到一个新ASIC项目”，而是有机会同时绑定新一代 AI 芯片架构变化带来的接口和设计增量价值，并可能在后续参与到其他 ASIC LPU 的案子中",
+        "bbox": [
+            110,
+            219,
+            922,
+            279
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "5) ALAB 的影响：CXL switch / controller 放量带来高弹性业绩空间",
+        "text_level": 1,
+        "bbox": [
+            73,
+            285,
+            626,
+            300
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "i)ALAB当前在相关高速互连及CXL方向具备领先地位。若谷歌无HBMLPU方案落地，ALAB有望直接受益于 CXL switch 和 memory controller 需求提升",
+        "bbox": [
+            89,
+            307,
+            922,
+            344
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "ii我们假设：",
+        "bbox": [
+            90,
+            351,
+            196,
+            366
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "a)CXL业务利润率与公司整体利润率接近，净利率约 20%",
+        "bbox": [
+            110,
+            373,
+            584,
+            388
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "b)ALAB在谷歌CXL相关配套中的份额，2027 年约 80%，2028 年约 70%",
+        "bbox": [
+            110,
+            395,
+            700,
+            411
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "iii中性情景下: ",
+        "bbox": [
+            90,
+            416,
+            215,
+            432
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "a)收入影响增量",
+        "bbox": [
+            112,
+            439,
+            245,
+            454
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2027 年增量收入约 1.6 亿美元",
+        "bbox": [
+            129,
+            461,
+            393,
+            476
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2028年增量收入约 7.84亿美元",
+        "bbox": [
+            129,
+            483,
+            400,
+            498
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "b)对应 EPS 增量约为:",
+        "bbox": [
+            112,
+            505,
+            295,
+            520
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2027 年：0.19 美元",
+        "bbox": [
+            129,
+            527,
+            302,
+            542
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2028 年：0.90 美元",
+        "bbox": [
+            129,
+            549,
+            302,
+            564
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "iv乐观情景下：",
+        "bbox": [
+            90,
+            571,
+            215,
+            586
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "收入影响增量",
+        "bbox": [
+            112,
+            593,
+            245,
+            608
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2027年增量收入约 5.6 亿美元",
+        "bbox": [
+            129,
+            615,
+            393,
+            630
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2028年增量收入约 39.2亿美元",
+        "bbox": [
+            129,
+            637,
+            400,
+            652
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "b)对应EPS 增量约为：",
+        "bbox": [
+            112,
+            659,
+            295,
+            674
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "c)2027年：0.66美元",
+        "bbox": [
+            112,
+            681,
+            284,
+            696
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "d) 2028年：4.10美元",
+        "bbox": [
+            112,
+            703,
+            284,
+            718
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "V相比 MRVL 更多受益于芯片设计本身，ALAB 的弹性更直接体现在CXL架构渗透率提升。 旦无HBM 路线从预研走向量产，ALAB 有望成为最直接的硬件配套受益标的之一",
+        "bbox": [
+            90,
+            724,
+            899,
+            763
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "2. 【应用大票\\_非完整调研反馈】Anthropic需求爆发背景下，CSP 的叙事变化：亚马逊 Aws最受益于Anthropic 需求爆发，trn 不行的叙事有望开始扭转；谷歌短期广告依旧强劲，云业务/tpu 同样受益于Anthropic 需求，模型层面，尽管目前coding能力落后，但我们认为这不会持续很久，半年内或有望大幅拉近差距；微软最为受损，claude code以及龙虾等agent 已经开始冲击微软 office 主业，下半年或可能看到已有客户削减订阅制seats，而微软能做的就是去 upsell E7 套餐提高 arpu，但实际效果仍有待观察，Azure短期算力供给有限且 anthropic exposure 最小，预计弹性一般。META本季度渠道调研反馈来看整体较好、略超预期；综合以上，我们调整大票排序为 Amzn>Goog>META>Msft",
+        "bbox": [
+            53,
+            790,
+            934,
+            939
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "page_number",
+        "text": "7 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "1) 亚马逊",
+        "text_level": 1,
+        "bbox": [
+            75,
+            43,
+            171,
+            58
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "i) aws 最受益于 anthropic 需求爆发，叠加 OpenAI 增量，aws 增速今年预计显著加速，到年底或达到40%",
+        "bbox": [
+            92,
+            64,
+            910,
+            99
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "a) Anthropic 需求在一季度爆发，3 月底 arr 达到 300 亿美金，年底有望达到 780 亿美金。由于谷歌大量算力要用于自身 gemini 业务，短期能够对外提供的增量算力有限，亚马逊 aws 有望成为anthropic需求爆发的最受益者。我们初步测算，anthropic 今年或实现 450 亿收入，若是按照60%毛利率，则一共消耗180亿推理成本，预计其中接近 100 亿花费在aws上；而今年 anthropic在 aws上的训练花费预计也将达到 120 亿，再考虑到要给 aws 分成的 60-70 亿，今年全年 aws 来自anthropic 的收入总量将达到 280 亿，比去年全年高出 220-230 亿",
+        "bbox": [
+            110,
+            104,
+            937,
+            231
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "b)此外，OpenAI也于去年 11 月于 aws 签订380 亿美金算力协议，并在今年二月进一步增加1000亿美金，我们初步测算，预计 25Q4 已经贡献了 2 亿收入， 26 年全年贡献 46 亿美金的额外算力收入",
+        "bbox": [
+            110,
+            236,
+            937,
+            275
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "c) 综合两者，aws 今年来自于模型厂商的增量收入就达到了 260-270 亿，占今年预期总收入增量 460亿的一半以上",
+        "bbox": [
+            110,
+            279,
+            924,
+            318
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "d) 但需要注意的是，这块业务主要都是算力租赁业务，且面向的是单一大客户，生意性质更像是 NCP而非传统 csp，利润率或有可能边际下降，显著低于现在云业务的 35%，因此或有可能带来利润率的下降（待进一步调研确认）",
+        "bbox": [
+            110,
+            323,
+            929,
+            384
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "table",
+        "img_path": "images/3eb0e8e26ab045925db184eebf26df01572a1234e98f33e9c67dac33928fb8af.jpg",
+        "table_caption": [
+            "e) "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>US$ mm</td><td>1Q25</td><td>2Q25</td><td>3Q25</td><td>4Q25</td><td>1Q26</td><td>2Q26</td><td>3Q26</td><td>4Q26</td></tr><tr><td>AWS Revenue</td><td>29,267</td><td>30,873</td><td>33,006</td><td>35,579</td><td>37,907</td><td>41,626</td><td>45,474</td><td>49,947</td></tr><tr><td>YoY Chg%</td><td>16.9%</td><td>17.5%</td><td>20.2%</td><td>23.6%</td><td>29.5%</td><td>34.8%</td><td>37.8%</td><td>40.4%</td></tr><tr><td>GPU Revenue</td><td>1,170</td><td>1,534</td><td>1,726</td><td>2,438</td><td>4,089</td><td>5,766</td><td>7,303</td><td>8,933</td></tr><tr><td>Rev YoY Contribution%</td><td>3.5%</td><td>4.6%</td><td>4.4%</td><td>5.5%</td><td>10.0%</td><td>13.7%</td><td>16.9%</td><td>18.3%</td></tr><tr><td>Rev%</td><td>4.0%</td><td>5.0%</td><td>5.2%</td><td>6.9%</td><td>10.8%</td><td>13.9%</td><td>16.1%</td><td>17.9%</td></tr><tr><td>TRN Revenue</td><td>85</td><td>89</td><td>397</td><td>648</td><td>1,093</td><td>1,269</td><td>1,389</td><td>2,048</td></tr><tr><td>Rev YoY Contribution%</td><td>0.3%</td><td>0.3%</td><td>1.4%</td><td>2.1%</td><td>3.4%</td><td>3.8%</td><td>3.0%</td><td>3.9%</td></tr><tr><td>Rev%</td><td>0.3%</td><td>0.3%</td><td>1.2%</td><td>1.8%</td><td>2.9%</td><td>3.0%</td><td>3.1%</td><td>4.1%</td></tr><tr><td>Anthropic ARR</td><td>1,800</td><td>4,000</td><td>7,000</td><td>9,000</td><td>30,000</td><td>45,000</td><td>60,000</td><td>78,000</td></tr><tr><td>Est. Anthropic Revenue</td><td>350</td><td>800</td><td>1,400</td><td>2,000</td><td>4,875</td><td>9,375</td><td>13,125</td><td>17,250</td></tr><tr><td>Est. Anthropic Inference Rev</td><td>118</td><td>258</td><td>431</td><td>588</td><td>1,268</td><td>2,250</td><td>2,888</td><td>3,450</td></tr><tr><td>Est. Anthropic Training Rev</td><td>700</td><td>800</td><td>900</td><td>1,300</td><td>2,300</td><td>2,800</td><td>3,200</td><td>3,700</td></tr><tr><td>Est. OpenAI Rev</td><td></td><td></td><td></td><td>200</td><td>400</td><td>700</td><td>1,200</td><td>2,300</td></tr><tr><td>Other GPU/TRN Customer</td><td>437</td><td>566</td><td>792</td><td>998</td><td>1,215</td><td>1,285</td><td>1,404</td><td>1,531</td></tr><tr><td>Anthropic%</td><td>65%</td><td>65%</td><td>63%</td><td>61%</td><td>69%</td><td>72%</td><td>70%</td><td>65%</td></tr><tr><td>OpenAI%</td><td></td><td></td><td></td><td>6%</td><td>8%</td><td>10%</td><td>14%</td><td>21%</td></tr><tr><td>Others%</td><td>35%</td><td>35%</td><td>37%</td><td>32%</td><td>23%</td><td>18%</td><td>16%</td><td>14%</td></tr><tr><td>Anthropic Revenue Sharing</td><td>70</td><td>140</td><td>210</td><td>300</td><td>731</td><td>1,406</td><td>1,969</td><td>2,588</td></tr><tr><td>% of Anthropic Revenue</td><td>20.00%</td><td>17.50%</td><td>15.00%</td><td>15.00%</td><td>15.00%</td><td>15.00%</td><td>15.00%</td><td>15.00%</td></tr><tr><td>NonGPU Revenue</td><td>27,942</td><td>29,110</td><td>30,673</td><td>32,193</td><td>31,994</td><td>33,185</td><td>34,813</td><td>36,378</td></tr><tr><td>Rev YoY Contribution%</td><td>12.8%</td><td>12.0%</td><td>13.7%</td><td>15.1%</td><td>13.8%</td><td>13.2%</td><td>12.5%</td><td>11.8%</td></tr><tr><td>YoY Chg%</td><td>12.9%</td><td>12.2%</td><td>14.0%</td><td>15.6%</td><td>14.5%</td><td>14.0%</td><td>13.5%</td><td>13.0%</td></tr></table>",
+        "bbox": [
+            112,
+            405,
+            815,
+            760
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "ii) trn叙事或开始扭转",
+        "text_level": 1,
+        "bbox": [
+            92,
+            763,
+            273,
+            778
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "a)本周亚马逊发了股东信，大篇幅提到了trn，且 CEO 在公开采访时提到 anthropic的新模型是在 trn上训练，我们认为这对于 trn的叙事或是一个重大的改变",
+        "bbox": [
+            110,
+            785,
+            924,
+            822
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "· 首先，我们认为anthropic 新模型在 trn上训练属实，但大概率是部分参与，且有可能参与的是后1训练；预训练应该主要是在 tpu/GB上完成的。根据我们的产业调研，当前模型厂商混合集群训练1非常常见，这也支持了我们的观点。但无论如何，CEO 这样的表态意味着 trn 真正进入了训练的9领域",
+        "bbox": [
+            129,
+            828,
+            937,
+            912
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            47,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_number",
+        "text": "8 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "股东信中其它关于trn 的内容：今年的 trn3 已经售罄（Q1 时的表态是年中前售罄，因此提前完成），trn4 离供货还有 18 个月，相当一部分已经被预定（需求旺盛）；芯片若是直接对外出售，收入arr可超500 亿美金，后续也会对外出售（trn也想复制 tpu的路线）",
+        "bbox": [
+            129,
+            43,
+            921,
+            103
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "综合来看，我们认为 anthropic 的爆发大幅拉动了对算力的需求，过去 trn确实落后于 tpu跟 GPU升，我们认为这对于 trn的叙事或是一个重大的改变",
+        "bbox": [
+            129,
+            109,
+            932,
+            168
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "iii)亚马逊 CPU Graviton 需求极其旺盛，股东信中提到，有客户想要承包 26 年全部的量单被拒绝，我们认为，CPU若是能涨价，这对于亚马逊会是额外的利好，这一块有待做更多的研究",
+        "bbox": [
+            90,
+            174,
+            924,
+            212
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "2) 谷歌",
+        "text_level": 1,
+        "bbox": [
+            73,
+            219,
+            154,
+            234
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "i) 根据我们初步的广告调研结果，我们初步认为谷歌在这个季度的广告收入可能符合市场预期（市场预期 17-18%），二季度目前受战争影响幅度较为可控，具体细节我们将做更多的调研；",
+            "ii) 谷歌云业务我们认为将继续维持加速，目前我们仍然维持谷歌云 54%的增速预期（略超市场预期），但能否进一步上修至60%以上的增速，取决于 tpu外售的节奏，这块我们将继续调研细节",
+            "iii)模型：我们认为谷歌的基础模型仍是第一梯队，尽管短期 coding 能力上落后，但我们预计谷歌将在 5月的 io 大会发布全新的 coding agent，能力可以追上 opus 4.6，从而大幅缩小差距。而下一代基础模型 gemini 4 大概率在 Q3 发布，将继续奠定谷歌第一梯队模型大厂的地位"
+        ],
+        "bbox": [
+            92,
+            239,
+            929,
+            388
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "a) 市场有观点认为，gemini 目前在能力上有所落后，尤其在 coding 上。但我们认为，谷歌模型能力依然处于全球第一梯队，尤其在多模态、数学以及事实稳定性上优势仍然明显。根据我们的产业调研，Gemini目前在业内甚至经常被直接用作 reward model，核心原因就在于其幻觉较少、事实遵循·----更强（不会像 GPT一样迎合用户观点），这从侧面验证了 Gemini的基础模型质量仍然很高。Claude当前在coding上的领先，更多是因为其最早认知到 coding的重要性，在训练数据配比更倾向于coding，在 system prompt、上下文压缩和 harness等工程层面率先跑通。但考虑到谷歌拥有庞大的内部代码库、接近 10 万的码农和真实反馈数据，我们认为其在意识到 coding 的重要性后已经加大了投入，后续完全可以追上",
+        "bbox": [
+            110,
+            393,
+            937,
+            563
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            112,
+            567,
+            929,
+            608
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            650,
+            612,
+            840,
+            627
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "3) 微软 ",
+        "text_level": 1,
+        "bbox": [
+            73,
+            653,
+            154,
+            668
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "i) 根据我们的初步调研结果，我们认为微软office 主业当前面临 agent的冲击，多位微软离职专家跟我们提到，已经看到客户开始裁员，renew contract预计从下半年开始，也就是 27 财年第一季度，就有可能看到客户开始缩减office 订阅seats。微软当前的应对方式是对E5套餐提价（下半年开始），同时推出 E7 套餐（5 月正式上线），试图去 upsell 提高 arpu（E7 套餐定价预计在 99 美金，比 E5 定价高出接近一倍），考虑到 E7最大的变化就是增加了 copilot cowork（与 claude cowork 较为类似），我们认为微软将直接与 anthropic 竞争，最终实际客户选择仍有待观察",
+        "bbox": [
+            90,
+            674,
+            934,
+            800
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "There will be reduction of seats with impact showing from early Fy27. However, the overall bet is that for the remaining seats companies will be choosing high ARPU Seats. So there will be E3 - > E5 upsell and E5 -> E7 Upsell. Apart from this the revenue for Consumption credits for advanced agentic workflows will also increase. If you directly just count seat revenue , then the growth will become slower ",
+        "bbox": [
+            112,
+            804,
+            931,
+            876
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "微软离职专家",
+        "bbox": [
+            680,
+            879,
+            788,
+            895
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "page_number",
+        "text": "9 / 25 ",
+        "bbox": [
+            473,
+            960,
+            531,
+            973
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            47,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "26 年初以来， 高盛和 AIG 已将部分高风险工作流从标准 Copilot 转向 Claude 驱动的 agent； 在coding 场景 Claude Code 在初创和精英工程团队中的渗透尤其快 上个月采用率已达 70%-75% 这AI 在高价值知识工作中的入口和定价权 正受到 Claude agent 的明显侵蚀",
+        "bbox": [
+            109,
+            43,
+            931,
+            124
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Anthropic 离职专家",
+        "bbox": [
+            663,
+            131,
+            825,
+            145
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "ii) Azure：考虑到 azure 在 anthropic 的 exposure 较小，且一季度未必有足够的 DC capacity 上线，我们初步认为 azure 在一季度的增速加速幅度要显著弱于另外两家，后续我们将做更多验证",
+        "bbox": [
+            90,
+            152,
+            929,
+            190
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "4) 综上，我们调整 hyperscaler 排序，Amzn>Goog>Msft",
+        "bbox": [
+            72,
+            196,
+            537,
+            212
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "5) Meta: 代理商反馈，2026 年 Q1 广告投放实际增速总体好于年初判断，世界杯催化游戏、短剧与跨境电商预算明显加量；与此同时， GEM 及下一代广告排序模型持续优化推荐与转化， Advantage+Leads Campaign 推动 AI 接管广告规模扩大，带动广告主预算增长；中东扰动有限且 Q2 修复可期，即使宏观变差预算收缩，亦会进一步向 Meta、Google 等头部平台集中",
+        "bbox": [
+            72,
+            236,
+            931,
+            319
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "iv) 据专家反馈，Meta 2026 年Q1广告投放金额普遍好于预期，世界杯催化游戏、短剧及跨境电商预算加速释放，模型整合与性能提升亦直接带动转化改善和预算扩张",
+        "bbox": [
+            89,
+            336,
+            932,
+            376
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "table",
+        "img_path": "images/9125cbdfefc6426bf76ddf11379033dc0ff964f824275d06f65e82c7fb10ac0a.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=\"2\"></td><td colspan=\"5\">Meta广告增速</td></tr><tr><td>25Q4</td><td>2025</td><td>2026Q1</td><td>2026Q2 (E)</td><td>2026 (E)</td></tr><tr><td>出海专家A-预期增速</td><td>13%</td><td>8%</td><td>10%</td><td>/</td><td>12%</td></tr><tr><td>出海专家A-实际增速</td><td>8%</td><td>7%</td><td>20%</td><td>17%</td><td>17%</td></tr><tr><td>出海专家B-预期增速</td><td>20%</td><td>19%</td><td>17%</td><td>/</td><td>14%</td></tr><tr><td>出海专家B-实际增速</td><td>18%</td><td>18%</td><td>15%</td><td>12%</td><td>14%</td></tr><tr><td>欧洲专家-A-预期增速</td><td>4%</td><td>3%</td><td>4%</td><td>/</td><td>7%</td></tr><tr><td>欧洲专家-A-实际增速</td><td>4%</td><td>3%</td><td>7%</td><td>10%</td><td>12%</td></tr></table>",
+        "bbox": [
+            193,
+            380,
+            858,
+            527
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "a)出海广告agency 离职专家 A客户主要为游戏和网络服务，年投放金额约 60 亿美金。专家认为游戏、短剧等领域受世界杯带动，今年一季度有明显加速",
+        "bbox": [
+            110,
+            532,
+            929,
+            571
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "1月中旬与出海专家 A沟通时，专家认为 26 年一季度同比10%以上增长，26 年全年增速预计超 12%",
+        "bbox": [
+            129,
+            577,
+            924,
+            615
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "在 4 月与专家沟通的过程中，专家表示实际广告投放额实际同比增长超预期，接近 20%，26· 年增速上调至17%，主要受世界杯影响",
+        "bbox": [
+            127,
+            624,
+            929,
+            663
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "“受世界杯较明显的是游戏行业，偏 FIFA 类或第一视角 FPS 类产品出现加量与加投，这属于典型大节点下的常态反应。电商领域则类似于创造了小型的黑五或网络星期一节点。围绕庆祝等多·----场景，对来自中国的小额贸易与跨境电商形成带动；外贸端面向 C 端的排期已提前至 3-4 月份，· ·开始排产并进行准备。",
+        "bbox": [
+            109,
+            670,
+            924,
+            753
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "--出海广告 agency 离职专家 A",
+        "bbox": [
+            697,
+            762,
+            941,
+            777
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "b)出海广告agency 离职专家 B的客户构成较为丰富，全渠道投放金额约1\\~2亿美金。专家认为地缘冲突对于Q1 预算有小幅影响，但会随着局势缓和在二季度快速回升",
+        "bbox": [
+            110,
+            795,
+            939,
+            835
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "1月中旬与出海专家 A沟通时，专家认为 26 年一季度同比17%以上增长，26 年全年增速预计超 14%",
+        "bbox": [
+            129,
+            841,
+            924,
+            879
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "4月与出海广告专家B沟通时，专家表示 Q1实际增速略小于预期约15%，全年增速预期维持不变。Q1 主要受中东地缘冲突影响，导致部分客户预算收缩，且广告预算向 Google等增速更快的平台转移。",
+        "bbox": [
+            129,
+            887,
+            932,
+            948
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "page_number",
+        "text": "10 / 25 ",
+        "bbox": [
+            468,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "“若拉平所有客户，中东相关投放占比接近 10%以下。受影响的客户包括对中东进行贸易的服饰类客户、部分互联网服务类客户及游戏客户等。……其他平台增速更快，广告预算出现迁移，挤出了 Meta 的增长空间。例如，Google 在 AI Overview、AI Model 及 AIGC 相关产品上的推进较快，带动其平台表现。”",
+        "bbox": [
+            109,
+            43,
+            926,
+            127
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "---出海广告 agency 离职专家 B",
+        "bbox": [
+            687,
+            135,
+            941,
+            151
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "c) 欧洲广告 agency 专家 A 客户类型较为丰富，全渠道投放金额约数亿美金。专家认为 Meta 的模型性能进一步提高对于广告预算有直接带动，同时世界杯也带来广告预算的强劲增长。",
+        "bbox": [
+            109,
+            168,
+            931,
+            208
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1 月中旬与出海专家 A 沟通时，专家认为 26 年一季度同比 4%以上增长，26 年全年增速预计超 7%",
+            "4月与出海广告专家 A沟通时，专家表示实际增速超预期达 7%，上调全年增速预期至12%。主要受 Meta 后端模型进一步整合，性能改善，同时世界杯带动了广告预算影响。"
+        ],
+        "bbox": [
+            129,
+            214,
+            931,
+            300
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "“最大的原因是性能，由 Meta 平台的更新所驱动。他们通过整合不同平台的模式来提供广告排名优势。以前，Feed、故事和卷轴在后端使用不同的模型；这些现在被合并成一个统一的模型，以提高结果……经济不确定时期，他们会把钱重新分配到那些他们有更多控制权、能够最大化低推动大量的内容和参与。”",
+        "bbox": [
+            109,
+            306,
+            926,
+            414
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "---欧洲广告 agency 离职专家 A",
+        "bbox": [
+            687,
+            420,
+            941,
+            437
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "v)Meta过去一年通过Wukong、GEM及下一代广告排序模型全面重构推荐系统，在 Instagram 与Facebook广告转化上持续取得 3%至5%的增量，同时借助 AI视频生成降低创意门槛、提升CTR和 ROI，并推动广告主预算向更高 CPM的视频单元迁移，成为Q1预算加速的重要驱动因素之一。",
+        "bbox": [
+            89,
+            483,
+            926,
+            570
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "a) Meta 在过去一年中通过 AI 改造推荐算法，GEM 顺利落地可能会有 3-5%额外的广告增量",
+        "bbox": [
+            110,
+            576,
+            885,
+            593
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "·Meta 在 2025Q1上线了Wukong 优化版模型，大幅优化了推荐效率，可以一次性给一批用户进行Ranking 算法，不用再分人情形。因为此优化的推荐，神经网络深度已经迭代超过 10计算复杂度。",
+        "bbox": [
+            129,
+            599,
+            931,
+            684
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "2025 年 11 月 10 日，GEM（Generative Ads Model）公开。这是 2025 年底最重要的一个底层-----模型节点之一，因为 Meta 明确把它定义为广告推荐系统里的 foundation model，而且是LLM-scale 的训练方式。Q2 带来 Instagram 广告转化 +5%；同期带来 Facebook Feed 广告转化 +3%；",
+        "bbox": [
+            129,
+            690,
+            937,
+            775
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "2026 年 1 月底，Meta 发布《2026: AI Drives Performance》，集中披露了 2025 年 Q4 这波“下一代广告排序”成果。新的 run-time model 上线到 Instagram Feed、Stories、Reels 后，转化率提升 3%；",
+        "bbox": [
+            129,
+            782,
+            931,
+            844
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "b)我们在和专家调研中发现，AI 对于推荐算法的改造是今年 Q1预算加速的重要原因。除了转化率提升以外，Meta 通过 AI 生成视频降低了广告主视频素材的制作门槛，并在投放上部分代替了 CPM 较低的静态图片广告，进一步提高了 Agency 的广告投放规模",
+        "bbox": [
+            110,
+            851,
+            929,
+            914
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "page_number",
+        "text": "11 / 25 ",
+        "bbox": [
+            468,
+            959,
+            536,
+            973
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "“Meta 上的大多数创意正在转向视频，这对性能和预算都很重要。如果之前的预算用于 CPM 在 4 美元左右的静态单元，那么转向 CPM 在 7 美元左右的视频单元仍然是有利的，因为视频比静态显示效果更好。视频提供了更丰富的参与信号——无论某人观看了 5 秒、10 秒还是 15 秒——这为算法提供通知平台的 AI。ROI 一直在提高，很难精确地量化”",
+        "bbox": [
+            53,
+            43,
+            934,
+            151
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "---欧洲广告 agency 离职专家 A",
+        "bbox": [
+            687,
+            168,
+            941,
+            185
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "“通过 Advantage+ Creative 和 AI，推荐质量明显提升，点击率提高约 50%至 80%，后端 ROI 平均提升接近 10%（个别客户可达两至三倍，均值约在 10%上下），整体客户接受度较高。”",
+        "bbox": [
+            53,
+            202,
+            924,
+            243
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "---出海广告 agency 离职专家 B",
+        "bbox": [
+            687,
+            261,
+            941,
+            277
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "vi) Meta 将 Advantage+从电商销售进一步扩展至 App 与 Leads 三类端到端方案，持续扩大可由 AI接管的广告预算池，降低广告主投放门槛并带动了广告预算的增长",
+        "bbox": [
+            89,
+            294,
+            937,
+            334
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "a) Meta 在 3 年前推出了 advantage+，2025 年，Meta 把它继续扩展到 sales、app、lead 三类端到端方案中。Meta 通过把更多 objective 纳入自动化，从 sales 扩到 app，再扩到 leads，扩大可被 AI 接管的广告预算池。",
+            "b) Sales Campaigns 面向电商场景促进交易转化；App Campaigns 面向 APP 场景，完成 APP 端的下载、注册、转化；Leads Campaigns 面向汽车、金融、房产等销售、服务场景，AI 自动去找更可能留电话、填表单、发消息的人，于 2025年 Q4上线。"
+        ],
+        "bbox": [
+            109,
+            340,
+            939,
+            470
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "ii) 我们在本轮调研中，看到了该功能降低了广告主的投放门槛，并带动了广告预算的增长",
+        "bbox": [
+            89,
+            476,
+            848,
+            494
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "“我们在东南亚、巴西等地区测试，适用于网约车等品类及 B 端招商等场景，已验证跑通。在部分对表单与线索较敏感的国家，投放亦能稳定执行，这是积极信号。”",
+        "bbox": [
+            55,
+            497,
+            939,
+            532
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "--出海广告 agency 离职专家 A",
+        "bbox": [
+            697,
+            536,
+            941,
+            551
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "“为了简化，Meta 的模型驱动优化已经变得越来越有创意。此前，比如，销售 suv 的广告商可能会手动瞄准有孩子或宠物的人群。有了 AI，你可以广泛地瞄准目标，平台从创意本身推断出合适的受众。这些格式在广告拍卖中获得了更高的优先级。零售和商业广告商相应地转移了预算，因为它可以有效地产生线索和推动转换。。”·····",
+        "bbox": [
+            53,
+            569,
+            939,
+            624
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "---欧洲广告 agency 离职专家 A",
+        "bbox": [
+            687,
+            627,
+            941,
+            642
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "vii) 地缘因素当前对多数出海广告主投放影响有限，预算即便收缩也更倾向向 Meta、Google等头部平台集中，游戏、网服等行业受扰动较小；目前仅中东市场短期有所放缓，但随着局势缓和，二季度投放与预算修复预期较强",
+        "bbox": [
+            89,
+            708,
+            937,
+            771
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "a)目前调研的三位专家中，有两位专家表示地缘对于目前广告主投放影响很小，即使广告主缩减预算规模，也更容易向Meta、Google 等头部平台集中。游戏、网服等广告预算对于地缘敏感度较低。",
+        "bbox": [
+            109,
+            777,
+            937,
+            840
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "“我们主要服务的领域包括网服、游戏、工具、短剧等，普遍不涉及线下履约环节。即便是电商客户，目前重点区域在东南亚、巴西以及北美，受影响因子较小，整体运行健康。从行业视角看，直接影响不大。就我们所处垂直行业而言，当前影响有限。",
+        "bbox": [
+            53,
+            845,
+            939,
+            898
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "--出海广告 agency 离职专家 A",
+        "bbox": [
+            697,
+            903,
+            941,
+            919
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "page_number",
+        "text": "12 / 25 ",
+        "bbox": [
+            468,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "“在经济不确定的时期，许多广告商会缩减规模，或者对一些非主要的渠道采取更保守的立场。他们会把钱重新分配到那些他们有更多控制权、能够最大化低漏斗直接反应的渠道上，因为这样成本效益更高。",
+        "bbox": [
+            53,
+            43,
+            941,
+            78
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "---欧洲广告 agency 离职专家 A",
+        "bbox": [
+            687,
+            80,
+            941,
+            97
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "b) 一位国内出海专家表示，短期对于中东地区的广告投放有影响，但是随着局势缓和也会较快恢复。 89",
+        "bbox": [
+            109,
+            115,
+            929,
+            154
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "“部分客户在中东市场的投放，出现了不同程度的放缓。随着停火协议出台，预期缓和对二季度整体是利好，预算有望出现一定回升与增长。基于市场规模与 ROI 的相对稳定性，客户目前仍愿意加码预算”",
+        "bbox": [
+            109,
+            159,
+            929,
+            219
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "---出海广告 agency 专家 B",
+        "bbox": [
+            729,
+            225,
+            941,
+            242
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "3. 【NCP】： Anthropic 带动算力需求爆发，现阶段算力资源更加稀缺，NCP 作为算力提供方稀缺性显著加强。本周 Coreweave 与 Meta & Anthropic 签订协议也侧面验证头部模型厂商正在急迫的寻找算力，在当下算力资源稀缺的背景下，我们认为签约价格或者条款方面有可能超预期（待更多验证）。当前 crwv26/27 年收入对应稳态利润率下的 ebit 为 32/62 亿，当前估值对应 ebit multiple 16x/9x，nbis 26/27 年收入对应稳态利润率下的 ebit 为 10/34 亿，当前估值对应 ebit multiple 35x/10x，考虑到 NCP 仍处于高速增长的趋势以及短期潜在的涨价或条款催化，我们认为这个估值具备吸引力",
+        "bbox": [
+            55,
+            307,
+            937,
+            434
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "1) 我们在前几周就提到 Coreweave的首个投资级融资对于 NCP形成重大利好，本周 Coreweave又拿到了Meta 大单，同时与 Anthropic 签订多年合作协议，虽然金额未披露，但这进一步表明头部模型厂商仍在持续锁定外部高质量算力资源",
+        "bbox": [
+            72,
+            438,
+            937,
+            501
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "2) Coreweave& NBIS对比：NBIS资产质地显著更优，或有可能率先实现估值体系的切换",
+        "bbox": [
+            72,
+            505,
+            806,
+            521
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "i) 订单质地我们认为 NBIS 应该略好于 Coreweave",
+        "bbox": [
+            92,
+            527,
+            494,
+            543
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "a) CoreWeave 订单总额约 880 亿，而 NBIS 约 470 亿，NBIS 应该略好于 Coreweave：根据我们的产业调研，此前Coreweave 为了拿下 OpenAI（大约占1/4 总订单），签订的订单的价格与条款是较为不利的，该订单基本不挣钱",
+            "b) DC capacity：CoreWeave 预计 26 年底实现 1.7gw，而 NBIS 预计实现 0.9gw，与订单规模比例差不多ii) 资产负债表质地：现阶段 nbis 显著好于 coreweave，安全垫显著更厚，在行业下行期面临的压力显著小于 coreweave ····"
+        ],
+        "bbox": [
+            90,
+            548,
+            937,
+            674
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "a) Coreweave：截止 25Q4，公司 net debt 182 亿美金（对比总市值 530 亿），每年利息支出 12 亿美金，同期全年 Adjusted EBITDA 为 31 亿美元，对应 net debt / EBITDA 约 6x",
+        "bbox": [
+            109,
+            680,
+            917,
+            719
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "b)Nbis：截止25Q4，公司 net debt仅 4.5 亿美金，每年利息支出仅数千万美金，除此之外，考虑到公司有优质的资产可以变卖，如 clickhouse的股权，价值约40亿美金，avride 业务同样价值数十亿美金，因此，nbis 实际的资产负债表应该为 net cash 大几十亿美金，显著好于 crwv",
+        "bbox": [
+            109,
+            724,
+            929,
+            784
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "iii)融资能力对比：Coreweave 目前做的更好，但 nbis有望迅速跟进",
+        "bbox": [
+            92,
+            790,
+            638,
+            806
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "a) CoreWeave通过先拿下大客户长期合同，再通过 SPV + DDTL 等项目融资结构，借助客户信用去撬动低成本债务。上周的投资级融资也是这么来的，其订单—融资—投放—回款的闭环已经初步跑通",
+            "b)Nbis此前主要还是依赖可转债融资，因此虽然利息低，但是将来稀释股东的风险也较大。但随着coreweave投资级融资的落地，我们认为 nbis也有望迅速跟进"
+        ],
+        "bbox": [
+            109,
+            810,
+            932,
+            894
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "page_number",
+        "text": "13 / 25 ",
+        "bbox": [
+            468,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "iv)合约时长对比：Coreweave 此前大客户长约占比较高，试图锁定客户价格，但这在价格上涨的当下反而成了劣势，而nbis由于入局较晚，此前主要跟中小客户签短约以及on demand业务，反而可以重新签约，更加受益于价格上涨",
+            "v) 综合来看，NBIS 在资产质地更好，潜在受益于价格的弹性也更大，或有可能率先实现估值体系的切换3) 收入预测",
+            "i)我们预计 crwv将在 26/27年实现183亿/337亿arr，对应129亿/247亿收入，行业预期稳态 ebit 利润率在 20-25%，考虑到投资级融资所带来的利率下降，长期利润率有望提升至 25%（详情见上周周报），因此 26/27 年收入对应稳态利润率下的 ebit 为 32/62 亿，当前估值对应 ebit multiple 16x/9x"
+        ],
+        "bbox": [
+            72,
+            43,
+            937,
+            212
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "table",
+        "img_path": "images/beede57d7f043e7377212e98ec0e39826c6f94eb75ca7bd5897adf2b0b8e0870.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td></td><td>26Q1</td><td>26Q2</td><td>26Q3</td><td>26Q4</td><td>27Q1</td><td>27Q2</td><td>27Q3</td><td>27Q4</td></tr><tr><td>ARR测算</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Blackwell ARR</td><td>5,820</td><td>9,280</td><td>13,100</td><td>14,336</td><td>14,049</td><td>13,768</td><td>13,493</td><td>13,223</td></tr><tr><td>数量</td><td>316,398</td><td>441,398</td><td>559,453</td><td>606,120</td><td>606,120</td><td>606,120</td><td>606,120</td><td>606,120</td></tr><tr><td>单卡ARR</td><td>18,396</td><td>21,024</td><td>23,415</td><td>23,652</td><td>23,179</td><td>22,715</td><td>22,261</td><td>21,816</td></tr><tr><td>价格</td><td>3.0</td><td>3.0</td><td>3.0</td><td>3.0</td><td>2.9</td><td>2.9</td><td>2.8</td><td>2.8</td></tr><tr><td>利用率</td><td>70%</td><td>80%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td></tr><tr><td>Rubin ARR</td><td></td><td></td><td></td><td>454</td><td>3,108</td><td>6,861</td><td>11,569</td><td>17,229</td></tr><tr><td>数量</td><td></td><td></td><td></td><td>54,588</td><td>233,412</td><td>412,235</td><td>591,059</td><td>769,882</td></tr><tr><td>单卡ARR</td><td></td><td></td><td></td><td>8,322</td><td>13,315</td><td>16,644</td><td>19,573</td><td>22,379</td></tr><tr><td>价格</td><td></td><td></td><td></td><td>3.8</td><td>3.8</td><td>3.8</td><td>3.7</td><td>3.6</td></tr><tr><td>利用率</td><td></td><td></td><td></td><td>25%</td><td>40%</td><td>50%</td><td>60%</td><td>70%</td></tr><tr><td>总卡量</td><td>316,398</td><td>441,398</td><td>559,453</td><td>660,708</td><td>839,532</td><td>1,018,355</td><td>1,197,179</td><td>1,376,002</td></tr><tr><td>总ARR</td><td>9,524</td><td>12,910</td><td>16,657</td><td>18,276</td><td>20,574</td><td>23,978</td><td>28,343</td><td>33,668</td></tr><tr><td>收入测算</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>测算季度收入</td><td>2,062</td><td>2,795</td><td>3,687</td><td>4,358</td><td>4,848</td><td>5,560</td><td>6,532</td><td>7,743</td></tr><tr><td>实际季度收入</td><td>2,000</td><td>2,795</td><td>3,687</td><td>4,358</td><td>4,848</td><td>5,560</td><td>6,532</td><td>7,743</td></tr><tr><td>年度总收入,Mn,USD</td><td></td><td></td><td></td><td>12,902</td><td></td><td></td><td></td><td>24,683</td></tr></table>",
+        "bbox": [
+            55,
+            227,
+            789,
+            423
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "ii)我们预计nbis将在 26/27年实现85亿/192亿arr，对应40亿/135亿收入，同样以 25%的ebit利润率计算，26/27 年收入对应稳态利润率下的 ebit 为 10/34 亿，当前估值对应 ebit multiple 35x/10x",
+        "bbox": [
+            89,
+            437,
+            937,
+            476
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "table",
+        "img_path": "images/1cd51281e1040c7c3648f16c452e4f789dd6bbfb60970025945b78fe05de2ca2.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td></td><td>26Q1</td><td>26Q2</td><td>26Q3</td><td>26Q4</td><td>27Q1</td><td>27Q2</td><td>27Q3</td><td>27Q4</td></tr><tr><td>ARR测算</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>H100 ARR (mn)</td><td>128</td><td>125</td><td>123</td><td>120</td><td>111</td><td>109</td><td>107</td><td>105</td></tr><tr><td>数量</td><td>9,000</td><td>9,000</td><td>9,000</td><td>9,000</td><td>9,000</td><td>9,000</td><td>9,000</td><td>9,000</td></tr><tr><td>单卡ARR</td><td>14,191</td><td>13,907</td><td>13,629</td><td>13,357</td><td>12,362</td><td>12,115</td><td>11,873</td><td>11,635</td></tr><tr><td>价格</td><td>1.8</td><td>1.8</td><td>1.7</td><td>1.7</td><td>1.7</td><td>1.6</td><td>1.6</td><td>1.6</td></tr><tr><td>利用率</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td><td>85%</td><td>85%</td><td>85%</td><td>85%</td></tr><tr><td>H200 ARR</td><td>319</td><td>331</td><td>324</td><td>318</td><td>311</td><td>288</td><td>282</td><td>277</td></tr><tr><td>数量</td><td>21,404</td><td>21,404</td><td>21,404</td><td>21,404</td><td>21,404</td><td>21,404</td><td>21,404</td><td>21,404</td></tr><tr><td>单卡ARR</td><td>14,892</td><td>15,453</td><td>15,144</td><td>14,841</td><td>14,544</td><td>13,461</td><td>13,192</td><td>12,928</td></tr><tr><td>价格</td><td>2.0</td><td>2.0</td><td>1.9</td><td>1.9</td><td>1.8</td><td>1.8</td><td>1.8</td><td>1.7</td></tr><tr><td>利用率</td><td>85%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td><td>85%</td><td>85%</td><td>85%</td></tr><tr><td>Blackwell ARR</td><td>1,629</td><td>2,870</td><td>5,086</td><td>8,120</td><td>9,498</td><td>9,308</td><td>9,122</td><td>8,940</td></tr><tr><td>数量</td><td>91,175</td><td>160,619</td><td>243,953</td><td>327,286</td><td>368,953</td><td>368,953</td><td>368,953</td><td>368,953</td></tr><tr><td>单卡ARR</td><td>17,870</td><td>17,870</td><td>20,849</td><td>24,810</td><td>25,744</td><td>25,229</td><td>24,725</td><td>24,230</td></tr><tr><td>价格</td><td>3.4</td><td>3.4</td><td>3.4</td><td>3.3</td><td>3.3</td><td>3.2</td><td>3.1</td><td>3.1</td></tr><tr><td>利用率</td><td>60%</td><td>60%</td><td>70%</td><td>85%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td></tr><tr><td>Rubin ARR</td><td></td><td></td><td></td><td></td><td>1,118</td><td>3,384</td><td>6,314</td><td>9,889</td></tr><tr><td>数量</td><td></td><td></td><td></td><td></td><td>83,997</td><td>203,287</td><td>322,578</td><td>441,869</td></tr><tr><td>单卡ARR</td><td></td><td></td><td></td><td></td><td>13,315</td><td>16,644</td><td>19,573</td><td>22,379</td></tr><tr><td>价格</td><td></td><td></td><td></td><td></td><td>3.8</td><td>3.8</td><td>3.7</td><td>3.6</td></tr><tr><td>利用率</td><td></td><td></td><td></td><td></td><td>40%</td><td>50%</td><td>60%</td><td>70%</td></tr><tr><td>总卡量</td><td>122,079</td><td>191,524</td><td>274,857</td><td>358,190</td><td>483,853</td><td>603,144</td><td>722,435</td><td>841,725</td></tr><tr><td>总ARR</td><td>2,078</td><td>3,328</td><td>5,535</td><td>8,560</td><td>11,041</td><td>13,091</td><td>15,827</td><td>19,211</td></tr><tr><td>公司口径ARR</td><td></td><td></td><td></td><td>8,000</td><td></td><td></td><td></td><td></td></tr><tr><td>收入测算</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>NCP业务季度收入测算</td><td>396</td><td>676</td><td>1,108</td><td>1,762</td><td>2,450</td><td>3,016</td><td>3,615</td><td>4,380</td></tr><tr><td>年度总收入</td><td></td><td></td><td></td><td>4,022</td><td></td><td></td><td></td><td>13,541</td></tr></table>",
+        "bbox": [
+            55,
+            489,
+            788,
+            803
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "page_number",
+        "text": "14 / 25 ",
+        "bbox": [
+            470,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "1. 【光】旭创&新易盛：npo 预计明年放量，用于scale up，因此为可插拔光模块之外的净增量，我们上修旭创/新易盛 27 年利润预期，分别上修至 900 亿/600 亿，对应 27 年 eps 分别为 81/62",
+        "bbox": [
+            53,
+            108,
+            927,
+            147
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "1) 本周市场传闻亚马逊给旭创以及新易盛分别下单了 800/600 万 npo，我们经过产业调研后认为，基本属实，只是数量上略微要做修正。这些 npo 主要用于 trn 4 的 scale up 互联，因此是传统可插拔光模块之外的净增量，我们因此调整模型，引入 npo 假设，并上修旭创/新易盛 27年 eps至81/62",
+        "bbox": [
+            73,
+            152,
+            934,
+            212
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "table",
+        "img_path": "images/2da8c8829d6b3e57edb864741826328ebefbe5660c19a74a9352eae6e520d24f.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>旭创</td><td>2026</td><td>2027</td><td>新易盛</td><td>2026</td><td>2027</td></tr><tr><td>400g</td><td></td><td></td><td>400g</td><td></td><td></td></tr><tr><td>vol(万)</td><td>250</td><td>1,100</td><td></td><td>vol(万)</td><td>220</td></tr><tr><td>asp(美金)</td><td>170</td><td>150</td><td></td><td>asp(美金)</td><td>170</td></tr><tr><td>rev(亿美金)</td><td>4</td><td>17</td><td></td><td>rev(亿美金)</td><td>4</td></tr><tr><td>800g</td><td></td><td></td><td>800g</td><td></td><td></td></tr><tr><td>vol(万)</td><td>1,500</td><td>2,000</td><td></td><td>vol(万)</td><td>1,050</td></tr><tr><td>asp(美金)</td><td>400</td><td>350</td><td></td><td>asp(美金)</td><td>400</td></tr><tr><td>rev(亿美金)</td><td>60</td><td>70</td><td></td><td>rev(亿美金)</td><td>42</td></tr><tr><td>1.6t</td><td></td><td></td><td>1.6t</td><td></td><td></td></tr><tr><td>vol(万)</td><td>1,450</td><td>3,500</td><td></td><td>vol(万)</td><td>450</td></tr><tr><td>asp(美金)</td><td>900</td><td>750</td><td></td><td>asp(美金)</td><td>900</td></tr><tr><td>rev(亿美金)</td><td>131</td><td>263</td><td></td><td>rev(亿美金)</td><td>41</td></tr><tr><td>npo</td><td></td><td></td><td>npo</td><td></td><td></td></tr><tr><td>vol(万)</td><td>-</td><td>800</td><td></td><td>vol(万)</td><td>-</td></tr><tr><td>asp(美金)</td><td>-</td><td>1,000</td><td></td><td>asp(美金)</td><td>-</td></tr><tr><td>rev(亿美金)</td><td>-</td><td>80</td><td></td><td>rev(亿美金)</td><td>-</td></tr><tr><td>总收入(美金)</td><td>195</td><td>429</td><td>总收入(美金)</td><td>86</td><td>225</td></tr><tr><td>总收入(rmb)</td><td>1,363</td><td>3,003</td><td>总收入(rmb)</td><td>604</td><td>1,573</td></tr><tr><td>npm</td><td>30%</td><td>30%</td><td></td><td>npm</td><td>39%</td></tr><tr><td>净利润</td><td>409</td><td>901</td><td>净利润</td><td>235</td><td>614</td></tr></table>",
+        "bbox": [
+            112,
+            216,
+            929,
+            546
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "2. 【消费电子+光】立讯精密：果链基本盘业务稳健，非 A 客户收入整合闻泰 ODM 业务之后有增长+汽车业务收购莱尼后快速增速 +通信业务中 NV 铜缆连接和液冷不断取得进展+光模块业务最新在谷歌取得突破（26/27 年有望贡献 11/53 亿利润）；预期 26/27 年净利润为 216/294 亿元，同比增长 29%/36%，26/27 年 forward PE 为 19.6X/14.4X，还有估值提升空间 ··---",
+        "bbox": [
+            53,
+            590,
+            937,
+            674
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "“立讯发力光模块业务已经有3-4年，现在已经确定进入谷歌光模块供应链，预计先导入800G，随后导入1.6T。如果获得谷歌认可，谷歌会协调上游物料情况。进入谷歌之后，也有希望进入Meta供应链。 ",
+        "bbox": [
+            55,
+            707,
+            934,
+            747
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "-产业链专家",
+        "bbox": [
+            778,
+            764,
+            914,
+            780
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "header",
+        "text": "¶国内",
+        "bbox": [
+            55,
+            43,
+            122,
+            64
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "header",
+        "text": "Liuli&Jiahao&Yu&Heng ",
+        "bbox": [
+            55,
+            78,
+            238,
+            93
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "page_number",
+        "text": "15 / 25 ",
+        "bbox": [
+            468,
+            959,
+            536,
+            973
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "1) 按照产业链专家调研，谷歌 26/27 年 800G 光模块需求量分别是 600 万/500 万只，1.6T 光模块需求量分别是 900 万/3000 万只。立讯获得谷歌正式光模块订单之后，有希望再导入 Meta，光模块业务弹性测算先不考虑Meta的情况。假设立讯 26年获得谷歌整体光模块需求的 5%，27年获得谷歌整体光模块需求的 10%，则对应 26/27 年光模块业务的营收为 5.3/25.2 亿美金，盈利能力参照行业龙头，假设30%的净利率，对应 26/27 年光模块业务净利润为 1.6/7.5 亿美金。",
+        "bbox": [
+            73,
+            42,
+            931,
+            148
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "table",
+        "img_path": "images/c79f2006360dbbf3703671115040ee1c3e1fb8c29ba93b010715903259f9c225.jpg",
+        "table_caption": [
+            "单位：亿美金"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>谷歌光模块需求</td><td>2026E</td><td>2027E</td></tr><tr><td>800G(万只)</td><td>600</td><td>500</td></tr><tr><td>单价(美金)</td><td>400</td><td>350</td></tr><tr><td>1.6T(万只)</td><td>900</td><td>3000</td></tr><tr><td>单价(美金)</td><td>900</td><td>780</td></tr><tr><td>总需求</td><td>105</td><td>252</td></tr><tr><td>立讯占5%营收份额</td><td>5.3</td><td>12.6</td></tr><tr><td>净利润(30%净利率)</td><td>1.6</td><td>3.8</td></tr><tr><td>立讯占10%营收份额</td><td>10.5</td><td>25.2</td></tr><tr><td>净利润(30%净利率)</td><td>3.2</td><td>7.5</td></tr></table>",
+        "bbox": [
+            107,
+            179,
+            460,
+            395
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "2) 在存储强涨价周期，消费电子处于逆风，但苹果锁定了较多存储产能，价格传导能力远高于安卓手机，公司释放了愿意牺牲一定利润来抢份额的信息，立讯作为苹果重要的代工厂，预计果链消费电子业务保持平稳，收购闻泰安卓业务，整合之后非A业务仍有一定增长；汽车业务收购莱尼之后高速增长；通信互联中零部件业务快速增长，主要是 NV 服务器铜连接业务和液冷业务不断取得进展；不考虑光模块业务，26/27年预计净利润为 205/241亿。假设立讯 26/27年分别获得谷歌光模块总需求的5%/10%份额，30%的净利率，对应净利润为 11/52.8 亿元，则立讯 26/27 年合计净利润达到 216/294--···亿元，同比增长 29%/36%，26/27 年 forward PE 为 19.6X/14.4X，还有估值提升空间。",
+        "bbox": [
+            72,
+            425,
+            932,
+            576
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "page_number",
+        "text": "16 / 25 ",
+        "bbox": [
+            470,
+            959,
+            536,
+            973
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "table",
+        "img_path": "images/b89bb1b1a87f25e870c39a928c94a96829a6d49f0c48329b79a7d87bd0e59d7e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"2\">消费性电子(亿元)</td><td>2024</td><td>2025E</td><td>2026E</td><td>2027E</td></tr><tr><td colspan=\"2\">收入合计</td><td>2241</td><td>2426</td><td>2707</td><td>2765</td></tr><tr><td colspan=\"2\">yoy</td><td>14%</td><td>8%</td><td>12%</td><td>2%</td></tr><tr><td colspan=\"2\">A客户</td><td>1940</td><td>1931</td><td>1994</td><td>2052</td></tr><tr><td colspan=\"2\">yoy</td><td>11%</td><td>0%</td><td>3%</td><td>3%</td></tr><tr><td colspan=\"2\">零部件</td><td>272</td><td>285</td><td>299</td><td>314</td></tr><tr><td rowspan=\"2\">(市占率70%)</td><td>yoy</td><td>-10%</td><td>5%</td><td>5%</td><td>5%</td></tr><tr><td>耳机组装</td><td>380</td><td>392</td><td>403</td><td>416</td></tr><tr><td rowspan=\"2\">(市占率50%)</td><td>yoy</td><td>17%</td><td>3%</td><td>3%</td><td>3%</td></tr><tr><td>手表组装</td><td>379</td><td>390</td><td>402</td><td>406</td></tr><tr><td colspan=\"2\">yoy</td><td>15%</td><td>3%</td><td>3%</td><td>1%</td></tr><tr><td colspan=\"2\">立铠</td><td>909</td><td>864</td><td>890</td><td>917</td></tr><tr><td rowspan=\"3\" colspan=\"2\">Non-A客户</td><td>yoy</td><td>15%</td><td>-5%</td><td>3%</td></tr><tr><td>302</td><td>495</td><td>713</td><td>713</td></tr><tr><td>yoy</td><td>33%</td><td>64%</td><td>44%</td></tr><tr><td colspan=\"2\">毛利率合计</td><td>9.10%</td><td>9%</td><td>8%</td><td>9%</td></tr><tr><td colspan=\"2\">汽车互联产品及精密组件(亿元)</td><td>2024</td><td>2025E</td><td>2026E</td><td>2027E</td></tr><tr><td colspan=\"2\">收入合计</td><td>115</td><td>373</td><td>710</td><td>890</td></tr><tr><td colspan=\"2\">yoy</td><td>49%</td><td>223%</td><td>90%</td><td>25%</td></tr><tr><td colspan=\"2\">毛利率合计</td><td>16.1%</td><td>16.0%</td><td>15.0%</td><td>15.0%</td></tr><tr><td colspan=\"2\">通讯互联产品及精密组件(亿元)</td><td>2024</td><td>2025E</td><td>2026E</td><td>2027E</td></tr><tr><td colspan=\"2\">收入合计</td><td>184</td><td>231</td><td>308</td><td>423</td></tr><tr><td colspan=\"2\">yoy</td><td>26%</td><td>26%</td><td>33%</td><td>37%</td></tr><tr><td colspan=\"2\">服务器组装</td><td>60</td><td>60</td><td>60</td><td>60</td></tr><tr><td colspan=\"2\">4G&amp;5G基站</td><td>18</td><td>18</td><td>18</td><td>18</td></tr><tr><td colspan=\"2\">零部件</td><td>106</td><td>153</td><td>230</td><td>345</td></tr><tr><td colspan=\"2\">yoy</td><td>5%</td><td>45%</td><td>50%</td><td>50%</td></tr><tr><td colspan=\"2\">毛利率合计</td><td>16.40%</td><td>20%</td><td>25%</td><td>25%</td></tr><tr><td colspan=\"2\">电脑互联产品及精密组件(亿元)</td><td>2024</td><td>2025E</td><td>2026E</td><td>2027E</td></tr><tr><td rowspan=\"2\" colspan=\"2\">yoy</td><td>90.02</td><td>94.52</td><td>99.25</td><td>104.21</td></tr><tr><td>20%</td><td>5%</td><td>5%</td><td>5%</td></tr><tr><td colspan=\"2\">毛利率合计</td><td>18.89%</td><td>19%</td><td>19%</td><td>19%</td></tr><tr><td colspan=\"2\">其他连接器(亿元)</td><td>2024</td><td>2025E</td><td>2026E</td><td>2027E</td></tr><tr><td rowspan=\"2\" colspan=\"2\">yoy</td><td>35.81</td><td>39.39</td><td>43.33</td><td>47.67</td></tr><tr><td>4%</td><td>10%</td><td>10%</td><td>10%</td></tr><tr><td colspan=\"2\">毛利率合计</td><td>18.88%</td><td>19%</td><td>19%</td><td>19%</td></tr><tr><td colspan=\"2\">总收入合计(亿元)</td><td>2,666</td><td>3,164</td><td>3,867</td><td>4,229</td></tr><tr><td colspan=\"2\">yoy</td><td>15.69%</td><td>18.68%</td><td>22.24%</td><td>9.35%</td></tr><tr><td colspan=\"2\">总毛利合计(亿元)</td><td>276</td><td>348</td><td>432</td><td>503</td></tr><tr><td colspan=\"2\">毛利率</td><td>10.37%</td><td>11.01%</td><td>11.18%</td><td>11.89%</td></tr><tr><td colspan=\"2\">净利率</td><td></td><td>5.3%</td><td>5.3%</td><td>5.7%</td></tr><tr><td colspan=\"2\">净利润</td><td></td><td>168</td><td>205</td><td>241</td></tr><tr><td colspan=\"2\">光模块增量利润</td><td></td><td></td><td>11</td><td>52.8</td></tr><tr><td colspan=\"2\">合计净利润</td><td></td><td>168</td><td>216</td><td>294</td></tr><tr><td colspan=\"2\">yoy</td><td></td><td></td><td>29%</td><td>36%</td></tr></table>",
+        "bbox": [
+            72,
+            36,
+            863,
+            873
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "page_number",
+        "text": "17 / 25 ",
+        "bbox": [
+            470,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "3. ",
+        "bbox": [
+            55,
+            43,
+            75,
+            57
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "【光模块测试设备】：光模块迭代与放量驱动测试设备需求高增，国产龙头厂商有望充分受益于国产替代进程。光模块设备按生产流程可分为贴片、键合、耦合、组装、老化和测试，其中测试设备占比最高、约 40%。核心测试设备为采样示波器，单台价值量达 100-200 万元，可集成时钟恢复单元、误码分析功能。参考旭创铜陵三期扩产项目，可测算得每 100 万只 800G 光模块产能对应约 2 亿元光模块测试设备投入。随着光模块由当前主流 800G 向未来 1.6T、3.2T 迭代升级，测试设备也必须更新换代；27 年全球光模块测试设备市场需求可达 200 亿元。目前市场由是德科技等海外厂商主导，国内龙头厂商如联讯等正在实现技术和产品的突破。预期远期光模块测试设备可给国内相关龙头厂商带来十亿量级利润增量，受益程度：联讯（即将上市）>华盛昌>优利德>普源精电，总体是行业β机会 ",
+        "bbox": [
+            89,
+            42,
+            941,
+            212
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) 光模块设备按生产流程及价值量占比包括贴片约 20%、键合 2%-5%、耦合 15%-20%、组装 10%-15%、老化 5%-10%和测试约 40%。",
+            "2) 光模块测试设备为光模块产线中的必须设备，核心测试设备为采样示波器。· · ·"
+        ],
+        "bbox": [
+            73,
+            218,
+            929,
+            278
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "i）采样示波器：核心设备，用于分析光模块的“眼图”,评估信号质量;随着技术从NRZ码型演进到PAM4码型，对示波器性能要求更高。",
+            "ii)误码分析仪：在眼图调试基本完成后，用于进行误码率的量化分析，是判断光模块合格与否的直接依据;通过精确的误码率评估信号质量。",
+            "ii时钟恢复单元：通常为光采样示波器内部模块。"
+        ],
+        "bbox": [
+            92,
+            282,
+            941,
+            387
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "3) 采样示波器，单台价值量达 100-200万元，可集成时钟恢复单元、误码分析功能。",
+        "bbox": [
+            73,
+            393,
+            764,
+            409
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "据普源精电离职专家,采样示波器价格最高,与光模块速率强相关;400G 曾达130万元(2019年顶峰),当前不到 100 万；800G 价格在 100-200 万元，是德的 N1078 型号约 180 万元，国内厂商会打 6-7 折；1.6T 价格在 200-300 万元区间，是德的型号在 250 万元以上。",
+            "i)据旭创21年披露，其铜陵110万只光模块(400G为主)项目采购的泰克DCA采样示波器均价约209万人民币(15861.2 万元÷76 台=208.7 万元/台)。"
+        ],
+        "bbox": [
+            90,
+            414,
+            941,
+            519
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "table",
+        "img_path": "images/93e101451291ed1dba148bf9c274dcb42e26ffdfc715c369a8ebf4a8f36aa049.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"5\">产业化用进口设备</td></tr><tr><td>序号</td><td>设备名称</td><td>设备型号</td><td>数量(台/套)</td><td>总价(万元)</td></tr><tr><td>1</td><td>自动贴片机</td><td>Datacon、ASM</td><td>11</td><td>4,248.00</td></tr><tr><td>2</td><td>自动贴片机</td><td>MRSI</td><td>15</td><td>3,894.40</td></tr><tr><td>3</td><td>自动打线机</td><td>ASM</td><td>2</td><td>417.60</td></tr><tr><td>4</td><td>烧结炉</td><td>SST</td><td>2</td><td>521.70</td></tr><tr><td>5</td><td>BI箱</td><td>Chroma BI</td><td>32</td><td>6,492.80</td></tr><tr><td>6</td><td>热流仪</td><td>MPI</td><td>53</td><td>1,075.90</td></tr><tr><td>7</td><td>DCA</td><td>泰克</td><td>76</td><td>15,861.20</td></tr><tr><td>8</td><td>光谱仪</td><td>Yokogawa</td><td>15</td><td>219.00</td></tr><tr><td>9</td><td>CDR</td><td>Keysight</td><td>30</td><td>1,425.00</td></tr><tr><td>10</td><td>环测机台</td><td>MPI</td><td>23</td><td>265.50</td></tr><tr><td>11</td><td>从属费用</td><td>-</td><td>-</td><td>10,228.90</td></tr><tr><td colspan=\"3\">合计</td><td>259</td><td>44,650.00</td></tr></table>",
+        "bbox": [
+            142,
+            524,
+            853,
+            810
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "4) 据旭创 24 年披露的铜陵三期扩产项目，可测算得每 100 万只 800G 光模块产能对应约 2 亿元光模块测试设备投入。",
+        "bbox": [
+            72,
+            826,
+            939,
+            864
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "page_number",
+        "text": "18 / 25 ",
+        "bbox": [
+            470,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "table",
+        "img_path": "images/7be7e9d275b7f0418d805ac7cf9a4421239be451884fc94f5300cd03b4316b83.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"6\">铜陵旭创高端光模块产业园三期项目-新增120万只产能</td></tr><tr><td>设备</td><td>型号</td><td>供应商</td><td>数量(台)</td><td>单价(万¥/台)</td><td>合计(亿¥)</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>CDR采样示波器(集成时钟恢复)</td><td></td><td>是德</td><td>158</td><td>25</td><td>0.4</td></tr><tr><td>DCA采样示波器</td><td></td><td>泰克</td><td>168</td><td>110</td><td>1.8</td></tr><tr><td>采样示波器+误码测试一体机</td><td>MP2110A</td><td>安立</td><td>40</td><td>35</td><td>0.1</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>示波器+误码仪合计</td><td></td><td></td><td></td><td></td><td>2.4</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"4\">每100万只800G光模块产能对应示波器+误码仪价值量</td><td></td><td>2.0</td></tr></table>",
+        "bbox": [
+            142,
+            43,
+            873,
+            227
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "5) 随着光模块由当前主流 800G 向未来 1.6T、3.2T 迭代升级，测试设备也必须更新换代；27 年全球光模块测试设备市场需求可达200亿元。 ",
+        "bbox": [
+            72,
+            243,
+            939,
+            280
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "table",
+        "img_path": "images/25b852be0c1a0c92c3548bc0a825960a0a52462926e7a341404e20e19242880d.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"3\">光模块测试设备需求空间测算</td><td>单位</td><td>2025</td><td>2026</td><td>2027</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"3\">光模块需求量</td><td>万只</td><td></td><td>7,700</td><td>14,000</td></tr><tr><td></td><td colspan=\"2\">800G</td><td>万只</td><td>1,900</td><td>5,000</td><td>5,000</td></tr><tr><td></td><td colspan=\"2\">1.6T</td><td>万只</td><td>160</td><td>2,700</td><td>8,500</td></tr><tr><td></td><td colspan=\"2\">3.2T</td><td>万只</td><td></td><td></td><td>500</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"3\">年化产能利用率</td><td>%</td><td>90%</td><td>90%</td><td>90%</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"3\">光模块扩产需求</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td colspan=\"2\">800G</td><td>万只</td><td></td><td>3,500</td><td></td></tr><tr><td></td><td colspan=\"2\">1.6T</td><td>万只</td><td></td><td>2,900</td><td>6,500</td></tr><tr><td></td><td colspan=\"2\">3.2T</td><td>万只</td><td></td><td></td><td>600</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"3\">核心测试设备需求金额</td><td>亿¥</td><td>■</td><td>150</td><td>204</td></tr></table>",
+        "bbox": [
+            206,
+            285,
+            789,
+            563
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "6) 目前市场由是德科技等海外厂商主导，国内龙头厂商如联讯等正在实现技术和产品的突破；预期远期光模块测试设备可给国内相关龙头厂商带来十亿量级利润增量。",
+        "bbox": [
+            72,
+            577,
+            929,
+            615
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "i）据联讯招股说明书，是德、安立等为代表的海外企业占据了24年光通信测试仪器市场约84%份额；头部公司在国内的份额，是德 30.8%、安立 22.5%、联讯 9.9%、泰克 8.2%、EXFO 份额 8%。",
+            "据普源精电离职专家，采样示波器国际主流为是德等；国内万里眼源自华为仪器事业部背景，技术实力国内第一；联讯主打性价比，为国内份额领先公司。",
+            "ii)万里眼、联讯均于近期推出了1.6T光模块核心测试仪器，水平达到世界前列。"
+        ],
+        "bbox": [
+            90,
+            621,
+            937,
+            726
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "page_number",
+        "text": "19 / 25 ",
+        "bbox": [
+            470,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "table",
+        "img_path": "images/10b16bdecca314bbf9175cdf542e7d541bbf1cef427e5c6876216ba9699510cd.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"2\">核心厂商业绩弹性测算</td><td>单位</td><td>2025</td><td>2026</td><td>2027</td><td colspan=\"2\">2030</td><td>2027</td><td colspan=\"2\">2030</td><td colspan=\"2\">2026/4/10</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"2\">核心测试设备需求金额</td><td>亿¥</td><td></td><td>150</td><td>204</td><td colspan=\"2\">400</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"2\">核心厂商份额</td><td></td><td></td><td></td><td></td><td></td><td></td><td colspan=\"3\">归母净利润贡献(亿¥)</td><td colspan=\"2\">市值(亿¥)</td></tr><tr><td></td><td>是德</td><td>%</td><td>35.0%</td><td>30.0%</td><td>25.0%</td><td>20.0%</td><td></td><td>12.8</td><td>20.0</td><td></td><td></td><td>3,817.0</td></tr><tr><td></td><td>安立</td><td>%</td><td>25.0%</td><td>20.0%</td><td>15.0%</td><td>5.0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>泰克</td><td>%</td><td>10.0%</td><td>7.5%</td><td>5.0%</td><td>1.5%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>联讯</td><td>%</td><td>5.0%</td><td>10.0%</td><td>18.0%</td><td>25.0%</td><td></td><td>7.3</td><td>20.0</td><td></td><td></td><td></td></tr><tr><td></td><td>万里眼</td><td>%</td><td></td><td>5.0%</td><td>10.0%</td><td>15.0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>华盛昌(拟收购伽蓝特100%股权)</td><td>%</td><td></td><td>3.0%</td><td>5.0%</td><td>10.0%</td><td></td><td>2.0</td><td>8.0</td><td></td><td></td><td>100.4</td></tr><tr><td></td><td>优利德(拟收购信测通信51%股权)</td><td>%</td><td></td><td>3.0%</td><td>5.0%</td><td>10.0%</td><td></td><td>1.0</td><td>4.1</td><td></td><td></td><td>65.4</td></tr><tr><td></td><td>普源精电</td><td>%</td><td></td><td></td><td>2.0%</td><td>8.0%</td><td></td><td>0.8</td><td>6.4</td><td></td><td></td><td>102.2</td></tr><tr><td></td><td>其他</td><td>%</td><td>25.0%</td><td>21.5%</td><td>15.0%</td><td>5.5%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>",
+        "bbox": [
+            57,
+            41,
+            941,
+            263
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "4. 金盘科技：油浸式主变（≥110KV）取得海外大单突破打开公司业务天花板+北美 AIDC 大厂配变订单稳步推进+SST 北美送样验证中，公司有望迎来订单高速增长期。根据离职专家访谈，公司 26Q1 海外新签订单约 20 亿，同比翻倍增长，其中首次获得 1.3 亿美金油浸式主变大单，从配变到主变的突破，公司业务天花板显著打开；Google、Meta 等 AIDC 客户订单稳步推进中，全年海外 AIDC 新签订单目标超 15 亿元；SST 目前正在北美送样测试中，打开未来想象空间。中性假设下，我们预测公司 2026、2027 年归母净利润分别为 9.5 亿元、14.5 亿元，当前市值对应 PE 分别为 41X、27X；考虑到公司美国产能 27 年有望集中释放，美国工厂主要产品定位 AIDC 配变+油浸式主变，未来净利率甚至有望突破 20%，带来显著业绩弹性，27-28 年或可展望超 20 亿净利润，则当前市值对应约 19XPE",
+        "bbox": [
+            53,
+            294,
+            939,
+            467
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) 订单情况梳理：公司凭借北美 AIDC配变业务推进+油浸式主变业务突破，26年有望迎来订单高速增长",
+            "i) 2026 年 Q1 海外新签订单：根据金盘科技离职专家访谈，2026 年 Q1 公司海外新签订单约 20 亿元（同比 25 年 Q1 海外新签订单翻倍），其中油变订单达 1.7 亿美元，主变（110kV 及以上）占油变订单超75%，约1.3亿美元，主要来自东南亚、中亚、中东等新兴市场，下游客户包括电网、新能源 EPC 等",
+            "ii) 北美 AIDC订单进展：公司此前与谷歌签订两年期合作备忘录，谷歌 30 亿元招标需求尚未正式公告，公· ·司目标获取谷歌40%份额，对应订单规模约 12 亿元，2026 年预计有望落地 5-6 亿元，目前已通过伟创力等总包商间接获得谷歌订单约 1 亿元；Meta 此前预计 2 亿美金需求因方案变化可能推迟至 Q2 末或· ·Q3，但项目金额可能会上修。公司 26Q1 北美 AIDC 配电变压器新签订单约 4 亿元左右，主要包括亚马逊、XAI等，当前在手 AIDC订单合计 13-14亿元；全年 AIDC新签订单目标30亿元，其中国内、海外各15亿元，Q2起随客户项目进入建设期，预计订单将加速落地",
+            "iii)全年订单目标：根据公司官方口径，25 年全年新签订单国内约57-58亿元，海外约32 亿元，合计约90亿元；离职专家推测 26 年全年新签订单目标国内 70-75 亿，海外订单约 60 亿元，合计约 130-135 亿元，同比增长约50%；其中海外新签订单 Q1已经实现20亿元，全年存在进一步上修的可能"
+        ],
+        "bbox": [
+            72,
+            482,
+            939,
+            770
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "2) 油浸式主变大单突破意义解读：干式变压器主要用于工商业、户用等分散型市场，而油浸式变压器使用场景广泛远超干式变压器，根据行业报告统计，25 年全球油浸式变压器市场约 476 亿美元，而干式变压器市场约71 亿美元，干变占全球变压器市场仅约 13%占比。金盘科技此前产品主要以干式配变为主，25 年公司仅有少量主变出货，主要是公司收购的武汉 GE工厂，需要一定时间消化技术、完成前期认证速发展阶段",
+        "bbox": [
+            72,
+            791,
+            944,
+            941
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "page_number",
+        "text": "",
+        "bbox": [
+            468,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "3) 产能扩张：离职专家预计公司 26年底产能有望突破 130亿产值，美国工厂产能将逐步落地。以国内产能方面，预计武汉基地产值从 20 亿元提升至 30-35 亿元，海口基地海外产值从 14 亿元提升至 18 亿元；美国超 40 亿元产值规划预计逐步落地，弗吉尼亚工厂预计 2026 年 Q3 投产，田纳西工厂规划 2027 年投产，本土产能将有效规避贸易风险，提升交付速度与客户粘性，支撑北美市场长期拓展，且美国工厂主要产品定位 AIDC 配变+油浸式主变，未来净利率甚至有望突破 20%，40 亿+产值有望对应 8 亿净利润，业绩弹性显著提升",
+        "bbox": [
+            72,
+            60,
+            944,
+            187
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "table",
+        "img_path": "images/41cd675ceee045f1eecac0b4d03c5ab3732c0474a1b39c6fd994c100a28cb4e9.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>生产基地</td><td>主要产品</td><td>2026年产值预期(亿元)</td><td>2025年产值(亿元)</td><td>关键说明</td></tr><tr><td>武汉</td><td>干变、油变(主变)、GIS开关柜</td><td>35</td><td>20</td><td>最大生产基地,整合G&amp;W高压工厂,可产330kV主变,东南亚/中东主变订单核心基地</td></tr><tr><td>海口</td><td>干变、油变</td><td>18</td><td>14</td><td>自贸港优势,出口便利,新增油变产能辐射东南亚</td></tr><tr><td>扬州</td><td>油变、新能源成套</td><td>15</td><td>12</td><td>国内海风及主变(110/220kV)产能增加</td></tr><tr><td>马来西亚</td><td>干变、油变</td><td>8</td><td>3.5</td><td>二期投产,数字化工厂,重要转口基地(半成品→北美)</td></tr><tr><td>墨西哥</td><td>干变、非晶铁芯</td><td>10</td><td>6</td><td>电网/制造业常规产品,非晶铁芯配套SST</td></tr><tr><td>美国-佛罗里达</td><td>配电变压器总装</td><td>3</td><td>1</td><td>原开关厂改造,仅常规产品,无法做AIDC高定制化产品</td></tr><tr><td>美国-弗吉尼亚</td><td>干变(AIDC)、开关柜</td><td>20</td><td>-</td><td>一期针对数据中心干变,规划产值20亿+,2026年Q3投产,仅1个季度贡献</td></tr><tr><td>美国-田纳西</td><td>油变、主变</td><td>-</td><td>-</td><td>规划产值约20亿,待主变认证和市场需求确认;计划2027下半年投产</td></tr><tr><td>桂林</td><td>成套设备、SST、PSU等</td><td>15</td><td>12.5</td><td>SST国内样机产地,后续可能在海南布局</td></tr><tr><td>浙江(原上海)</td><td>特种变、移相变、油变</td><td>5</td><td>5</td><td>上海厂房迁入,地盘扩大,油变/特种变产能扩张</td></tr><tr><td>其他(湖南等地)</td><td>非晶带材、储能</td><td>3</td><td>3</td><td>非晶工厂+储能基地</td></tr><tr><td>合计产值:</td><td></td><td>132</td><td>77</td><td></td></tr></table>",
+        "bbox": [
+            122,
+            195,
+            885,
+            467
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "4) SST进展：根据离职专家访谈，北美 SST 行业标准即将落地，公司 SST样机正面向 NV、Google 等北美客户送样测试中；公司作为唯一与英伟达直接合作 SST 整机的国产厂商，3MW 机型已送往北美客户测试，重点验证系统兼容性与模拟负载运行效果。英伟达联合北美CSP 厂商制定的 SST 性能与接口规范原计划2026 年 4 月发布，目前略有延迟，样机需根据标准小幅改造，若无重大改动，公司有望快速进入英伟达白名单",
+            "5) 盈利预测&估值：25 年公司总收入72 亿元，其中国内 50 亿元（新能源17亿、AIDC4亿、工商业 10亿、电网 5 亿），海外 23 亿元（北美 11 亿、亚太 8 亿、欧洲 4 亿），实现 6.6 亿归母净利润；离职专家表亿元净利润；考虑到 26 年新签订单同比增长 50%，则中性情况下预计 27 年同比 26 年增长约 50%，对应净利润约14.5亿元，中性假设下，我们预测公司 2026、2027 年归母净利润分别为 9.5 亿元、14.5 亿元，当前市值对应 PE 分别为 41X、27X；考虑到公司美国产能 27 年有望集中释放，美国工厂主要产品定位 AIDC 配变+油浸式主变，未来净利率甚至有望突破 20%，带来显著业绩弹性，27-28 年或可展望超20 亿净利润，则当前市值对应约19XPE"
+        ],
+        "bbox": [
+            72,
+            491,
+            944,
+            771
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "text",
+        "text": "5. 安靠智电：变压器负责人钟总本周赴美对接业务，此前预期北美变压器新订单或有望近期落地，若推进顺利，公司北美拓展确定性将进一步增强；考虑到公司新产能生产交付能力强，新增订单兑现程度高，有望带来显著业绩弹性。公司作为北美变压器市场新进入者，已经公告获得北美 AIDC配电变压器订单并已经实现部分交付，有望在 Q1 业绩中体现；此外公司正在北美电力公司验证 230KV 电力变压器，凭借渠道及新产能优势+已有项目交付增强确定性+未来拿单预期，我们预测 26、27公司有望实现 2.5、5.5亿元净利润，当前市值分别对应 39、18XPE",
+        "bbox": [
+            55,
+            793,
+            936,
+            921
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "page_number",
+        "text": "21 / 25 ",
+        "bbox": [
+            468,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) 近况更新：根据调研，变压器负责人钟总本周赴美，预计开展为期两周的商务洽谈，重点对接北美电力公司与 AIDC 客户，推进电力变压器与配电变压器框架协议；此次出访为订单落地关键节点，有望确定合作细节与采购规模，若订单推进顺利，公司北美变压器业务拓展确定性将进一步得到验证",
+            "2) 产线&产能：根据此前线下调研公司变压器生产线情况，公司司目前共 10 台绕线机（其中大吨位立绕设备 4 台+中吨位立绕设备2 台+卧绕设备 4台），设计团队30余人，生产制造团队49人，预计年底将扩充至 100 人，届时公司设备及人员产能可支持约 20 亿变压器产值",
+            "3) 北美变压器拓展情况：公司在钟鸣总（原华鹏变压器、思源东芝核心成员）的带领下在北美变压器市场快速取得突破，作为北美变压器市场新进入者，已经公告获得北美 AIDC 配电变压器订单，在手 13 台35kV油浸式变压器订单（金额 890万美金），2 月底已发部分，3 月底前全交付，发货周期仅 2-3 个月，显著短于海外供应商；26 年北美新增变压器订单预期约 5000 万美元，其中预计 AIDC 运营商 30-50 台（约 2000 万-3500 万美金），电力公司 Q4 或出框架（每年约两三千万美金，目标至少 500 万美金以上），同时正在谈 345kV 产品，凭借渠道及新产能优势+已有项目交付增强确定性，我们认为公司未来在美国市场拿单的确定性较强",
+            "4) Q1 业绩预期&全年盈利预测：考虑到 Q1 已实现部分北美变压器订单交付，预计 26Q1 公司净利润有望实现 5500 万左右，同比增长约 25%，扣非预计增长较为显著；公司 25 年实现归母净利润 7000 万，主要是计提减值 8000 万减值，预计 26 年传统业务整体营收约 10-12 亿元，净利约 1.2-1.5 亿元；考虑目前北美在跟踪订单约 5000 万美金，南美欧洲土耳其目标各 1 亿人民币，海外变压器约 7 亿潜在订单，假设完成70%，对应5 亿收入 1 亿利润，则 25年业绩预计 2.5亿；27 年受益国内电网资本开支增长，假设传统业务实现 30%左右增长对应约 2 亿利润，15-20 亿产值（未考虑潜在扩产建设新厂房）对应约3-4 亿利润，取中值则公司有望实现约 5.5 亿净利润，26、27 公司有望实现 2.5、5.5 亿元净利润，当前市值分别对应 39、18XPE"
+        ],
+        "bbox": [
+            72,
+            43,
+            944,
+            539
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "6. 阳光电源：本质是稀缺的中国优质海外高认可度的储能品牌，最差时刻已经过去，预计 26Q2 公司积极变化陆续落地，公司内部信心强。25 年 Q4 业绩大幅低于预期，主要受储能系统交付结构及锂电池涨价等因素影响；根据调研，26 年公司全年出货同比增长约 40-50%，且目前欧美高价值量订单已实现顺价，3 月之后欧洲好价订单将于 Q2开始逐步交付，此外 Q2 预计800VHVDC+PowerTitan3.0 同步发售，带来新业务+有效降本路径；美国方面，公司已有数据中心升级加配储能系统订单，新建AIDC配储具备技术但订单仍处于开发阶段，Notice2026-15 之后的独立储能项目仍在早期尝试中。我们认为公司作为全球储能市场高认可度的品牌，后续仍可通过新技术、新市场、新服务等方式实现收入增长和持续降本，中性假设下，公司 26、27 年预计分别实现归母净利润约 165、188 亿元，当前市值分别对应 15.7X、13.9XPE",
+        "bbox": [
+            55,
+            562,
+            934,
+            753
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) 25Q4 业绩下滑原因复盘：根据阳光电源离职专家访谈，公司内部总结 25Q4 业绩与毛利率不及预期五大核心原因，一是高毛利海外项目交付周期从 6-8 个月延长至 8-12 个月，收入确认延迟至 2026 年 Q1-Q2；二是储能电池等原材料价格上涨，已锁价订单无法及时传导成本；三是电芯涨价后终端顺价存在时滞，欧美市场 2026年 Q1才完成顺价；四是低毛利国内业务占比阶段性提升；五是年末费用集中支付，叠加应收账款减值影响，公司内部认为上述因素主要系阶段性问题，26Q1将显著改善，回归健康水平1",
+            "2) 26 年全年出货目标：全年储能发货目标为 60-63GWh，预计其中，中国 10GWh、北美 15GWh、欧洲44 1 12GWh、南美 6GWh、亚太 7GWh、中东 5GWh、非洲 7GWh，结构持续优化"
+        ],
+        "bbox": [
+            72,
+            760,
+            939,
+            926
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "page_number",
+        "text": "22 / 25 ",
+        "bbox": [
+            468,
+            959,
+            536,
+            973
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "3) AIDC 业务进展：根据离职专家访谈，公司与 AWS 签署的 8GWh 框架协议中，2GWh 已于 Q1 完成交付，后续交付节奏需听从客户安排，全年交付计划存在小幅延期；AWS 二期 12GWh 原计划 Q3 招标，现已推迟至 Q4；谷歌 AIDC 配储项目仍于洽谈阶段，原计划于 4 月中旬开始招标，现推迟至 5 月中旬，公司凭借技术实力与项目经验，内部判断中标概率较高",
+            "4) 兑现度：离职专家表示公司内部对于后续发展“很有信心”，信心主要来源"
+        ],
+        "bbox": [
+            72,
+            43,
+            939,
+            165
+        ],
+        "page_idx": 23
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "i）优质的现金流：公司现金流约700亿元，主要来源于公司严格的风险控制和现金回收政策，此外，海外销售占比首次超过国内，带来了更健康的现金流结构，强大的现金流为后续全球市场的业务拓展提供了资金支持，确保了新一代产品（如三代储能系统、HVDC 技术）的研发和推出不受资金限制，在面对原材料价格高位、项目延期等挑战时，有更强的抗风险能力",
+            "i)明确的出货增长目标：全年储能发货目标为60-63GWh，根据在手订单盘点，预计兑现度较高，尽管中东等地因战争因素下调了目标，但其他区域增长可部分弥补",
+            "·---- ·---- ----- ····· ····· ---·· ··--- --···步发售，三代产品相比二代有望实现 12%降本，新品推出有望提升产品竞争力、修复毛利率；此外随着前端竞争加剧，公司计划战略重点向高毛利的后市场运维、资产管理、VPP虚拟电厂等领域延伸，该领域毛利率预计可达50%，能有效对冲前端利润压力",
+            "5) Q1 业绩预期&全年盈利预测：根据产业链调研，预计 Q1 收入约 190 亿元，净利率环比25Q4 预计大幅改善，15-17%净利率，对应约 30 亿归母净利润，同比去年下滑约 20%；根据产业链调研，公司最新出货目标及各地区价格、毛利水平预计情况。我们调整了公司全年盈利预测，中性假设下，公司 26、27年预计分别实现归母净利润约 165、188 亿元，当前市值分别对应 15.7X、13.9XPE"
+        ],
+        "bbox": [
+            72,
+            171,
+            941,
+            476
+        ],
+        "page_idx": 23
+    },
+    {
+        "type": "page_number",
+        "text": "23 / 25 ",
+        "bbox": [
+            468,
+            959,
+            536,
+            973
+        ],
+        "page_idx": 23
+    },
+    {
+        "type": "table",
+        "img_path": "images/7b0abead09043021fde4fdfcd22976c2cef90c5f7fc9282d185b5ee21eb7d401.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>大储确收(GWh)</td><td>2025A</td><td>2026E</td><td>2027E</td></tr><tr><td>美国</td><td>8.2</td><td>12</td><td>14</td></tr><tr><td>其中:AIDC配储</td><td></td><td>6</td><td>8</td></tr><tr><td>中国</td><td>10</td><td>10</td><td>12</td></tr><tr><td>欧洲</td><td>6.3</td><td>10</td><td>13</td></tr><tr><td>其他地区</td><td>14</td><td>23</td><td>30.4</td></tr><tr><td>合计:</td><td>38</td><td>55</td><td>69</td></tr><tr><td>单价(元/wh)</td><td></td><td></td><td></td></tr><tr><td>美国:表前大储</td><td>1.10</td><td>1.10</td><td>1.10</td></tr><tr><td>美国:AIDC配储</td><td></td><td>1.24</td><td>1.18</td></tr><tr><td>中国</td><td>0.75</td><td>0.7</td><td>0.7</td></tr><tr><td>欧洲</td><td>1.00</td><td>1.10</td><td>1.10</td></tr><tr><td>其他地区</td><td>0.90</td><td>1.00</td><td>0.95</td></tr><tr><td>大储收入(亿元)</td><td>349.7</td><td>545.4</td><td>669.6</td></tr><tr><td>户储+工商业收入(亿元)</td><td>23.17</td><td>32.4</td><td>42.2</td></tr><tr><td>储能系统收入(亿元)</td><td>372.9</td><td>577.8</td><td>711.7</td></tr><tr><td>大储</td><td></td><td></td><td></td></tr><tr><td>美国:表前大储</td><td>36%</td><td>32%</td><td>30%</td></tr><tr><td>美国:AIDC配储</td><td></td><td>37%</td><td>35%</td></tr><tr><td>中国</td><td>15%</td><td>14%</td><td>13%</td></tr><tr><td>欧洲</td><td>40%</td><td>38%</td><td>36%</td></tr><tr><td>其他地区</td><td>30%</td><td>27%</td><td>25%</td></tr><tr><td>户储+工商业</td><td>35%</td><td>33%</td><td>33%</td></tr><tr><td>期间费用率</td><td>13%</td><td>13%</td><td>13%</td></tr><tr><td>分区域/下游利润(亿元)</td><td></td><td></td><td></td></tr><tr><td>大储</td><td></td><td></td><td></td></tr><tr><td>美国:表前大储</td><td>20.7</td><td>12.5</td><td>11.2</td></tr><tr><td>美国:AIDC配储</td><td></td><td>17.9</td><td>20.7</td></tr><tr><td>中国</td><td>1.5</td><td>0.4</td><td>0.0</td></tr><tr><td>欧洲</td><td>17.0</td><td>27.5</td><td>32.9</td></tr><tr><td>其他地区</td><td>18.4</td><td>25.2</td><td>29.2</td></tr><tr><td>户储+工商业</td><td>5.1</td><td>6.5</td><td>8.4</td></tr><tr><td>储能系统利润(亿元)</td><td>62.7</td><td>89.9</td><td>102.4</td></tr><tr><td>光伏逆变器等电力转换设备</td><td></td><td></td><td></td></tr><tr><td>收入(亿元)</td><td>311.4</td><td>342.5</td><td>365.6</td></tr><tr><td>yoy</td><td>6.9%</td><td>10%</td><td>10%</td></tr><tr><td>毛利率</td><td>34.7%</td><td>32%</td><td>30%</td></tr><tr><td>期间费用率</td><td>13.0%</td><td>13.0%</td><td>13.0%</td></tr><tr><td>逆变器利润(亿元)</td><td>67.4</td><td>65.1</td><td>62.1</td></tr><tr><td>其他业务(EPC+风电+氢能)</td><td></td><td></td><td></td></tr><tr><td>收入(亿元)</td><td>207.6</td><td>250</td><td>300</td></tr><tr><td>净利率</td><td>7%</td><td>6%</td><td>6%</td></tr><tr><td>其他业务利润(亿元)</td><td>14.5</td><td>15.0</td><td>18.0</td></tr><tr><td>非AIDC业务</td><td></td><td></td><td></td></tr><tr><td>总收入(亿元)</td><td>891.8</td><td>1137.9</td><td>1335.1</td></tr><tr><td>总利润(亿元)</td><td>144.7</td><td>170.0</td><td>182.6</td></tr><tr><td>净利率</td><td>16.2%</td><td>14.9%</td><td>13.7%</td></tr><tr><td>AIDC业务</td><td></td><td></td><td></td></tr><tr><td>收入(亿元)</td><td></td><td>15</td><td>75</td></tr><tr><td>净利率</td><td></td><td>15%</td><td>17%</td></tr><tr><td>AIDC利润(亿元)</td><td></td><td>2.25</td><td>12.75</td></tr><tr><td>营业总收入(亿元)</td><td>891.8</td><td>1152.9</td><td>1410.1</td></tr><tr><td>计算净利润(亿元)</td><td>144.7</td><td>172.3</td><td>195.3</td></tr><tr><td>资产+信用价值损失(超额)</td><td>(10.07)</td><td>(7.00)</td><td>(7.00)</td></tr><tr><td>归母净利润(亿元)</td><td>134.61</td><td>165.26</td><td>188.34</td></tr></table>",
+        "bbox": [
+            115,
+            41,
+            623,
+            785
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            48,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "page_number",
+        "text": "24 / 25 ",
+        "bbox": [
+            470,
+            960,
+            536,
+            973
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "text",
+        "text": "本报告文件（以后简称\"报告\"）由久谦论坛系统生成，仅供授权用户使用；",
+        "bbox": [
+            78,
+            129,
+            606,
+            145
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "报告包含的所有信息、内容仅供交流，不构成投资建议，不具有任何商业建议、投资决策等性质；",
+        "bbox": [
+            78,
+            165,
+            769,
+            181
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "报告为久谦咨询基于专家论坛进行的稿录；",
+        "bbox": [
+            78,
+            183,
+            388,
+            198
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "久远谦长（上海）企业管理咨询有限公司及其关联公司（统称\"久谦咨询\"）对报告所述内容不予以精准性、完全性确定；",
+        "bbox": [
+            78,
+            200,
+            929,
+            216
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "报告中专家叙述部分为专家个人的立场和观点，久谦未对专家所述进行任何修改，不代表久谦咨询的观点；",
+        "bbox": [
+            78,
+            218,
+            840,
+            234
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "报告相关的著作权等所有知识产权均属于久谦咨询所有；",
+        "bbox": [
+            78,
+            236,
+            487,
+            250
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "未经允许，严禁修改、编辑、复制、发表、传播、传递、出版、授权、模仿、转载或销售。",
+        "bbox": [
+            78,
+            254,
+            700,
+            269
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "报告受数字水印保护，任何试图移除或修改水印的行为，都将被系统识别并记录，",
+        "bbox": [
+            78,
+            290,
+            660,
+            305
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "如发现文件被非法使用，请及时联系平台客服。",
+        "bbox": [
+            78,
+            307,
+            418,
+            323
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "header",
+        "text": "免责声明",
+        "bbox": [
+            80,
+            43,
+            176,
+            61
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "footer",
+        "text": "fixn8NluP0GxiohYMFxu1AKdyFLY9WabROjby/YKihc= ",
+        "bbox": [
+            48,
+            965,
+            394,
+            978
+        ],
+        "page_idx": 25
+    }
+]
