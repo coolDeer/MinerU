@@ -65,6 +65,42 @@ def main() -> int:
     final = guess_suffix_by_path(path)
     print(f"🎯 MinerU final suffix: {final!r}")
 
+    # When the file looks like an OOXML container (starts with PK), peek inside
+    # so we can tell xlsx from xlsb/xlsm/docm/etc.
+    if head[:4] == b"PK\x03\x04":
+        print()
+        print("-- ZIP internals --")
+        try:
+            import zipfile
+            with zipfile.ZipFile(path) as zf:
+                names = zf.namelist()
+                print(f"  entries: {len(names)}")
+                for n in names[:8]:
+                    print(f"    {n}")
+                if len(names) > 8:
+                    print(f"    ... ({len(names) - 8} more)")
+                if "[Content_Types].xml" in names:
+                    content = zf.read("[Content_Types].xml").decode("utf-8", "replace")
+                    markers = {
+                        "spreadsheetml.sheet.binary": "xlsb (Excel Binary Workbook)",
+                        "spreadsheetml.sheet.macroEnabled": "xlsm (Macro-enabled xlsx)",
+                        "spreadsheetml.sheet": "xlsx (standard Excel)",
+                        "wordprocessingml.document.macroEnabled": "docm (Macro-enabled docx)",
+                        "wordprocessingml.document": "docx (standard Word)",
+                        "presentationml.presentation.macroEnabled": "pptm (Macro-enabled pptx)",
+                        "presentationml.presentation": "pptx (standard PowerPoint)",
+                    }
+                    matched = next(
+                        (label for m, label in markers.items() if m in content),
+                        "unknown OOXML variant",
+                    )
+                    print(f"  [Content_Types].xml payload → {matched}")
+                else:
+                    print("  [Content_Types].xml NOT present → not standard OOXML")
+        except Exception as exc:
+            print(f"  (failed to open as zip: {exc})")
+
+    print()
     if final in SUPPORTED:
         print(f"✅ Supported by MinerU as: {SUPPORTED[final]}")
         return 0

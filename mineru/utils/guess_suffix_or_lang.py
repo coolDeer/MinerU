@@ -84,19 +84,32 @@ def guess_language_by_text(code):
     return lang if lang != "unknown" else DEFAULT_LANG
 
 
+def _maybe_recover_ooxml(suffix: str, zip_source, hint_suffix: str) -> str:
+    """If the extension hints at OOXML, verify via [Content_Types].xml.
+
+    Magika can mislabel legitimate xlsx/docx/pptx files as 'zip', 'xlsb', or
+    other zip-derivative formats because the container is a zip archive. When
+    the filename extension says OOXML, trust the archive's [Content_Types].xml
+    over Magika's guess.
+    """
+    if hint_suffix not in OOXML_SUFFIXES:
+        return suffix
+    expected = hint_suffix.lstrip(".")
+    if suffix == expected:
+        return suffix
+    variant = _detect_ooxml_variant_from_zip(zip_source)
+    if variant:
+        return variant
+    return suffix
+
+
 def guess_suffix_by_bytes(file_bytes, file_path=None) -> str:
     suffix = magika.identify_bytes(file_bytes).prediction.output.label
     if file_path and suffix in ["ai", "html"] and Path(file_path).suffix.lower() in [".pdf"] and file_bytes[:4] == PDF_SIG_BYTES:
         suffix = "pdf"
-    # Magika sometimes labels OOXML (xlsx/docx/pptx) as generic "zip" because
-    # the container is a zip archive — recover the real variant by inspecting
-    # [Content_Types].xml inside the archive.
-    if suffix == "zip" and file_bytes[:4] == ZIP_SIG_BYTES:
+    if file_bytes[:4] == ZIP_SIG_BYTES:
         hint = Path(file_path).suffix.lower() if file_path else ""
-        if hint in OOXML_SUFFIXES or not hint:
-            variant = _detect_ooxml_variant_from_zip(BytesIO(file_bytes))
-            if variant:
-                suffix = variant
+        suffix = _maybe_recover_ooxml(suffix, BytesIO(file_bytes), hint)
     return suffix
 
 
@@ -111,11 +124,5 @@ def guess_suffix_by_path(file_path) -> str:
                     suffix = "pdf"
         except Exception as e:
             logger.warning(f"Failed to read file {file_path} for PDF signature check: {e}")
-    # Magika sometimes labels OOXML (xlsx/docx/pptx) as generic "zip" because
-    # the container is a zip archive — recover the real variant by inspecting
-    # [Content_Types].xml inside the archive.
-    if suffix == "zip" and file_path.suffix.lower() in OOXML_SUFFIXES:
-        variant = _detect_ooxml_variant_from_zip(file_path)
-        if variant:
-            suffix = variant
+    suffix = _maybe_recover_ooxml(suffix, file_path, file_path.suffix.lower())
     return suffix
