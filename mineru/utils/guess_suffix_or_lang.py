@@ -85,18 +85,28 @@ def guess_language_by_text(code):
 
 
 def _maybe_recover_ooxml(suffix: str, zip_source, hint_suffix: str) -> str:
-    """If the extension hints at OOXML, verify via [Content_Types].xml.
+    """Verify suspected OOXML files via [Content_Types].xml.
 
     Magika can mislabel legitimate xlsx/docx/pptx files as 'zip', 'xlsb', or
-    other zip-derivative formats because the container is a zip archive. When
-    the filename extension says OOXML, trust the archive's [Content_Types].xml
-    over Magika's guess.
+    other zip-derivative formats because the container is a zip archive.
+    Trust the archive's [Content_Types].xml over Magika's guess when either
+    (a) the filename extension claims OOXML and disagrees with Magika, or
+    (b) no extension hint is available but Magika's label is zip-like.
     """
-    if hint_suffix not in OOXML_SUFFIXES:
+    if hint_suffix in OOXML_SUFFIXES:
+        expected = hint_suffix.lstrip(".")
+        if suffix == expected:
+            return suffix
+    elif hint_suffix:
+        # Non-OOXML extension hint — don't second-guess Magika.
         return suffix
-    expected = hint_suffix.lstrip(".")
-    if suffix == expected:
-        return suffix
+    else:
+        # No hint (pure-bytes dispatch): only probe when Magika already thinks
+        # it's some zip-family label that might actually be OOXML.
+        if suffix in ("xlsx", "docx", "pptx"):
+            return suffix
+        if suffix not in ("zip", "xlsb", "xlsm", "docm", "pptm"):
+            return suffix
     variant = _detect_ooxml_variant_from_zip(zip_source)
     if variant:
         return variant
