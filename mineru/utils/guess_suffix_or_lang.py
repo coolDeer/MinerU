@@ -1,4 +1,6 @@
 # Copyright (c) Opendatalab. All rights reserved.
+import zipfile
+from io import BytesIO
 from pathlib import Path
 
 from loguru import logger
@@ -7,7 +9,34 @@ from magika import Magika
 
 DEFAULT_LANG = "txt"
 PDF_SIG_BYTES = b'%PDF'
+ZIP_SIG_BYTES = b'PK\x03\x04'
+OOXML_SUFFIXES = (".xlsx", ".docx", ".pptx")
+OOXML_CONTENT_TYPE_MARKERS = {
+    "xlsx": b"spreadsheetml",
+    "docx": b"wordprocessingml",
+    "pptx": b"presentationml",
+}
 magika = Magika()
+
+
+def _detect_ooxml_variant_from_zip(zip_source) -> str | None:
+    """Inspect an OOXML (xlsx/docx/pptx) zip archive and return its variant.
+
+    OOXML files are zip containers with a [Content_Types].xml describing the
+    spreadsheet/document/presentation payload. Magika sometimes labels them
+    as generic "zip" — this helper recovers the specific variant.
+    """
+    try:
+        with zipfile.ZipFile(zip_source) as zf:
+            if "[Content_Types].xml" not in zf.namelist():
+                return None
+            content_types = zf.read("[Content_Types].xml")
+            for variant, marker in OOXML_CONTENT_TYPE_MARKERS.items():
+                if marker in content_types:
+                    return variant
+    except (zipfile.BadZipFile, KeyError, OSError):
+        return None
+    return None
 
 def _normalize_text_for_language_guess(code: str) -> str:
     if not code:
@@ -59,6 +88,15 @@ def guess_suffix_by_bytes(file_bytes, file_path=None) -> str:
     suffix = magika.identify_bytes(file_bytes).prediction.output.label
     if file_path and suffix in ["ai", "html"] and Path(file_path).suffix.lower() in [".pdf"] and file_bytes[:4] == PDF_SIG_BYTES:
         suffix = "pdf"
+    # Magika sometimes labels OOXML (xlsx/docx/pptx) as generic "zip" because
+    # the container is a zip archive — recover the real variant by inspecting
+    # [Content_Types].xml inside the archive.
+    if suffix == "zip" and file_bytes[:4] == ZIP_SIG_BYTES:
+        hint = Path(file_path).suffix.lower() if file_path else ""
+        if hint in OOXML_SUFFIXES or not hint:
+            variant = _detect_ooxml_variant_from_zip(BytesIO(file_bytes))
+            if variant:
+                suffix = variant
     return suffix
 
 
@@ -73,4 +111,11 @@ def guess_suffix_by_path(file_path) -> str:
                     suffix = "pdf"
         except Exception as e:
             logger.warning(f"Failed to read file {file_path} for PDF signature check: {e}")
+    # Magika sometimes labels OOXML (xlsx/docx/pptx) as generic "zip" because
+    # the container is a zip archive — recover the real variant by inspecting
+    # [Content_Types].xml inside the archive.
+    if suffix == "zip" and file_path.suffix.lower() in OOXML_SUFFIXES:
+        variant = _detect_ooxml_variant_from_zip(file_path)
+        if variant:
+            suffix = variant
     return suffix
