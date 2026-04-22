@@ -228,7 +228,7 @@ def parse_local(source_file: Path, output_dir: Path) -> Path:
     source_bytes = source_file.read_bytes()
     do_parse(
         output_dir=str(output_dir),
-        pdf_file_names=[source_file.name],
+        pdf_file_names=[source_file.stem],
         pdf_bytes_list=[source_bytes],
         p_lang_list=[""],
         backend=MINERU_BACKEND,
@@ -286,16 +286,17 @@ def upload_result(
         conv_key = f"{key_prefix}/{converted_pdf.name}"
         uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
 
-    # do_parse 产物(在 output_dir/<stem>/{auto|office}/ 下)
-    # 先上传所有非 .md 文件，收集 key 映射，最后处理 markdown
-    md_files: list[Path] = []
-    for p in output_dir.rglob("*"):
-        if not p.is_file():
-            continue
+    # do_parse 产物结构: output_dir/<stem>/<method>/{files, images/}
+    # 以含 .md 的那层目录为根，扁平上传到 key_prefix/
+    all_files = [p for p in output_dir.rglob("*") if p.is_file()]
+    md_files = [p for p in all_files if p.suffix == ".md"]
+    content_root = md_files[0].parent if md_files else output_dir
+
+    # 先上传非 .md 文件
+    for p in all_files:
         if p.suffix == ".md":
-            md_files.append(p)
             continue
-        rel = p.relative_to(output_dir)
+        rel = p.relative_to(content_root)
         key = f"{key_prefix}/{rel}"
         url = s3_upload(s3, str(p), key)
         if p.name.endswith("_content_list.json"):
@@ -303,13 +304,13 @@ def upload_result(
         elif p.name.endswith("_layout.pdf"):
             uploaded["layout_pdf"] = url
 
-    # 上传 markdown：先把相对图片路径替换为完整 S3 URL
+    # 上传 markdown：把相对图片路径替换为完整 S3 URL
+    images_base = s3_url(f"{key_prefix}")
     for md_path in md_files:
-        rel = md_path.relative_to(output_dir)
-        md_s3_dir = s3_url(f"{key_prefix}/{rel.parent}")
         content = md_path.read_text(encoding="utf-8")
-        content = _rewrite_md_image_urls(content, md_s3_dir)
+        content = _rewrite_md_image_urls(content, images_base)
         md_path.write_text(content, encoding="utf-8")
+        rel = md_path.relative_to(content_root)
         key = f"{key_prefix}/{rel}"
         url = s3_upload(s3, str(md_path), key)
         uploaded["markdown"] = url
@@ -345,7 +346,8 @@ def process_one(task: dict) -> None:
         parse_local(parse_file, output_dir)
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
-        key_prefix = f"{S3_PREFIX}/{research_id or str(record_id)}"
+        folder = f"{research_id}/{record_id}" if research_id else str(record_id)
+        key_prefix = f"{S3_PREFIX}/{folder}"
         s3_keys = upload_result(output_dir, key_prefix, converted_pdf)
 
         patch(
