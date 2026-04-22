@@ -5,18 +5,21 @@
 
 状态机 (parseStatus):
   pending    → 待处理 (上游/人工初始化此值)
-  processing → 处理中 (worker 持锁,parseSubStatus 细分 downloading/parsing/uploading)
+  processing → 处理中 (parseSubStatus 细分 downloading/parsing/uploading)
   completed  → 已完成 (不会再被 worker 扫到)
   failed     → 超过重试上限,需人工 (不会再被 worker 扫到)
 
 抢任务: parseStatus=pending 或 (parseStatus=processing 且锁超时且重试未超限)
+
+注: 直接调 do_parse(同步)而非经由 mineru-api,
+    让 MLX 推理在主线程运行,避免 asyncio.to_thread 的 GPU Stream 跨线程问题。
 """
-import asyncio
 import os
 import shutil
 import socket
 import subprocess
 import tempfile
+import time
 import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -26,7 +29,7 @@ import httpx
 from loguru import logger
 from pymongo import MongoClient, ReturnDocument
 
-from mineru.cli import api_client as _api_client
+from mineru.cli.common import do_parse
 
 
 # ========== 环境变量 ==========
@@ -40,7 +43,6 @@ AWS_REGION = os.environ.get("AWS_REGION", "ap-southeast-1")
 S3_BUCKET = os.environ["AWS_S3_BUCKET_NAME"]
 S3_PREFIX = os.environ.get("AWS_S3_PREFIX", "research-reports/parsed")
 
-MINERU_API_URL = os.environ.get("MINERU_API_URL", "http://127.0.0.1:8000")
 MINERU_BACKEND = os.environ.get("MINERU_BACKEND", "hybrid-auto-engine")
 
 WORKER_ID = f"{socket.gethostname()}-{os.getpid()}"
@@ -94,11 +96,10 @@ def ensure_indexes() -> None:
     try:
         get_coll().create_index([("parseStatus", 1), ("parseLockedUntil", 1)])
     except Exception as e:
-        logger.warning(f"建索引失败(权限不足?),Worker 仍可运行,但大数据量下查询会慢: {e}")
+        logger.warning(f"建索引失败(权限不足?),Worker 仍可运行: {e}")
 
 
 def claim_task() -> dict | None:
-    """原子抢一个可处理的记录。"""
     now = _now()
     lock_until = now + timedelta(seconds=LOCK_TTL_SECONDS)
     return get_coll().find_one_and_update(
@@ -136,7 +137,7 @@ def patch(record_id, **fields) -> None:
 # ========== 下载 + 类型识别 ==========
 PDF_MAGIC = b"%PDF-"
 ZIP_MAGIC = b"PK\x03\x04"
-OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"  # 老版 .doc/.xls OLE2
+OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 
 
 def download_file(url: str, dest: Path) -> Path:
@@ -155,10 +156,6 @@ def download_file(url: str, dest: Path) -> Path:
 
 
 def detect_file_type(path: Path) -> str:
-    """magic bytes + zip 内部指纹识别真实类型,不依赖 URL 后缀。
-
-    返回: 'pdf' | 'docx' | 'doc' | 'xlsx' | 'xls' | 'pptx' | 'unknown'
-    """
     with open(path, "rb") as f:
         head = f.read(8)
     if head.startswith(PDF_MAGIC):
@@ -182,11 +179,12 @@ def detect_file_type(path: Path) -> str:
     return "unknown"
 
 
-# ========== 格式转换 (Word/老 Excel → PDF/XLSX) ==========
+# ========== 格式转换 ==========
 def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
         LIBREOFFICE_BIN, "--headless",
+        f"-env:UserInstallation=file:///tmp/lo-{os.getpid()}",
         "--convert-to", target,
         "--outdir", str(out_dir),
         str(src),
@@ -199,20 +197,14 @@ def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
         )
     candidates = list(out_dir.glob(f"*.{target}"))
     if not candidates:
-        raise RuntimeError(
-            f"LibreOffice 没产出 .{target}: stdout={proc.stdout.strip()}"
-        )
+        raise RuntimeError(f"LibreOffice 没产出 .{target}: {proc.stdout.strip()}")
     return candidates[0]
 
 
 def prepare_for_parse(
     downloaded: Path, ftype: str, workdir: Path,
 ) -> tuple[Path, str, Path, Path | None]:
-    """把下载下来的文件整理成 mineru 可直接解析的形式。
-
-    返回 (parse_file, final_type, original_file, converted_pdf_or_None)。
-    converted_pdf 仅在 Word (doc/docx) → PDF 转换时非空。
-    """
+    """返回 (parse_file, final_type, original_file, converted_pdf_or_None)"""
     if ftype == "pdf":
         f = downloaded.rename(workdir / "source.pdf")
         return f, "pdf", f, None
@@ -230,83 +222,56 @@ def prepare_for_parse(
     raise RuntimeError(f"不支持的文件类型: {ftype}")
 
 
-# ========== 调 mineru-api ==========
-async def parse_via_mineru(source_file: Path, workdir: Path) -> Path:
-    form_data = _api_client.build_parse_request_form_data(
-        lang_list=[""],
+# ========== 解析(直接调 do_parse,主线程,无线程池) ==========
+def parse_local(source_file: Path, output_dir: Path) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    source_bytes = source_file.read_bytes()
+    do_parse(
+        output_dir=str(output_dir),
+        pdf_file_names=[source_file.name],
+        pdf_bytes_list=[source_bytes],
+        p_lang_list=[""],
         backend=MINERU_BACKEND,
         parse_method="auto",
         formula_enable=True,
         table_enable=True,
-        server_url=None,
-        start_page_id=0,
-        end_page_id=None,
-        return_md=True,
-        return_middle_json=False,
-        return_model_output=False,
-        return_content_list=True,
-        return_images=True,
-        response_format_zip=True,
-        return_original_file=False,
+        f_draw_layout_bbox=True,
+        f_draw_span_bbox=False,
+        f_dump_md=True,
+        f_dump_middle_json=False,
+        f_dump_model_output=False,
+        f_dump_orig_pdf=False,
+        f_dump_content_list=True,
     )
-    assets = [_api_client.UploadAsset(path=source_file, upload_name=source_file.name)]
-
-    async with httpx.AsyncClient(
-        timeout=_api_client.build_http_timeout(),
-        follow_redirects=True,
-    ) as client:
-        base_url = _api_client.normalize_base_url(MINERU_API_URL)
-        submit_resp = await _api_client.submit_parse_task(
-            base_url=base_url,
-            upload_assets=assets,
-            form_data=form_data,
-        )
-        logger.info(f"mineru task submitted: {submit_resp.task_id}")
-        await _api_client.wait_for_task_result(
-            client=client,
-            submit_response=submit_resp,
-            task_label=source_file.stem,
-        )
-        zip_path = await _api_client.download_result_zip(
-            client=client,
-            submit_response=submit_resp,
-            task_label=source_file.stem,
-        )
-
-    result_dir = workdir / "result"
-    result_dir.mkdir(exist_ok=True)
-    _api_client.safe_extract_zip(zip_path, result_dir)
-    zip_path.unlink(missing_ok=True)
-    return result_dir
+    return output_dir
 
 
 # ========== S3 上传 ==========
 def upload_result(
-    result_dir: Path,
+    output_dir: Path,
     original_file: Path,
     key_prefix: str,
     converted_pdf: Path | None = None,
 ) -> dict:
-    """上传原文件 + 可选的转换后 PDF + 解析产物。"""
     s3 = make_s3()
     uploaded: dict[str, str] = {}
 
-    # 1. 原始下载文件(docx/pdf/xlsx 原样)
+    # 原始下载文件
     src_key = f"{key_prefix}/source{original_file.suffix}"
     s3.upload_file(str(original_file), S3_BUCKET, src_key)
     uploaded["source"] = src_key
 
-    # 2. Word 转来的 PDF (仅 Word 输入时才有)
+    # Word 转来的 PDF
     if converted_pdf is not None:
         conv_key = f"{key_prefix}/converted.pdf"
         s3.upload_file(str(converted_pdf), S3_BUCKET, conv_key)
         uploaded["converted_pdf"] = conv_key
 
-    # 3. mineru 解析产物
-    for p in result_dir.rglob("*"):
+    # do_parse 产物(在 output_dir/<stem>/{auto|office}/ 下)
+    for p in output_dir.rglob("*"):
         if not p.is_file():
             continue
-        rel = p.relative_to(result_dir)
+        rel = p.relative_to(output_dir)
         key = f"{key_prefix}/{rel}"
         s3.upload_file(str(p), S3_BUCKET, key)
         name = p.name
@@ -317,13 +282,13 @@ def upload_result(
         elif name.endswith("_layout.pdf"):
             uploaded["layout_pdf"] = key
 
-    uploaded["images_prefix"] = f"{key_prefix}/images/"
+    uploaded["images_prefix"] = f"{key_prefix}/"
     logger.info(f"Uploaded to s3://{S3_BUCKET}/{key_prefix}/")
     return uploaded
 
 
-# ========== 主流程 ==========
-async def process_one(task: dict) -> None:
+# ========== 主流程(同步) ==========
+def process_one(task: dict) -> None:
     record_id = task["_id"]
     research_id = task.get("researchId")
     report_url = task.get("reportUrl")
@@ -343,11 +308,12 @@ async def process_one(task: dict) -> None:
         )
         patch(record_id, finalType=final_type, parseSubStatus=SUB_PARSING)
 
-        result_dir = await parse_via_mineru(parse_file, workdir)
+        output_dir = workdir / "output"
+        parse_local(parse_file, output_dir)
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
         key_prefix = f"{S3_PREFIX}/{research_id or str(record_id)}"
-        s3_keys = upload_result(result_dir, original_file, key_prefix, converted_pdf)
+        s3_keys = upload_result(output_dir, original_file, key_prefix, converted_pdf)
 
         patch(
             record_id,
@@ -368,14 +334,9 @@ async def process_one(task: dict) -> None:
         logger.success(f"✅ {label} done")
     except Exception as e:
         logger.exception(f"❌ {label} failed: {e}")
-        # 先拉现状看看重试次数是否超限
-        current = get_coll().find_one(
-            {"_id": record_id},
-            {"parseRetryCount": 1},
-        ) or {}
+        current = get_coll().find_one({"_id": record_id}, {"parseRetryCount": 1}) or {}
         next_retry = (current.get("parseRetryCount") or 0) + 1
         is_dead = next_retry >= MAX_RETRIES
-
         get_coll().update_one(
             {"_id": record_id},
             {
@@ -394,25 +355,22 @@ async def process_one(task: dict) -> None:
         shutil.rmtree(workdir, ignore_errors=True)
 
 
-async def main_loop() -> None:
+def main_loop() -> None:
     ensure_indexes()
-    logger.info(
-        f"Worker {WORKER_ID} started "
-        f"(coll={COLL_NAME}, batch={BATCH_SIZE}, backend={MINERU_BACKEND})"
-    )
+    logger.info(f"Worker {WORKER_ID} started (coll={COLL_NAME}, backend={MINERU_BACKEND})")
     while True:
         processed = 0
         for _ in range(BATCH_SIZE):
             task = claim_task()
             if not task:
                 break
-            await process_one(task)
+            process_one(task)
             processed += 1
         if processed == 0:
-            await asyncio.sleep(POLL_IDLE_SECONDS)
+            time.sleep(POLL_IDLE_SECONDS)
         else:
             logger.info(f"Batch done: {processed}")
 
 
 if __name__ == "__main__":
-    asyncio.run(main_loop())
+    main_loop()

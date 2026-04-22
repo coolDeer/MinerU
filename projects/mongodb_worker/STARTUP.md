@@ -26,7 +26,7 @@ brew install --cask libreoffice
 ## 第一次初始化（只做一次）
 
 ```bash
-cd /Users/bububot/Desktop/project/MinerU   # 换成你的实际路径
+cd /Users/bububot/Desktop/project/MinerU
 
 # 1. 建虚拟环境
 uv venv .venv
@@ -39,9 +39,10 @@ uv pip install -e ".[all]"
 uv pip install pymongo boto3 httpx loguru
 
 # 4. 确认装好
-mineru-api --help
-python3 -c "import pymongo, boto3; print('deps OK')"
+python3 -c "import pymongo, boto3, mineru; print('deps OK')"
 ```
+
+> 首次执行时会下载模型权重（几 GB），耐心等待。
 
 ---
 
@@ -58,6 +59,7 @@ cp projects/mongodb_worker/.env.example projects/mongodb_worker/.env
 ```bash
 # ---- MongoDB ----
 MONGODB_DATABASE_URL=mongodb://user:pass@host:27017/dbname?authSource=dbname
+# 密码中有 $ 等特殊字符需 URL 编码，例如 $ → %24
 
 # ---- AWS S3 ----
 AWS_ACCESS_KEY_ID=你的key
@@ -67,7 +69,6 @@ AWS_S3_BUCKET_NAME=你的bucket
 AWS_S3_PREFIX=research-reports/parsed
 
 # ---- MinerU ----
-MINERU_API_URL=http://127.0.0.1:8000
 MINERU_BACKEND=hybrid-auto-engine
 
 # ---- Worker ----
@@ -80,25 +81,9 @@ LIBREOFFICE_BIN=/Applications/LibreOffice.app/Contents/MacOS/soffice
 
 ---
 
-## 每次启动（需要两个终端窗口）
+## 每次启动（只需一个终端）
 
-### 终端 A — mineru-api（保持开着）
-
-```bash
-cd /Users/bububot/Desktop/project/MinerU
-source .venv/bin/activate
-mineru-api --host 127.0.0.1 --port 8000
-```
-
-等出现这行再开 B：
-
-```
-INFO: Uvicorn running on http://127.0.0.1:8000
-```
-
-> 首次启动会下载模型权重（几 GB），需要等待。
-
-### 终端 B — Worker
+> Worker 直接调用 MinerU 解析引擎，**不需要单独启动 mineru-api**。
 
 ```bash
 cd /Users/bububot/Desktop/project/MinerU
@@ -135,7 +120,7 @@ db.ResearchReportRecord.updateMany(
 | parseStatus | 含义 |
 |---|---|
 | `pending` | 待处理（初始值） |
-| `processing` | 处理中 |
+| `processing` | 处理中（parseSubStatus 细分：downloading / parsing / uploading）|
 | `completed` | 已完成，不再处理 |
 | `failed` | 超过重试上限，需人工介入 |
 
@@ -162,12 +147,12 @@ db.ResearchReportRecord.updateMany(
 
 ```
 s3://<bucket>/research-reports/parsed/<researchId>/
-├── source.pdf / source.docx / source.xlsx   # 原始文件
-├── converted.pdf                             # Word 转来的 PDF（仅 docx/doc 输入时有）
-├── <name>.md                                 # Markdown 正文
-├── <name>_content_list.json                  # 结构化块（标题/段落/表/图）
-├── <name>_layout.pdf                         # 带 bbox 的可视化 PDF
-└── images/                                   # 抽出的图片
+├── source.pdf / source.docx / source.xlsx        # 原始下载文件
+├── converted.pdf                                  # Word 转来的 PDF（仅 docx/doc 输入时有）
+├── source/auto/<name>.md                          # Markdown 正文
+├── source/auto/<name>_content_list.json           # 结构化块（标题/段落/表/图）
+├── source/auto/<name>_layout.pdf                  # 带 bbox 的可视化 PDF
+└── source/auto/images/                            # 抽出的图片
 ```
 
 ---
@@ -177,8 +162,9 @@ s3://<bucket>/research-reports/parsed/<researchId>/
 | 现象 | 原因 | 解决 |
 |---|---|---|
 | `command not found: pip` | venv 未激活 | `source .venv/bin/activate` |
-| `Error: source file could not be loaded` | LibreOffice 无法读文件 | 检查文件路径是否存在，文件是否损坏 |
+| MongoDB 认证失败 | 密码含特殊字符被 shell 吞掉 | 密码中 `$` 改为 `%24`，其余特殊字符做 URL 编码 |
+| `Error: source file could not be loaded` | LibreOffice 无法读文件 | 检查路径是否存在、文件是否损坏；路径有空格需加引号 |
 | soffice 进程不退出 | 多实例抢锁 | `pkill -9 -f soffice` |
-| 记录卡在 `processing` | Worker 崩溃了 | 等 `LOCK_TTL_SECONDS`（1h）超时自动释放，或手动 `updateMany({parseStatus:"processing"}, {$set:{parseStatus:"pending"}})` |
+| `RuntimeError: There is no Stream(gpu, N)` | MLX 在非主线程运行 | 不要通过 mineru-api 调用，直接跑 `report_worker.py` |
+| 记录卡在 `processing` | Worker 崩溃，锁未释放 | 等 `LOCK_TTL_SECONDS`（1h）超时自动释放，或手动：`db.ResearchReportRecord.updateMany({parseStatus:"processing"}, {$set:{parseStatus:"pending"}})` |
 | `SignatureDoesNotMatch` | S3 region 不对 | 确认 `AWS_REGION` 与 bucket 实际 region 一致 |
-| mineru-api 响应慢 | 第一次加载模型 | 等模型加载完（日志不再有大量 INFO 输出）|
