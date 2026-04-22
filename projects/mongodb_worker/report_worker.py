@@ -50,6 +50,7 @@ BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "5"))
 LOCK_TTL_SECONDS = int(os.environ.get("LOCK_TTL_SECONDS", "3600"))
 MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "3"))
 POLL_IDLE_SECONDS = int(os.environ.get("POLL_IDLE_SECONDS", "30"))
+INTER_TASK_SLEEP_SECONDS = int(os.environ.get("INTER_TASK_SLEEP_SECONDS", "5"))
 LIBREOFFICE_BIN = os.environ.get("LIBREOFFICE_BIN", "soffice")
 
 
@@ -367,7 +368,23 @@ def process_one(task: dict) -> None:
         patch(record_id, finalType=final_type, parseSubStatus=SUB_PARSING)
 
         output_dir = workdir / "output"
-        parse_local(parse_file, output_dir)
+        try:
+            parse_local(parse_file, output_dir)
+        except Exception as native_err:
+            # MinerU native docx 解析器对某些列表样式会 IndexError。
+            # 只要走的是 native docx 路径,失败就回退 LibreOffice→PDF 重试一次。
+            if final_type != "docx":
+                raise
+            logger.warning(
+                f"{label}: native docx 解析失败({type(native_err).__name__}: {native_err}),"
+                f"回退到 LibreOffice→PDF"
+            )
+            shutil.rmtree(output_dir, ignore_errors=True)
+            converted_pdf = libreoffice_convert(original_file, workdir / "converted", "pdf")
+            parse_file = converted_pdf
+            final_type = "pdf"
+            patch(record_id, finalType=final_type)
+            parse_local(parse_file, output_dir)
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
         folder = f"{research_id}/{record_id}" if research_id else str(record_id)
@@ -418,10 +435,13 @@ def main_loop() -> None:
     logger.info(f"Worker {WORKER_ID} started (coll={COLL_NAME}, backend={MINERU_BACKEND})")
     while True:
         processed = 0
-        for _ in range(BATCH_SIZE):
+        for i in range(BATCH_SIZE):
             task = claim_task()
             if not task:
                 break
+            if i > 0 and INTER_TASK_SLEEP_SECONDS > 0:
+                logger.debug(f"Sleep {INTER_TASK_SLEEP_SECONDS}s before next task")
+                time.sleep(INTER_TASK_SLEEP_SECONDS)
             process_one(task)
             processed += 1
         if processed == 0:
