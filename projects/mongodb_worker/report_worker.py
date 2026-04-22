@@ -202,21 +202,21 @@ def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
 
 
 def prepare_for_parse(
-    downloaded: Path, ftype: str, workdir: Path,
+    downloaded: Path, ftype: str, workdir: Path, ts: str,
 ) -> tuple[Path, str, Path, Path | None]:
     """返回 (parse_file, final_type, original_file, converted_pdf_or_None)"""
     if ftype == "pdf":
-        f = downloaded.rename(workdir / "source.pdf")
+        f = downloaded.rename(workdir / f"source_{ts}.pdf")
         return f, "pdf", f, None
     if ftype in ("docx", "doc"):
-        original = downloaded.rename(workdir / f"source.{ftype}")
+        original = downloaded.rename(workdir / f"source_{ts}.{ftype}")
         pdf = libreoffice_convert(original, workdir / "converted", "pdf")
         return pdf, "pdf", original, pdf
     if ftype == "xlsx":
-        f = downloaded.rename(workdir / "source.xlsx")
+        f = downloaded.rename(workdir / f"source_{ts}.xlsx")
         return f, "xlsx", f, None
     if ftype == "xls":
-        original = downloaded.rename(workdir / "source.xls")
+        original = downloaded.rename(workdir / f"source_{ts}.xls")
         xlsx = libreoffice_convert(original, workdir / "converted", "xlsx")
         return xlsx, "xlsx", original, None
     raise RuntimeError(f"不支持的文件类型: {ftype}")
@@ -247,6 +247,15 @@ def parse_local(source_file: Path, output_dir: Path) -> Path:
 
 
 # ========== S3 上传 ==========
+def s3_url(key: str) -> str:
+    return f"https://{S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{key}"
+
+
+def s3_upload(s3, local_path: str, key: str) -> str:
+    s3.upload_file(local_path, S3_BUCKET, key, ExtraArgs={"ACL": "public-read"})
+    return s3_url(key)
+
+
 def upload_result(
     output_dir: Path,
     original_file: Path,
@@ -257,15 +266,13 @@ def upload_result(
     uploaded: dict[str, str] = {}
 
     # 原始下载文件
-    src_key = f"{key_prefix}/source{original_file.suffix}"
-    s3.upload_file(str(original_file), S3_BUCKET, src_key)
-    uploaded["source"] = src_key
+    src_key = f"{key_prefix}/{original_file.name}"
+    uploaded["source"] = s3_upload(s3, str(original_file), src_key)
 
     # Word 转来的 PDF
     if converted_pdf is not None:
-        conv_key = f"{key_prefix}/converted.pdf"
-        s3.upload_file(str(converted_pdf), S3_BUCKET, conv_key)
-        uploaded["converted_pdf"] = conv_key
+        conv_key = f"{key_prefix}/{converted_pdf.name}"
+        uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
 
     # do_parse 产物(在 output_dir/<stem>/{auto|office}/ 下)
     for p in output_dir.rglob("*"):
@@ -273,16 +280,16 @@ def upload_result(
             continue
         rel = p.relative_to(output_dir)
         key = f"{key_prefix}/{rel}"
-        s3.upload_file(str(p), S3_BUCKET, key)
+        url = s3_upload(s3, str(p), key)
         name = p.name
         if name.endswith(".md"):
-            uploaded["markdown"] = key
+            uploaded["markdown"] = url
         elif name.endswith("_content_list.json"):
-            uploaded["content_list_json"] = key
+            uploaded["content_list_json"] = url
         elif name.endswith("_layout.pdf"):
-            uploaded["layout_pdf"] = key
+            uploaded["layout_pdf"] = url
 
-    uploaded["images_prefix"] = f"{key_prefix}/"
+    uploaded["images_prefix"] = s3_url(f"{key_prefix}/")
     logger.info(f"Uploaded to s3://{S3_BUCKET}/{key_prefix}/")
     return uploaded
 
@@ -295,6 +302,7 @@ def process_one(task: dict) -> None:
     label = research_id or str(record_id)
 
     logger.info(f"▶ {label}: {report_url}")
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
     workdir = Path(tempfile.mkdtemp(prefix="mineru_report_"))
     try:
         downloaded = download_file(report_url, workdir / "download.bin")
@@ -304,7 +312,7 @@ def process_one(task: dict) -> None:
         patch(record_id, detectedFileType=ftype)
 
         parse_file, final_type, original_file, converted_pdf = prepare_for_parse(
-            downloaded, ftype, workdir,
+            downloaded, ftype, workdir, ts,
         )
         patch(record_id, finalType=final_type, parseSubStatus=SUB_PARSING)
 
