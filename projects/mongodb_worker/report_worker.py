@@ -247,6 +247,23 @@ def parse_local(source_file: Path, output_dir: Path) -> Path:
 
 
 # ========== S3 上传 ==========
+import re as _re
+
+
+def _rewrite_md_image_urls(content: str, md_s3_dir: str) -> str:
+    """把 markdown 里的相对图片路径替换为完整 S3 URL."""
+    base = md_s3_dir.rstrip("/")
+
+    def _replace(m: _re.Match) -> str:
+        alt, path = m.group(1), m.group(2)
+        if path.startswith("http://") or path.startswith("https://"):
+            return m.group(0)
+        full = base + "/" + path.lstrip("./")
+        return f"![{alt}]({full})"
+
+    return _re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", _replace, content)
+
+
 def s3_url(key: str) -> str:
     return f"https://{S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{key}"
 
@@ -258,36 +275,44 @@ def s3_upload(s3, local_path: str, key: str) -> str:
 
 def upload_result(
     output_dir: Path,
-    original_file: Path,
     key_prefix: str,
     converted_pdf: Path | None = None,
 ) -> dict:
     s3 = make_s3()
     uploaded: dict[str, str] = {}
 
-    # 原始下载文件
-    src_key = f"{key_prefix}/{original_file.name}"
-    uploaded["source"] = s3_upload(s3, str(original_file), src_key)
-
-    # Word 转来的 PDF
+    # Word 转来的 PDF（原始文件已有 reportUrl，无需重复上传）
     if converted_pdf is not None:
         conv_key = f"{key_prefix}/{converted_pdf.name}"
         uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
 
     # do_parse 产物(在 output_dir/<stem>/{auto|office}/ 下)
+    # 先上传所有非 .md 文件，收集 key 映射，最后处理 markdown
+    md_files: list[Path] = []
     for p in output_dir.rglob("*"):
         if not p.is_file():
+            continue
+        if p.suffix == ".md":
+            md_files.append(p)
             continue
         rel = p.relative_to(output_dir)
         key = f"{key_prefix}/{rel}"
         url = s3_upload(s3, str(p), key)
-        name = p.name
-        if name.endswith(".md"):
-            uploaded["markdown"] = url
-        elif name.endswith("_content_list.json"):
+        if p.name.endswith("_content_list.json"):
             uploaded["content_list_json"] = url
-        elif name.endswith("_layout.pdf"):
+        elif p.name.endswith("_layout.pdf"):
             uploaded["layout_pdf"] = url
+
+    # 上传 markdown：先把相对图片路径替换为完整 S3 URL
+    for md_path in md_files:
+        rel = md_path.relative_to(output_dir)
+        md_s3_dir = s3_url(f"{key_prefix}/{rel.parent}")
+        content = md_path.read_text(encoding="utf-8")
+        content = _rewrite_md_image_urls(content, md_s3_dir)
+        md_path.write_text(content, encoding="utf-8")
+        key = f"{key_prefix}/{rel}"
+        url = s3_upload(s3, str(md_path), key)
+        uploaded["markdown"] = url
 
     uploaded["images_prefix"] = s3_url(f"{key_prefix}/")
     logger.info(f"Uploaded to s3://{S3_BUCKET}/{key_prefix}/")
@@ -321,14 +346,13 @@ def process_one(task: dict) -> None:
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
         key_prefix = f"{S3_PREFIX}/{research_id or str(record_id)}"
-        s3_keys = upload_result(output_dir, original_file, key_prefix, converted_pdf)
+        s3_keys = upload_result(output_dir, key_prefix, converted_pdf)
 
         patch(
             record_id,
             parseStatus=STATUS_COMPLETED,
             parseSubStatus=None,
             parsedS3Bucket=S3_BUCKET,
-            parsedSourceS3=s3_keys.get("source"),
             convertedPdfS3=s3_keys.get("converted_pdf"),
             parsedMarkdownS3=s3_keys.get("markdown"),
             parsedContentListS3=s3_keys.get("content_list_json"),
