@@ -91,7 +91,10 @@ def _now() -> datetime:
 
 # ========== 任务领取 ==========
 def ensure_indexes() -> None:
-    get_coll().create_index([("parseStatus", 1), ("parseLockedUntil", 1)])
+    try:
+        get_coll().create_index([("parseStatus", 1), ("parseLockedUntil", 1)])
+    except Exception as e:
+        logger.warning(f"建索引失败(权限不足?),Worker 仍可运行,但大数据量下查询会慢: {e}")
 
 
 def claim_task() -> dict | None:
@@ -202,20 +205,28 @@ def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
     return candidates[0]
 
 
-def prepare_for_parse(downloaded: Path, ftype: str, workdir: Path) -> tuple[Path, str]:
-    """把下载下来的文件整理成 mineru 可直接解析的形式。"""
+def prepare_for_parse(
+    downloaded: Path, ftype: str, workdir: Path,
+) -> tuple[Path, str, Path, Path | None]:
+    """把下载下来的文件整理成 mineru 可直接解析的形式。
+
+    返回 (parse_file, final_type, original_file, converted_pdf_or_None)。
+    converted_pdf 仅在 Word (doc/docx) → PDF 转换时非空。
+    """
     if ftype == "pdf":
-        return downloaded.rename(workdir / "source.pdf"), "pdf"
+        f = downloaded.rename(workdir / "source.pdf")
+        return f, "pdf", f, None
     if ftype in ("docx", "doc"):
-        renamed = downloaded.rename(workdir / f"source.{ftype}")
-        pdf = libreoffice_convert(renamed, workdir / "converted", "pdf")
-        return pdf, "pdf"
+        original = downloaded.rename(workdir / f"source.{ftype}")
+        pdf = libreoffice_convert(original, workdir / "converted", "pdf")
+        return pdf, "pdf", original, pdf
     if ftype == "xlsx":
-        return downloaded.rename(workdir / "source.xlsx"), "xlsx"
+        f = downloaded.rename(workdir / "source.xlsx")
+        return f, "xlsx", f, None
     if ftype == "xls":
-        renamed = downloaded.rename(workdir / "source.xls")
-        xlsx = libreoffice_convert(renamed, workdir / "converted", "xlsx")
-        return xlsx, "xlsx"
+        original = downloaded.rename(workdir / "source.xls")
+        xlsx = libreoffice_convert(original, workdir / "converted", "xlsx")
+        return xlsx, "xlsx", original, None
     raise RuntimeError(f"不支持的文件类型: {ftype}")
 
 
@@ -270,14 +281,28 @@ async def parse_via_mineru(source_file: Path, workdir: Path) -> Path:
 
 
 # ========== S3 上传 ==========
-def upload_result(result_dir: Path, source_file: Path, key_prefix: str) -> dict:
+def upload_result(
+    result_dir: Path,
+    original_file: Path,
+    key_prefix: str,
+    converted_pdf: Path | None = None,
+) -> dict:
+    """上传原文件 + 可选的转换后 PDF + 解析产物。"""
     s3 = make_s3()
     uploaded: dict[str, str] = {}
 
-    src_key = f"{key_prefix}/source{source_file.suffix}"
-    s3.upload_file(str(source_file), S3_BUCKET, src_key)
+    # 1. 原始下载文件(docx/pdf/xlsx 原样)
+    src_key = f"{key_prefix}/source{original_file.suffix}"
+    s3.upload_file(str(original_file), S3_BUCKET, src_key)
     uploaded["source"] = src_key
 
+    # 2. Word 转来的 PDF (仅 Word 输入时才有)
+    if converted_pdf is not None:
+        conv_key = f"{key_prefix}/converted.pdf"
+        s3.upload_file(str(converted_pdf), S3_BUCKET, conv_key)
+        uploaded["converted_pdf"] = conv_key
+
+    # 3. mineru 解析产物
     for p in result_dir.rglob("*"):
         if not p.is_file():
             continue
@@ -313,14 +338,16 @@ async def process_one(task: dict) -> None:
         logger.info(f"{label}: detected type = {ftype}")
         patch(record_id, detectedFileType=ftype)
 
-        source_file, final_type = prepare_for_parse(downloaded, ftype, workdir)
+        parse_file, final_type, original_file, converted_pdf = prepare_for_parse(
+            downloaded, ftype, workdir,
+        )
         patch(record_id, finalType=final_type, parseSubStatus=SUB_PARSING)
 
-        result_dir = await parse_via_mineru(source_file, workdir)
+        result_dir = await parse_via_mineru(parse_file, workdir)
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
         key_prefix = f"{S3_PREFIX}/{research_id or str(record_id)}"
-        s3_keys = upload_result(result_dir, source_file, key_prefix)
+        s3_keys = upload_result(result_dir, original_file, key_prefix, converted_pdf)
 
         patch(
             record_id,
@@ -328,6 +355,7 @@ async def process_one(task: dict) -> None:
             parseSubStatus=None,
             parsedS3Bucket=S3_BUCKET,
             parsedSourceS3=s3_keys.get("source"),
+            convertedPdfS3=s3_keys.get("converted_pdf"),
             parsedMarkdownS3=s3_keys.get("markdown"),
             parsedContentListS3=s3_keys.get("content_list_json"),
             parsedLayoutPdfS3=s3_keys.get("layout_pdf"),
