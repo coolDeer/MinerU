@@ -179,6 +179,18 @@ def detect_file_type(path: Path) -> str:
     return "unknown"
 
 
+def docx_has_embedded_images(path: Path) -> bool:
+    """docx 是 zip,图片资源存放在 word/media/ 下。只要该目录有任意文件即视为含图。"""
+    try:
+        with zipfile.ZipFile(path) as zf:
+            for name in zf.namelist():
+                if name.startswith("word/media/") and not name.endswith("/"):
+                    return True
+    except zipfile.BadZipFile:
+        return True  # 坏 zip 走保守路径(PDF 转换)
+    return False
+
+
 # ========== 格式转换 ==========
 def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -204,12 +216,24 @@ def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
 def prepare_for_parse(
     downloaded: Path, ftype: str, workdir: Path, ts: str,
 ) -> tuple[Path, str, Path, Path | None]:
-    """返回 (parse_file, final_type, original_file, converted_pdf_or_None)"""
+    """返回 (parse_file, final_type, original_file, converted_pdf_or_None)
+
+    对纯文本 docx(无嵌入图片)跳过 LibreOffice→PDF 的重环节,直接走 MinerU 的 native
+    office 后端(`office_docx_analyze`),解析时间能从分钟级降到秒级。
+    """
     if ftype == "pdf":
         f = downloaded.rename(workdir / f"source_{ts}.pdf")
         return f, "pdf", f, None
-    if ftype in ("docx", "doc"):
-        original = downloaded.rename(workdir / f"source_{ts}.{ftype}")
+    if ftype == "docx":
+        original = downloaded.rename(workdir / f"source_{ts}.docx")
+        if docx_has_embedded_images(original):
+            logger.info(f"{original.name}: 含嵌入图片,转 PDF 走 hybrid 解析")
+            pdf = libreoffice_convert(original, workdir / "converted", "pdf")
+            return pdf, "pdf", original, pdf
+        logger.info(f"{original.name}: 无图片,直接走 office 后端")
+        return original, "docx", original, None
+    if ftype == "doc":
+        original = downloaded.rename(workdir / f"source_{ts}.doc")
         pdf = libreoffice_convert(original, workdir / "converted", "pdf")
         return pdf, "pdf", original, pdf
     if ftype == "xlsx":
