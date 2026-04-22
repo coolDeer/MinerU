@@ -1,0 +1,4 @@
+pymongo>=4.6.0
+boto3>=1.28.43
+httpx
+loguru>=0.7.2
