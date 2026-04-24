@@ -223,10 +223,10 @@ def prepare_for_parse(
     office 后端(`office_docx_analyze`),解析时间能从分钟级降到秒级。
     """
     if ftype == "pdf":
-        f = downloaded.rename(workdir / f"source_{ts}.pdf")
+        f = downloaded.rename(workdir / f"{ts}.pdf")
         return f, "pdf", f, None
     if ftype == "docx":
-        original = downloaded.rename(workdir / f"source_{ts}.docx")
+        original = downloaded.rename(workdir / f"{ts}.docx")
         if docx_has_embedded_images(original):
             logger.info(f"{original.name}: 含嵌入图片,转 PDF 走 hybrid 解析")
             pdf = libreoffice_convert(original, workdir / "converted", "pdf")
@@ -234,14 +234,14 @@ def prepare_for_parse(
         logger.info(f"{original.name}: 无图片,直接走 office 后端")
         return original, "docx", original, None
     if ftype == "doc":
-        original = downloaded.rename(workdir / f"source_{ts}.doc")
+        original = downloaded.rename(workdir / f"{ts}.doc")
         pdf = libreoffice_convert(original, workdir / "converted", "pdf")
         return pdf, "pdf", original, pdf
     if ftype == "xlsx":
-        f = downloaded.rename(workdir / f"source_{ts}.xlsx")
+        f = downloaded.rename(workdir / f"{ts}.xlsx")
         return f, "xlsx", f, None
     if ftype == "xls":
-        original = downloaded.rename(workdir / f"source_{ts}.xls")
+        original = downloaded.rename(workdir / f"{ts}.xls")
         xlsx = libreoffice_convert(original, workdir / "converted", "xlsx")
         return xlsx, "xlsx", original, None
     raise RuntimeError(f"不支持的文件类型: {ftype}")
@@ -302,13 +302,28 @@ def upload_result(
     output_dir: Path,
     key_prefix: str,
     converted_pdf: Path | None = None,
+    name_prefix: str | None = None,
 ) -> dict:
+    """把解析产物上传到 S3。
+
+    name_prefix: 若指定,会加在各顶层产物文件名前(如 "<researchId>_xxx.md"),
+    方便单个文件从文件名就能识别所属 research。images/ 子目录下的图片不加前缀,
+    以免破坏 markdown 里的相对图片链接。
+    """
     s3 = make_s3()
     uploaded: dict[str, str] = {}
 
+    def _apply_prefix(filename: str) -> str:
+        if not name_prefix:
+            return filename
+        # 已带前缀的跳过,避免重试时重复叠加
+        if filename.startswith(f"{name_prefix}_"):
+            return filename
+        return f"{name_prefix}_{filename}"
+
     # Word 转来的 PDF（原始文件已有 reportUrl，无需重复上传）
     if converted_pdf is not None:
-        conv_key = f"{key_prefix}/{converted_pdf.name}"
+        conv_key = f"{key_prefix}/{_apply_prefix(converted_pdf.name)}"
         uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
 
     # do_parse 产物结构: output_dir/<stem>/<method>/{files, images/}
@@ -317,12 +332,18 @@ def upload_result(
     md_files = [p for p in all_files if p.suffix == ".md"]
     content_root = md_files[0].parent if md_files else output_dir
 
+    def _key_for(rel: Path) -> str:
+        # 只给顶层文件加前缀, images/ 等子目录下的资源保持原名
+        if rel.parent == Path("."):
+            return f"{key_prefix}/{_apply_prefix(rel.name)}"
+        return f"{key_prefix}/{rel}"
+
     # 先上传非 .md 文件
     for p in all_files:
         if p.suffix == ".md":
             continue
         rel = p.relative_to(content_root)
-        key = f"{key_prefix}/{rel}"
+        key = _key_for(rel)
         url = s3_upload(s3, str(p), key)
         if p.name.endswith("_content_list.json"):
             uploaded["content_list_json"] = url
@@ -336,7 +357,7 @@ def upload_result(
         content = _rewrite_md_image_urls(content, images_base)
         md_path.write_text(content, encoding="utf-8")
         rel = md_path.relative_to(content_root)
-        key = f"{key_prefix}/{rel}"
+        key = _key_for(rel)
         url = s3_upload(s3, str(md_path), key)
         uploaded["markdown"] = url
 
@@ -389,7 +410,8 @@ def process_one(task: dict) -> None:
 
         folder = f"{research_id}/{record_id}" if research_id else str(record_id)
         key_prefix = f"{S3_PREFIX}/{folder}"
-        s3_keys = upload_result(output_dir, key_prefix, converted_pdf)
+        name_prefix = str(research_id) if research_id else str(record_id)
+        s3_keys = upload_result(output_dir, key_prefix, converted_pdf, name_prefix=name_prefix)
 
         patch(
             record_id,
