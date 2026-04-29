@@ -345,7 +345,11 @@ def upload_result(
         rel = p.relative_to(content_root)
         key = _key_for(rel)
         url = s3_upload(s3, str(p), key)
-        if p.name.endswith("_content_list.json"):
+        # 注意 v2 检查必须放在 v1 前面,因为 v2 的文件名 xxx_content_list_v2.json
+        # 也以 _content_list_v2.json 收尾,防御性匹配
+        if p.name.endswith("_content_list_v2.json"):
+            uploaded["content_list_v2_json"] = url
+        elif p.name.endswith("_content_list.json"):
             uploaded["content_list_json"] = url
         elif p.name.endswith("_layout.pdf"):
             uploaded["layout_pdf"] = url
@@ -421,6 +425,7 @@ def process_one(task: dict) -> None:
             convertedPdfS3=s3_keys.get("converted_pdf"),
             parsedMarkdownS3=s3_keys.get("markdown"),
             parsedContentListS3=s3_keys.get("content_list_json"),
+            parsedContentListV2S3=s3_keys.get("content_list_v2_json"),
             parsedLayoutPdfS3=s3_keys.get("layout_pdf"),
             parsedImagesS3Prefix=s3_keys.get("images_prefix"),
             parseCompletedAt=_now(),
