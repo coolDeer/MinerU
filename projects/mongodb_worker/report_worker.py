@@ -300,30 +300,29 @@ def s3_upload(s3, local_path: str, key: str) -> str:
 
 def upload_result(
     output_dir: Path,
-    key_prefix: str,
+    research_id: str,
     converted_pdf: Path | None = None,
-    name_prefix: str | None = None,
 ) -> dict:
-    """把解析产物上传到 S3。
+    """把解析产物扁平上传到 s3://{bucket}/{S3_PREFIX}/{research_id}/。
 
-    name_prefix: 若指定,会加在各顶层产物文件名前(如 "<researchId>_xxx.md"),
-    方便单个文件从文件名就能识别所属 research。images/ 子目录下的图片不加前缀,
-    以免破坏 markdown 里的相对图片链接。
+    顶层文件名前面会加 "{research_id}_" 前缀,方便单文件识别所属 research;
+    images/ 子目录下的图片保持原名,以免破坏 markdown 里的相对图片链接。
     """
     s3 = make_s3()
+    key_prefix = f"{S3_PREFIX}/{research_id}"
     uploaded: dict[str, str] = {}
 
-    def _apply_prefix(filename: str) -> str:
-        if not name_prefix:
-            return filename
-        # 已带前缀的跳过,避免重试时重复叠加
-        if filename.startswith(f"{name_prefix}_"):
-            return filename
-        return f"{name_prefix}_{filename}"
+    def _key_for(rel: Path) -> str:
+        if rel.parent == Path("."):
+            name = rel.name
+            if not name.startswith(f"{research_id}_"):
+                name = f"{research_id}_{name}"
+            return f"{key_prefix}/{name}"
+        return f"{key_prefix}/{rel}"
 
     # Word 转来的 PDF（原始文件已有 reportUrl，无需重复上传）
     if converted_pdf is not None:
-        conv_key = f"{key_prefix}/{_apply_prefix(converted_pdf.name)}"
+        conv_key = _key_for(Path(converted_pdf.name))
         uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
 
     # do_parse 产物结构: output_dir/<stem>/<method>/{files, images/}
@@ -331,12 +330,6 @@ def upload_result(
     all_files = [p for p in output_dir.rglob("*") if p.is_file()]
     md_files = [p for p in all_files if p.suffix == ".md"]
     content_root = md_files[0].parent if md_files else output_dir
-
-    def _key_for(rel: Path) -> str:
-        # 只给顶层文件加前缀, images/ 等子目录下的资源保持原名
-        if rel.parent == Path("."):
-            return f"{key_prefix}/{_apply_prefix(rel.name)}"
-        return f"{key_prefix}/{rel}"
 
     # 先上传非 .md 文件
     for p in all_files:
@@ -373,9 +366,9 @@ def upload_result(
 # ========== 主流程(同步) ==========
 def process_one(task: dict) -> None:
     record_id = task["_id"]
-    research_id = task.get("researchId")
+    research_id = str(task["researchId"])
     report_url = task.get("reportUrl")
-    label = research_id or str(record_id)
+    label = research_id
 
     logger.info(f"▶ {label}: {report_url}")
     ts = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
@@ -412,10 +405,7 @@ def process_one(task: dict) -> None:
             parse_local(parse_file, output_dir)
         patch(record_id, parseSubStatus=SUB_UPLOADING)
 
-        folder = f"{research_id}/{record_id}" if research_id else str(record_id)
-        key_prefix = f"{S3_PREFIX}/{folder}"
-        name_prefix = str(research_id) if research_id else str(record_id)
-        s3_keys = upload_result(output_dir, key_prefix, converted_pdf, name_prefix=name_prefix)
+        s3_keys = upload_result(output_dir, research_id, converted_pdf)
 
         patch(
             record_id,
