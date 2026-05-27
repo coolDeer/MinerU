@@ -28,6 +28,12 @@ import boto3
 import httpx
 from loguru import logger
 from pymongo import MongoClient, ReturnDocument
+from pymongo.errors import (
+    AutoReconnect,
+    ConnectionFailure,
+    NetworkTimeout,
+    ServerSelectionTimeoutError,
+)
 
 from mineru.cli.common import do_parse
 
@@ -52,6 +58,15 @@ MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "3"))
 POLL_IDLE_SECONDS = int(os.environ.get("POLL_IDLE_SECONDS", "30"))
 INTER_TASK_SLEEP_SECONDS = int(os.environ.get("INTER_TASK_SLEEP_SECONDS", "5"))
 LIBREOFFICE_BIN = os.environ.get("LIBREOFFICE_BIN", "soffice")
+MONGODB_SERVER_SELECTION_TIMEOUT_MS = int(
+    os.environ.get("MONGODB_SERVER_SELECTION_TIMEOUT_MS", "30000")
+)
+MONGODB_CONNECT_TIMEOUT_MS = int(os.environ.get("MONGODB_CONNECT_TIMEOUT_MS", "20000"))
+MONGODB_SOCKET_TIMEOUT_MS = int(os.environ.get("MONGODB_SOCKET_TIMEOUT_MS", "20000"))
+MONGODB_OP_RETRIES = max(1, int(os.environ.get("MONGODB_OP_RETRIES", "3")))
+MONGODB_OP_RETRY_SLEEP_SECONDS = float(
+    os.environ.get("MONGODB_OP_RETRY_SLEEP_SECONDS", "5")
+)
 
 
 # ========== 状态常量 ==========
@@ -69,14 +84,63 @@ SUB_UPLOADING = "uploading"
 _mongo: MongoClient | None = None
 
 
+TRANSIENT_MONGO_ERRORS = (
+    AutoReconnect,
+    ConnectionFailure,
+    NetworkTimeout,
+    ServerSelectionTimeoutError,
+)
+
+
 def get_coll():
     global _mongo
     if _mongo is None:
-        _mongo = MongoClient(MONGODB_DATABASE_URL)
+        _mongo = MongoClient(
+            MONGODB_DATABASE_URL,
+            serverSelectionTimeoutMS=MONGODB_SERVER_SELECTION_TIMEOUT_MS,
+            connectTimeoutMS=MONGODB_CONNECT_TIMEOUT_MS,
+            socketTimeoutMS=MONGODB_SOCKET_TIMEOUT_MS,
+        )
     db = _mongo[MONGODB_DB] if MONGODB_DB else _mongo.get_default_database()
     if db is None:
         raise RuntimeError("MONGODB_DATABASE_URL 没带默认 DB,且未设 MONGODB_DB")
     return db[COLL_NAME]
+
+
+def reset_mongo() -> None:
+    global _mongo
+    if _mongo is not None:
+        try:
+            _mongo.close()
+        except Exception:
+            pass
+        _mongo = None
+
+
+def is_transient_mongo_error(exc: Exception) -> bool:
+    # PyMongo 4.x may expose socket cancellations as private _OperationCancelled.
+    return isinstance(exc, TRANSIENT_MONGO_ERRORS) or type(exc).__name__ == "_OperationCancelled"
+
+
+def with_mongo_retry(description: str, func):
+    last_error = None
+    for attempt in range(1, MONGODB_OP_RETRIES + 1):
+        try:
+            return func(get_coll())
+        except Exception as e:
+            if not is_transient_mongo_error(e):
+                raise
+            last_error = e
+            reset_mongo()
+            if attempt >= MONGODB_OP_RETRIES:
+                break
+            sleep_seconds = MONGODB_OP_RETRY_SLEEP_SECONDS * attempt
+            logger.warning(
+                f"MongoDB {description} 失败({type(e).__name__}: {e}), "
+                f"{sleep_seconds:.1f}s 后重试 {attempt}/{MONGODB_OP_RETRIES}"
+            )
+            time.sleep(sleep_seconds)
+    raise last_error
 
 
 def make_s3():
@@ -95,44 +159,53 @@ def _now() -> datetime:
 # ========== 任务领取 ==========
 def ensure_indexes() -> None:
     try:
-        get_coll().create_index([("parseStatus", 1), ("parseLockedUntil", 1)])
+        with_mongo_retry(
+            "建索引",
+            lambda coll: coll.create_index([("parseStatus", 1), ("parseLockedUntil", 1)]),
+        )
     except Exception as e:
         logger.warning(f"建索引失败(权限不足?),Worker 仍可运行: {e}")
 
 
 def claim_task() -> dict | None:
-    now = _now()
-    lock_until = now + timedelta(seconds=LOCK_TTL_SECONDS)
-    return get_coll().find_one_and_update(
-        {
-            "reportUrl": {"$exists": True, "$ne": None, "$ne": ""},
-            "$or": [
-                {"parseStatus": STATUS_PENDING},
-                {
-                    "parseStatus": STATUS_PROCESSING,
-                    "parseLockedUntil": {"$lt": now},
-                    "parseRetryCount": {"$lt": MAX_RETRIES},
-                },
-            ],
-        },
-        {
-            "$set": {
-                "parseStatus": STATUS_PROCESSING,
-                "parseSubStatus": SUB_DOWNLOADING,
-                "parseLockedBy": WORKER_ID,
-                "parseLockedUntil": lock_until,
-                "parseStartedAt": now,
-                "parseUpdatedAt": now,
+    def _claim(coll):
+        now = _now()
+        lock_until = now + timedelta(seconds=LOCK_TTL_SECONDS)
+        return coll.find_one_and_update(
+            {
+                "reportUrl": {"$exists": True, "$ne": None, "$ne": ""},
+                "$or": [
+                    {"parseStatus": STATUS_PENDING},
+                    {
+                        "parseStatus": STATUS_PROCESSING,
+                        "parseLockedUntil": {"$lt": now},
+                        "parseRetryCount": {"$lt": MAX_RETRIES},
+                    },
+                ],
             },
-        },
-        return_document=ReturnDocument.AFTER,
-        sort=[("createTime", 1)],
-    )
+            {
+                "$set": {
+                    "parseStatus": STATUS_PROCESSING,
+                    "parseSubStatus": SUB_DOWNLOADING,
+                    "parseLockedBy": WORKER_ID,
+                    "parseLockedUntil": lock_until,
+                    "parseStartedAt": now,
+                    "parseUpdatedAt": now,
+                },
+            },
+            return_document=ReturnDocument.AFTER,
+            sort=[("createTime", 1)],
+        )
+
+    return with_mongo_retry("领取任务", _claim)
 
 
 def patch(record_id, **fields) -> None:
     fields.setdefault("parseUpdatedAt", _now())
-    get_coll().update_one({"_id": record_id}, {"$set": fields})
+    with_mongo_retry(
+        "更新任务",
+        lambda coll: coll.update_one({"_id": record_id}, {"$set": fields}),
+    )
 
 
 # ========== 下载 + 类型识别 ==========
@@ -426,23 +499,34 @@ def process_one(task: dict) -> None:
         logger.success(f"✅ {label} done")
     except Exception as e:
         logger.exception(f"❌ {label} failed: {e}")
-        current = get_coll().find_one({"_id": record_id}, {"parseRetryCount": 1}) or {}
-        next_retry = (current.get("parseRetryCount") or 0) + 1
-        is_dead = next_retry >= MAX_RETRIES
-        get_coll().update_one(
-            {"_id": record_id},
-            {
-                "$set": {
-                    "parseStatus": STATUS_FAILED if is_dead else STATUS_PENDING,
-                    "parseSubStatus": None,
-                    "parseErrorMessage": str(e)[:2000],
-                    "parseUpdatedAt": _now(),
-                    "parseLockedBy": None,
-                    "parseLockedUntil": None,
+        error_message = str(e)[:2000]
+
+        def _mark_failed(coll):
+            current = coll.find_one({"_id": record_id}, {"parseRetryCount": 1}) or {}
+            next_retry = (current.get("parseRetryCount") or 0) + 1
+            is_dead = next_retry >= MAX_RETRIES
+            return coll.update_one(
+                {"_id": record_id},
+                {
+                    "$set": {
+                        "parseStatus": STATUS_FAILED if is_dead else STATUS_PENDING,
+                        "parseSubStatus": None,
+                        "parseErrorMessage": error_message,
+                        "parseUpdatedAt": _now(),
+                        "parseLockedBy": None,
+                        "parseLockedUntil": None,
+                    },
+                    "$inc": {"parseRetryCount": 1},
                 },
-                "$inc": {"parseRetryCount": 1},
-            },
-        )
+            )
+
+        try:
+            with_mongo_retry("回写失败状态", _mark_failed)
+        except Exception as mark_err:
+            logger.error(
+                f"{label}: 回写失败状态也失败({type(mark_err).__name__}: {mark_err}); "
+                f"任务会在锁超时后重新被领取"
+            )
     finally:
         shutil.rmtree(workdir, ignore_errors=True)
 
@@ -453,7 +537,11 @@ def main_loop() -> None:
     while True:
         processed = 0
         for i in range(BATCH_SIZE):
-            task = claim_task()
+            try:
+                task = claim_task()
+            except Exception as e:
+                logger.exception(f"领取任务失败, {POLL_IDLE_SECONDS}s 后重试: {e}")
+                break
             if not task:
                 break
             if i > 0 and INTER_TASK_SLEEP_SECONDS > 0:
