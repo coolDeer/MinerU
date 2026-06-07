@@ -23,6 +23,7 @@ import time
 import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 import boto3
 import httpx
@@ -173,7 +174,7 @@ def claim_task() -> dict | None:
         lock_until = now + timedelta(seconds=LOCK_TTL_SECONDS)
         return coll.find_one_and_update(
             {
-                "reportUrl": {"$exists": True, "$ne": None, "$ne": ""},
+                "reportUrl": {"$exists": True, "$nin": [None, ""]},
                 "$or": [
                     {"parseStatus": STATUS_PENDING},
                     {
@@ -212,6 +213,17 @@ def patch(record_id, **fields) -> None:
 PDF_MAGIC = b"%PDF-"
 ZIP_MAGIC = b"PK\x03\x04"
 OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+SUPPORTED_SOURCE_SUFFIXES = {"pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"}
+OLE_SUFFIXES = {"doc", "xls", "ppt"}
+FILENAME_HINT_FIELDS = (
+    "fileName",
+    "file_name",
+    "filename",
+    "originalFileName",
+    "reportName",
+    "reportTitle",
+    "title",
+)
 
 
 def download_file(url: str, dest: Path) -> Path:
@@ -229,14 +241,48 @@ def download_file(url: str, dest: Path) -> Path:
     return dest
 
 
-def detect_file_type(path: Path) -> str:
+def suffix_from_hint(value: object) -> str | None:
+    if not isinstance(value, str):
+        return None
+    value = value.strip().strip('"').strip("'")
+    if not value:
+        return None
+
+    parsed = urlparse(value)
+    path_text = parsed.path if (parsed.scheme or parsed.netloc) else value
+    path_text = unquote(path_text).split("?", 1)[0].split("#", 1)[0]
+    suffix = Path(path_text).suffix.lower().lstrip(".")
+    return suffix if suffix in SUPPORTED_SOURCE_SUFFIXES else None
+
+
+def filename_hints_from_task(task: dict) -> list[str]:
+    hints = []
+    for field in FILENAME_HINT_FIELDS:
+        value = task.get(field)
+        if isinstance(value, str):
+            hints.append(value)
+    report_url = task.get("reportUrl")
+    if isinstance(report_url, str):
+        hints.append(report_url)
+    return hints
+
+
+def detect_file_type(path: Path, filename_hints: list[str] | None = None) -> str:
+    hinted_suffixes = [
+        suffix
+        for suffix in (suffix_from_hint(hint) for hint in filename_hints or [])
+        if suffix
+    ]
+
     with open(path, "rb") as f:
         head = f.read(8)
     if head.startswith(PDF_MAGIC):
         return "pdf"
     if head.startswith(OLE_MAGIC):
-        suf = path.suffix.lower().lstrip(".")
-        return suf if suf in ("doc", "xls", "ppt") else "ole"
+        for suffix in hinted_suffixes:
+            if suffix in OLE_SUFFIXES:
+                return suffix
+        return "ole"
     if head.startswith(ZIP_MAGIC):
         try:
             with zipfile.ZipFile(path) as zf:
@@ -268,9 +314,11 @@ def docx_has_embedded_images(path: Path) -> bool:
 # ========== 格式转换 ==========
 def libreoffice_convert(src: Path, out_dir: Path, target: str) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
+    lo_profile = (out_dir.parent / f"lo-{os.getpid()}").resolve()
+    lo_profile.mkdir(parents=True, exist_ok=True)
     cmd = [
         LIBREOFFICE_BIN, "--headless",
-        f"-env:UserInstallation=file:///tmp/lo-{os.getpid()}",
+        f"-env:UserInstallation={lo_profile.as_uri()}",
         "--convert-to", target,
         "--outdir", str(out_dir),
         str(src),
@@ -308,6 +356,13 @@ def prepare_for_parse(
         return original, "docx", original, None
     if ftype == "doc":
         original = downloaded.rename(workdir / f"{ts}.doc")
+        pdf = libreoffice_convert(original, workdir / "converted", "pdf")
+        return pdf, "pdf", original, pdf
+    if ftype == "pptx":
+        f = downloaded.rename(workdir / f"{ts}.pptx")
+        return f, "pptx", f, None
+    if ftype == "ppt":
+        original = downloaded.rename(workdir / f"{ts}.ppt")
         pdf = libreoffice_convert(original, workdir / "converted", "pdf")
         return pdf, "pdf", original, pdf
     if ftype == "xlsx":
@@ -449,7 +504,7 @@ def process_one(task: dict) -> None:
     try:
         downloaded = download_file(report_url, workdir / "download.bin")
 
-        ftype = detect_file_type(downloaded)
+        ftype = detect_file_type(downloaded, filename_hints_from_task(task))
         logger.info(f"{label}: detected type = {ftype}")
         patch(record_id, detectedFileType=ftype)
 
