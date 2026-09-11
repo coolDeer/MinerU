@@ -36,6 +36,50 @@ from pymongo.errors import (
     ServerSelectionTimeoutError,
 )
 
+
+def _env_flag_enabled(value: str | None, default: bool) -> bool:
+    if value is None:
+        return default
+    return value.strip().lower() not in ("0", "false", "no", "off")
+
+
+def load_env_file(env_path: Path, override: bool = True) -> None:
+    if not env_path.exists():
+        return
+
+    loaded = 0
+    env_lines = env_path.read_text(encoding="utf-8").splitlines()
+    for line_no, raw_line in enumerate(env_lines, 1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].lstrip()
+        if "=" not in line:
+            logger.warning(f"Skip invalid .env line {env_path}:{line_no}")
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if not key:
+            logger.warning(f"Skip empty .env key {env_path}:{line_no}")
+            continue
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
+            value = value[1:-1]
+        if override or key not in os.environ:
+            os.environ[key] = value
+            loaded += 1
+
+    logger.info(f"Loaded {loaded} env vars from {env_path}")
+
+
+DEFAULT_ENV_PATH = Path(__file__).with_name(".env")
+ENV_PATH = Path(os.environ.get("MONGODB_WORKER_ENV_FILE", DEFAULT_ENV_PATH))
+ENV_OVERRIDE = _env_flag_enabled(os.environ.get("MONGODB_WORKER_ENV_OVERRIDE"), True)
+load_env_file(ENV_PATH, override=ENV_OVERRIDE)
+
+# MinerU modules may inspect environment variables at import time.
 from mineru.cli.common import do_parse
 
 

@@ -88,10 +88,11 @@ LIBREOFFICE_BIN=/Applications/LibreOffice.app/Contents/MacOS/soffice
 ```bash
 cd /Users/bububot/Desktop/project/MinerU
 source .venv/bin/activate
-set -a && source projects/mongodb_worker/.env && set +a
 
 python3 projects/mongodb_worker/report_worker.py
 ```
+
+`report_worker.py` 会自动读取 `projects/mongodb_worker/.env`。
 
 ---
 

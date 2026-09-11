@@ -159,50 +159,35 @@ LIBREOFFICE_BIN=C:\Program Files\LibreOffice\program\soffice.exe
 
 - `.env` 里有密钥，不要提交到 git。
 - MongoDB 密码里的特殊字符需要 URL 编码，例如 `$` 写成 `%24`。
-- 当前 `report_worker.py` 不会自动读取 `.env`，需要启动前在 PowerShell 中加载。
+- `report_worker.py` 会自动读取同目录下的 `.env`。
 
-## 7. 加载 `.env`
+## 7. 启动 Worker
 
-每次新开终端后，在项目根目录执行：
-
-```powershell
-Get-Content .\projects\mongodb_worker\.env | Where-Object { $_ -match '^\s*[^#\s].*=' } | ForEach-Object {
-  $name, $value = $_ -split '=', 2
-  $name = $name.Trim()
-  $value = $value.Trim().Trim('"').Trim("'")
-  [Environment]::SetEnvironmentVariable($name, $value, 'Process')
-}
-```
-
-可以检查关键变量：
-
-```powershell
-echo $env:MINERU_BACKEND
-echo $env:LIBREOFFICE_BIN
-echo $env:MONGODB_COLL
-```
-
-## 8. 启动 Worker
+在项目根目录执行：
 
 ```powershell
 python projects\mongodb_worker\report_worker.py
 ```
 
+Worker 启动时会自动读取：
+
+```text
+projects\mongodb_worker\.env
+```
+
+如果需要使用其他 `.env` 文件，可以先设置：
+
+```powershell
+$env:MONGODB_WORKER_ENV_FILE="D:\path\to\.env"
+```
+
 Worker 会循环领取 MongoDB 中 `parseStatus=pending` 的任务，处理完成后把 Markdown、JSON、图片等产物上传到 S3，并回写 `ResearchReportRecord`。
 
-## 9. 每次重启终端后的最小流程
+## 8. 每次重启终端后的最小流程
 
 ```powershell
 conda activate mineru
 cd C:\path\to\MinerU
-
-Get-Content .\projects\mongodb_worker\.env | Where-Object { $_ -match '^\s*[^#\s].*=' } | ForEach-Object {
-  $name, $value = $_ -split '=', 2
-  $name = $name.Trim()
-  $value = $value.Trim().Trim('"').Trim("'")
-  [Environment]::SetEnvironmentVariable($name, $value, 'Process')
-}
-
 python projects\mongodb_worker\report_worker.py
 ```
 
@@ -248,7 +233,13 @@ python --version
 
 ### Worker 启动时报缺少环境变量
 
-说明 `.env` 没有加载到当前 PowerShell。重新执行第 7 步加载命令。
+确认 `.env` 文件存在于：
+
+```text
+projects\mongodb_worker\.env
+```
+
+也可以用 `MONGODB_WORKER_ENV_FILE` 指向其他配置文件。
 
 ### `CUDA is not available`
 
@@ -302,7 +293,7 @@ MINERU_LMDEPLOY_BACKEND=pytorch
 MINERU_LMDEPLOY_EAGER_MODE=1
 ```
 
-重新加载 `.env` 并重启 worker。启动后日志仍应显示：
+重启 worker。启动后日志仍应显示：
 
 ```text
 lmdeploy device is: cuda, lmdeploy backend is: pytorch
