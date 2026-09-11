@@ -152,6 +152,9 @@ BATCH_SIZE=5
 LOCK_TTL_SECONDS=3600
 MAX_RETRIES=3
 POLL_IDLE_SECONDS=30
+DOWNLOAD_TIMEOUT_SECONDS=300
+DOWNLOAD_RETRIES=3
+DOWNLOAD_RETRY_SLEEP_SECONDS=5
 LIBREOFFICE_BIN=C:\Program Files\LibreOffice\program\soffice.exe
 ```
 
@@ -240,6 +243,24 @@ projects\mongodb_worker\.env
 ```
 
 也可以用 `MONGODB_WORKER_ENV_FILE` 指向其他配置文件。
+
+### `Server disconnected without sending a response`
+
+这是源文件下载阶段的网络断连，常见于 S3、代理或临时网络抖动。Worker 会按 `.env` 中的配置重试：
+
+```env
+DOWNLOAD_TIMEOUT_SECONDS=300
+DOWNLOAD_RETRIES=3
+DOWNLOAD_RETRY_SLEEP_SECONDS=5
+```
+
+如果大 PDF 下载经常失败，可以把重试次数和超时调大：
+
+```env
+DOWNLOAD_TIMEOUT_SECONDS=600
+DOWNLOAD_RETRIES=5
+DOWNLOAD_RETRY_SLEEP_SECONDS=10
+```
 
 ### `CUDA is not available`
 
