@@ -91,6 +91,14 @@ uv pip install -e ".[all]"
 uv pip install -r projects\mongodb_worker\requirements.txt
 ```
 
+Windows + NVIDIA GPU 运行 `lmdeploy` 的 PyTorch 后端时还需要 Triton。RTX 50 系列建议使用 CUDA 12.8 的 PyTorch，并安装与 PyTorch 2.8 匹配的 Windows Triton：
+
+```powershell
+python -m pip uninstall -y torch torchvision torchaudio
+python -m pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+python -m pip install triton-windows==3.4.0.post21
+```
+
 检查 worker 基础依赖：
 
 ```powershell
@@ -136,6 +144,8 @@ AWS_S3_PREFIX=research-reports/parsed
 
 # ---- MinerU ----
 MINERU_BACKEND=hybrid-auto-engine
+MINERU_LMDEPLOY_BACKEND=pytorch
+MINERU_LMDEPLOY_EAGER_MODE=1
 
 # ---- Worker ----
 BATCH_SIZE=5
@@ -240,3 +250,60 @@ python --version
 
 说明 `.env` 没有加载到当前 PowerShell。重新执行第 7 步加载命令。
 
+### `CUDA is not available`
+
+先确认 NVIDIA 驱动正常：
+
+```powershell
+nvidia-smi
+```
+
+再确认当前 conda 环境中的 PyTorch 能看到 CUDA：
+
+```powershell
+python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'no cuda')"
+```
+
+如果 `torch.cuda.is_available()` 是 `False`，重新安装 CUDA 12.8 版 PyTorch：
+
+```powershell
+python -m pip uninstall -y torch torchvision torchaudio
+python -m pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+```
+
+### `No module named 'triton'`
+
+确认 `.env` 中使用 PyTorch 后端：
+
+```env
+MINERU_LMDEPLOY_BACKEND=pytorch
+MINERU_LMDEPLOY_EAGER_MODE=1
+```
+
+安装 Windows Triton：
+
+```powershell
+python -m pip install triton-windows==3.4.0.post21
+```
+
+验证：
+
+```powershell
+python -c "import triton; print(triton.__version__)"
+python -m lmdeploy.pytorch.check_env.triton_custom_add
+```
+
+### `OverflowError: Python int too large to convert to C long`
+
+这是 Windows 上 PyTorch Inductor/Triton 编译路径的兼容问题。确认 `.env` 中启用 eager mode：
+
+```env
+MINERU_LMDEPLOY_BACKEND=pytorch
+MINERU_LMDEPLOY_EAGER_MODE=1
+```
+
+重新加载 `.env` 并重启 worker。启动后日志仍应显示：
+
+```text
+lmdeploy device is: cuda, lmdeploy backend is: pytorch
+```

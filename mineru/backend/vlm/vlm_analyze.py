@@ -198,6 +198,9 @@ class ModelSingleton:
 
                         if lm_backend == "pytorch":
                             kwargs["device_type"] = device_type
+                            eager_mode = os.getenv("MINERU_LMDEPLOY_EAGER_MODE", "")
+                            if eager_mode.lower() in ("1", "true", "yes", "on"):
+                                kwargs["eager_mode"] = True
                             backend_config = PytorchEngineConfig(**kwargs)
                         elif lm_backend == "turbomind":
                             backend_config = TurbomindEngineConfig(**kwargs)
