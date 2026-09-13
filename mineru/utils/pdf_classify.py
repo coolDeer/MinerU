@@ -429,7 +429,7 @@ def get_high_image_coverage_ratio_pdfium(pdf_doc, page_indices):
         for page_object in page.get_objects(
             filter=[pdfium_c.FPDF_PAGEOBJ_IMAGE], max_depth=3
         ):
-            left, bottom, right, top = page_object.get_pos()
+            left, bottom, right, top = _get_page_object_bounds(page_object)
             image_area += max(0.0, right - left) * max(0.0, top - bottom)
 
         coverage_ratio = min(image_area / page_area, 1.0) if page_area > 0 else 0.0
@@ -439,6 +439,24 @@ def get_high_image_coverage_ratio_pdfium(pdf_doc, page_indices):
     if not page_indices:
         return 0.0
     return high_image_coverage_pages / len(page_indices)
+
+
+def _get_page_object_bounds(page_object):
+    """Return page-object bounds across pypdfium2 API versions.
+
+    ``PdfPageObject.get_pos()`` was replaced by ``get_bounds()`` in newer
+    pypdfium2 releases.  Prefer the current API while retaining compatibility
+    with older supported installations.
+    """
+    get_bounds = getattr(page_object, "get_bounds", None)
+    if callable(get_bounds):
+        return get_bounds()
+
+    get_pos = getattr(page_object, "get_pos", None)
+    if callable(get_pos):
+        return get_pos()
+
+    raise AttributeError("PDF page object exposes neither get_bounds() nor get_pos()")
 
 
 def extract_pages(src_pdf_bytes: bytes) -> bytes:

@@ -244,7 +244,9 @@ def claim_task() -> dict | None:
                 },
             },
             return_document=ReturnDocument.AFTER,
-            sort=[("createTime", 1)],
+            # Always prioritize the most recently published reports. createTime
+            # provides a deterministic fallback for equal/missing publishDate.
+            sort=[("publishDate", -1), ("createTime", -1)],
         )
 
     return with_mongo_retry("领取任务", _claim)
@@ -616,6 +618,7 @@ def process_one(task: dict) -> None:
             parsedContentListV2S3=s3_keys.get("content_list_v2_json"),
             parsedLayoutPdfS3=s3_keys.get("layout_pdf"),
             parsedImagesS3Prefix=s3_keys.get("images_prefix"),
+            parsedByWorker=WORKER_ID,
             parseCompletedAt=_now(),
             parseLockedBy=None,
             parseLockedUntil=None,
