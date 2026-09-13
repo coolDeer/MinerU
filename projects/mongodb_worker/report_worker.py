@@ -35,6 +35,52 @@ from pymongo.errors import (
     ServerSelectionTimeoutError,
 )
 
+
+def _env_flag_enabled(value: str | None, default: bool) -> bool:
+    if value is None:
+        return default
+    return value.strip().lower() not in ("0", "false", "no", "off")
+
+
+def load_env_file(env_path: Path, override: bool = True) -> None:
+    """Load simple KEY=VALUE entries before importing MinerU modules."""
+    if not env_path.exists():
+        return
+
+    loaded = 0
+    for line_no, raw_line in enumerate(
+        env_path.read_text(encoding="utf-8").splitlines(), 1
+    ):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].lstrip()
+        if "=" not in line:
+            logger.warning(f"Skip invalid .env line {env_path}:{line_no}")
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if not key:
+            logger.warning(f"Skip empty .env key {env_path}:{line_no}")
+            continue
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
+            value = value[1:-1]
+        if override or key not in os.environ:
+            os.environ[key] = value
+            loaded += 1
+
+    logger.info(f"Loaded {loaded} env vars from {env_path}")
+
+
+DEFAULT_ENV_PATH = Path(__file__).with_name(".env")
+ENV_PATH = Path(os.environ.get("MONGODB_WORKER_ENV_FILE", DEFAULT_ENV_PATH))
+ENV_OVERRIDE = _env_flag_enabled(os.environ.get("MONGODB_WORKER_ENV_OVERRIDE"), True)
+load_env_file(ENV_PATH, override=ENV_OVERRIDE)
+
+# MinerU modules may inspect environment variables at import time.
 from mineru.cli.common import do_parse
 
 
@@ -58,6 +104,11 @@ MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "3"))
 POLL_IDLE_SECONDS = int(os.environ.get("POLL_IDLE_SECONDS", "30"))
 INTER_TASK_SLEEP_SECONDS = int(os.environ.get("INTER_TASK_SLEEP_SECONDS", "5"))
 LIBREOFFICE_BIN = os.environ.get("LIBREOFFICE_BIN", "soffice")
+DOWNLOAD_TIMEOUT_SECONDS = float(os.environ.get("DOWNLOAD_TIMEOUT_SECONDS", "300"))
+DOWNLOAD_RETRIES = max(1, int(os.environ.get("DOWNLOAD_RETRIES", "3")))
+DOWNLOAD_RETRY_SLEEP_SECONDS = float(
+    os.environ.get("DOWNLOAD_RETRY_SLEEP_SECONDS", "5")
+)
 MONGODB_SERVER_SELECTION_TIMEOUT_MS = int(
     os.environ.get("MONGODB_SERVER_SELECTION_TIMEOUT_MS", "30000")
 )
@@ -219,16 +270,37 @@ OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 def download_file(url: str, dest: Path) -> Path:
     if not url:
         raise ValueError("reportUrl 为空")
-    with httpx.stream("GET", url, timeout=300, follow_redirects=True) as resp:
-        resp.raise_for_status()
-        with open(dest, "wb") as f:
-            for chunk in resp.iter_bytes():
-                f.write(chunk)
-    size = dest.stat().st_size
-    if size == 0:
-        raise RuntimeError(f"下载为空: {url}")
-    logger.info(f"Downloaded {url} -> {dest.name} ({size} bytes)")
-    return dest
+    last_error = None
+    for attempt in range(1, DOWNLOAD_RETRIES + 1):
+        try:
+            dest.unlink(missing_ok=True)
+            with httpx.stream(
+                "GET",
+                url,
+                timeout=DOWNLOAD_TIMEOUT_SECONDS,
+                follow_redirects=True,
+            ) as resp:
+                resp.raise_for_status()
+                with open(dest, "wb") as f:
+                    for chunk in resp.iter_bytes():
+                        f.write(chunk)
+            size = dest.stat().st_size
+            if size == 0:
+                raise RuntimeError(f"下载为空: {url}")
+            logger.info(f"Downloaded {url} -> {dest.name} ({size} bytes)")
+            return dest
+        except (httpx.HTTPError, OSError, RuntimeError) as e:
+            last_error = e
+            dest.unlink(missing_ok=True)
+            if attempt >= DOWNLOAD_RETRIES:
+                break
+            sleep_seconds = DOWNLOAD_RETRY_SLEEP_SECONDS * attempt
+            logger.warning(
+                f"Download failed ({type(e).__name__}: {e}), "
+                f"{sleep_seconds:.1f}s 后重试 {attempt}/{DOWNLOAD_RETRIES}: {url}"
+            )
+            time.sleep(sleep_seconds)
+    raise last_error
 
 
 def detect_file_type(path: Path) -> str:
