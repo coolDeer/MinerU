@@ -104,6 +104,11 @@ MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "3"))
 POLL_IDLE_SECONDS = int(os.environ.get("POLL_IDLE_SECONDS", "30"))
 INTER_TASK_SLEEP_SECONDS = int(os.environ.get("INTER_TASK_SLEEP_SECONDS", "5"))
 LIBREOFFICE_BIN = os.environ.get("LIBREOFFICE_BIN", "soffice")
+DOWNLOAD_TIMEOUT_SECONDS = float(os.environ.get("DOWNLOAD_TIMEOUT_SECONDS", "300"))
+DOWNLOAD_RETRIES = max(1, int(os.environ.get("DOWNLOAD_RETRIES", "3")))
+DOWNLOAD_RETRY_SLEEP_SECONDS = float(
+    os.environ.get("DOWNLOAD_RETRY_SLEEP_SECONDS", "5")
+)
 MONGODB_SERVER_SELECTION_TIMEOUT_MS = int(
     os.environ.get("MONGODB_SERVER_SELECTION_TIMEOUT_MS", "30000")
 )
@@ -265,16 +270,37 @@ OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 def download_file(url: str, dest: Path) -> Path:
     if not url:
         raise ValueError("reportUrl 为空")
-    with httpx.stream("GET", url, timeout=300, follow_redirects=True) as resp:
-        resp.raise_for_status()
-        with open(dest, "wb") as f:
-            for chunk in resp.iter_bytes():
-                f.write(chunk)
-    size = dest.stat().st_size
-    if size == 0:
-        raise RuntimeError(f"下载为空: {url}")
-    logger.info(f"Downloaded {url} -> {dest.name} ({size} bytes)")
-    return dest
+    last_error = None
+    for attempt in range(1, DOWNLOAD_RETRIES + 1):
+        try:
+            dest.unlink(missing_ok=True)
+            with httpx.stream(
+                "GET",
+                url,
+                timeout=DOWNLOAD_TIMEOUT_SECONDS,
+                follow_redirects=True,
+            ) as resp:
+                resp.raise_for_status()
+                with open(dest, "wb") as f:
+                    for chunk in resp.iter_bytes():
+                        f.write(chunk)
+            size = dest.stat().st_size
+            if size == 0:
+                raise RuntimeError(f"下载为空: {url}")
+            logger.info(f"Downloaded {url} -> {dest.name} ({size} bytes)")
+            return dest
+        except (httpx.HTTPError, OSError, RuntimeError) as e:
+            last_error = e
+            dest.unlink(missing_ok=True)
+            if attempt >= DOWNLOAD_RETRIES:
+                break
+            sleep_seconds = DOWNLOAD_RETRY_SLEEP_SECONDS * attempt
+            logger.warning(
+                f"Download failed ({type(e).__name__}: {e}), "
+                f"{sleep_seconds:.1f}s 后重试 {attempt}/{DOWNLOAD_RETRIES}: {url}"
+            )
+            time.sleep(sleep_seconds)
+    raise last_error
 
 
 def detect_file_type(path: Path) -> str:
