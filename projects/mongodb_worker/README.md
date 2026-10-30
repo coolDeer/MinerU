@@ -145,7 +145,7 @@ db.documents.countDocuments({
 三个 worker 和底层 S3Reader/S3Writer 均通过 Node 获取签名，再使用 HTTP PUT/GET 传输文件。MinerU 不再需要 AWS 密钥、S3 endpoint 或 boto3；Node 服务保留 AWS 配置。旧构造函数的凭证参数仅为兼容调用保留，不再使用，`bucket_info` 也不再读取。当前只支持 Node 配置的 AWS bucket，不支持任意多 bucket 或 MinIO。
 
 - 先部署 Node 端本次目录白名单更新，再更新 MinerU；远程鉴权使用 `AUTH_API_KEY`，沿用 Node 的 IP 白名单规则。
-- 主流程沿用 `AWS_S3_PREFIX=research-reports/parsed`；通用 worker 沿用 `S3_PREFIX`。Node 放行 `research-reports`、`mineru-parsed`、`mineru`。
+- 主流程使用 `AWS_S3_PREFIX=research/parsed`（兼容已有 Node 的 research 根目录）；通用 worker 沿用 `S3_PREFIX`。Node 放行 `research-reports`、`mineru-parsed`、`mineru`。
 - Markdown、JSON、PDF 等按私有文件上传。图片进入 `images/mineru/{原业务目录}/...`，Markdown 和 JSON 的相对图片引用替换为实际返回的地址。本地原始产物保留。图片是否公开读取由 AWS 的 `images/*` Bucket 策略控制，需要部署时确认。
 - 数据库保存永久 `fileUrl` 或实际 `key`（沿用各 worker 原有字段格式），不保存会过期的签名链接，也没有 complete 接口。
 - 下载私有原文件时，`s3://bucket/key` 和已编码的 AWS S3 永久地址会先申请下载签名；外部 HTTP 链接和已有签名链接直接使用。历史含未编码 `#` 的地址有歧义，应提供正确编码地址或原始 key。

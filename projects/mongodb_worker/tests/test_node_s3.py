@@ -53,7 +53,7 @@ class SigningTest(unittest.TestCase):
     def test_upload_returns_encoded_location_and_does_not_delete_local_file(self):
         file = self.root / '报告 #1.md'
         file.write_bytes(b'abc')
-        result = self.client.upload_file(file, '', 'research-reports/parsed/报告 #1.md')
+        result = self.client.upload_file(file, '', 'research/parsed/报告 #1.md')
         self.assertIn('%20%231.md', result['fileUrl'])
         payload = json.loads(self.requests[0].content)
         self.assertEqual(payload['sha256'], hashlib.sha256(b'abc').hexdigest())
@@ -67,11 +67,11 @@ class SigningTest(unittest.TestCase):
         (self.root / 'images' / 'a.png').write_bytes(b'png')
         (self.root / 'report.md').write_text('![图](images/a.png)', encoding='utf-8')
         (self.root / 'report_content_list.json').write_text('[{"img_path":"images/a.png"}]')
-        result = api.upload_tree(self.client, self.root, 'research-reports/parsed/123', top_name_prefix='123_')
+        result = api.upload_tree(self.client, self.root, 'research/parsed/123', top_name_prefix='123_')
         image = result['images/a.png']['fileUrl']
-        self.assertIn('/images/mineru/research-reports/parsed/123/images/a.png', image)
-        self.assertIn(image.encode(), self.objects['/research-reports/parsed/123/123_report.md'])
-        self.assertEqual(json.loads(self.objects['/research-reports/parsed/123/123_report_content_list.json'])[0]['img_path'], image)
+        self.assertIn('/images/mineru/research/parsed/123/images/a.png', image)
+        self.assertIn(image.encode(), self.objects['/research/parsed/123/123_report.md'])
+        self.assertEqual(json.loads(self.objects['/research/parsed/123/123_report_content_list.json'])[0]['img_path'], image)
         self.assertEqual((self.root / 'report.md').read_text(), '![图](images/a.png)')
 
     def test_range_read_and_literal_plus_percent_are_preserved(self):
@@ -106,7 +106,7 @@ class SigningTest(unittest.TestCase):
         path = MODULE.parents[3] / 'projects/mongodb_worker' / filename
         tree = ast.parse(path.read_text())
         node = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == function)
-        namespace = dict(Path=Path, make_s3=lambda: self.client, S3_PREFIX='research-reports/parsed',
+        namespace = dict(Path=Path, make_s3=lambda: self.client, S3_PREFIX='research/parsed',
                          S3_BUCKET='', upload_tree=api.upload_tree, logger=Mock(),
                          IMAGE_EXTENSIONS=api.IMAGE_EXTENSIONS)
         exec(compile(ast.Module(body=[node], type_ignores=[]), str(path), 'exec',
@@ -121,7 +121,7 @@ class SigningTest(unittest.TestCase):
         self.assertTrue(report['markdown'].endswith('/123/123_report.md'))
         self.assertNotIn('?', report['markdown'])
         generic = self.load_worker_function('worker.py', 'upload_to_s3')(self.root, '456')
-        self.assertEqual(generic['markdown'], 'research-reports/parsed/456/report.md')
+        self.assertEqual(generic['markdown'], 'research/parsed/456/report.md')
         self.assertEqual(generic['s3_bucket'], 'bucket')
 
     def test_pg_worker_moves_image_source_into_images_directory(self):
@@ -131,7 +131,7 @@ class SigningTest(unittest.TestCase):
         output.mkdir()
         (output / 'report.md').write_text('# report')
         result = self.load_worker_function('worker_with_pg.py', 'upload_assets_to_s3')(output, '123', source)
-        self.assertEqual(result['source'], 'images/mineru/research-reports/parsed/docs/123/source.png')
+        self.assertEqual(result['source'], 'images/mineru/research/parsed/docs/123/source.png')
 
     def test_transient_upload_failure_refreshes_grant_and_reopens_body(self):
         original = self.handle
@@ -147,3 +147,29 @@ class SigningTest(unittest.TestCase):
             self.client.put_object(Bucket='bucket', Key='research/a.pdf', Body=b'pdf')
         self.assertEqual(attempts, [b'pdf', b'pdf'])
         self.assertEqual(sum(r.url.host == 'node.test' for r in self.requests), 2)
+
+    def test_worker_encoding_fallback_still_uses_signed_download(self):
+        import ast
+        import __future__
+        from unittest.mock import Mock
+        from urllib.parse import quote, unquote, urlsplit
+        path = MODULE.parents[3] / 'projects/mongodb_worker/report_worker.py'
+        tree = ast.parse(path.read_text())
+        nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef)
+                 and n.name in ('download_url_candidates', 'download_file')]
+        calls = []
+        def download(url, destination, timeout):
+            calls.append(url)
+            if len(calls) == 1:
+                raise ValueError('Ambiguous fragment')
+            destination.write_bytes(b'docx')
+        namespace = dict(Path=Path, quote=quote, unquote=unquote, urlsplit=urlsplit,
+                         download_source_file=download, DOWNLOAD_RETRIES=1,
+                         DOWNLOAD_TIMEOUT_SECONDS=10, httpx=httpx, logger=Mock())
+        exec(compile(ast.Module(body=nodes, type_ignores=[]), str(path), 'exec',
+                     flags=__future__.annotations.compiler_flag), namespace)
+        url = 'https://bucket.s3.ap-southeast-1.amazonaws.com/research/a#b.docx'
+        target = self.root / 'download.bin'
+        namespace['download_file'](url, target)
+        self.assertEqual(calls, [url, url.replace('#', '%23')])
+        self.assertEqual(target.read_bytes(), b'docx')

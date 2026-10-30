@@ -64,7 +64,7 @@ MONGODB_DATABASE_URL=mongodb://user:pass@host:27017/dbname?authSource=dbname
 # ---- Node 签名接口 ----
 NODE_SERVICE_URL=https://your-node-service
 AUTH_API_KEY=你的Node接口Key
-AWS_S3_PREFIX=research-reports/parsed
+AWS_S3_PREFIX=research/parsed
 
 # ---- MinerU ----
 MINERU_BACKEND=hybrid-auto-engine
@@ -145,7 +145,7 @@ db.ResearchReportRecord.updateMany(
 ## S3 产物结构
 
 ```
-s3://<bucket>/research-reports/parsed/<researchId>/
+s3://<bucket>/research/parsed/<researchId>/
 ├── source.pdf / source.docx / source.xlsx        # 原始下载文件
 ├── converted.pdf                                  # Word 转来的 PDF（仅 docx/doc 输入时有）
 ├── source/auto/<name>.md                          # Markdown 正文
