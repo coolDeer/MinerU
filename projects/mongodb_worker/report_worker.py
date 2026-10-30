@@ -23,6 +23,7 @@ import time
 import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote, unquote, urlsplit
 
 import boto3
 import httpx
@@ -267,23 +268,51 @@ ZIP_MAGIC = b"PK\x03\x04"
 OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 
 
+def download_url_candidates(url: str) -> list[str]:
+    """Try S3 key encodings without changing working or signed URLs."""
+    candidates = [url]
+    parts = urlsplit(url)
+    if (
+        parts.scheme != "https"
+        or not (parts.hostname or "").endswith(".amazonaws.com")
+        or ".s3" not in (parts.hostname or "")
+        or "?" in url
+    ):
+        return candidates
+    # Preserve literal # in stored object names, rather than treating it as
+    # a fragment. Some keys also contain literal percent-encoded characters.
+    key = url.split("://", 1)[1].partition("/")[2]
+    base = f"{parts.scheme}://{parts.netloc}/"
+    for value in (unquote(key), key):
+        candidate = base + quote(value, safe="/")
+        if candidate not in candidates:
+            candidates.append(candidate)
+    return candidates
+
+
 def download_file(url: str, dest: Path) -> Path:
     if not url:
         raise ValueError("reportUrl 为空")
     last_error = None
+    candidates = download_url_candidates(url)
     for attempt in range(1, DOWNLOAD_RETRIES + 1):
         try:
             dest.unlink(missing_ok=True)
-            with httpx.stream(
-                "GET",
-                url,
-                timeout=DOWNLOAD_TIMEOUT_SECONDS,
-                follow_redirects=True,
-            ) as resp:
-                resp.raise_for_status()
-                with open(dest, "wb") as f:
-                    for chunk in resp.iter_bytes():
-                        f.write(chunk)
+            for candidate_index, candidate in enumerate(candidates):
+                with httpx.stream(
+                    "GET",
+                    candidate,
+                    timeout=DOWNLOAD_TIMEOUT_SECONDS,
+                    follow_redirects=True,
+                ) as resp:
+                    if resp.status_code in (403, 404) and candidate_index + 1 < len(candidates):
+                        logger.warning("S3 download denied or missing; trying alternate key encoding")
+                        continue
+                    resp.raise_for_status()
+                    with open(dest, "wb") as f:
+                        for chunk in resp.iter_bytes():
+                            f.write(chunk)
+                    break
             size = dest.stat().st_size
             if size == 0:
                 raise RuntimeError(f"下载为空: {url}")
