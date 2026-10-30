@@ -36,10 +36,10 @@ source .venv/bin/activate
 
 # 3. 装 MinerU + 所有依赖
 uv pip install -e ".[all]"
-uv pip install pymongo boto3 httpx loguru
+uv pip install pymongo httpx loguru
 
 # 4. 确认装好
-python3 -c "import pymongo, boto3, mineru; print('deps OK')"
+python3 -c "import pymongo, httpx, mineru; print('deps OK')"
 ```
 
 > 首次执行时会下载模型权重（几 GB），耐心等待。
@@ -61,11 +61,9 @@ cp projects/mongodb_worker/.env.example projects/mongodb_worker/.env
 MONGODB_DATABASE_URL=mongodb://user:pass@host:27017/dbname?authSource=dbname
 # 密码中有 $ 等特殊字符需 URL 编码，例如 $ → %24
 
-# ---- AWS S3 ----
-AWS_ACCESS_KEY_ID=你的key
-AWS_SECRET_ACCESS_KEY=你的secret
-AWS_REGION=ap-southeast-1
-AWS_S3_BUCKET_NAME=你的bucket
+# ---- Node 签名接口 ----
+NODE_SERVICE_URL=https://your-node-service
+AUTH_API_KEY=你的Node接口Key
 AWS_S3_PREFIX=research-reports/parsed
 
 # ---- MinerU ----
@@ -168,4 +166,4 @@ s3://<bucket>/research-reports/parsed/<researchId>/
 | soffice 进程不退出 | 多实例抢锁 | `pkill -9 -f soffice` |
 | `RuntimeError: There is no Stream(gpu, N)` | MLX 在非主线程运行 | 不要通过 mineru-api 调用，直接跑 `report_worker.py` |
 | 记录卡在 `processing` | Worker 崩溃，锁未释放 | 等 `LOCK_TTL_SECONDS`（1h）超时自动释放，或手动：`db.ResearchReportRecord.updateMany({parseStatus:"processing"}, {$set:{parseStatus:"pending"}})` |
-| `SignatureDoesNotMatch` | S3 region 不对 | 确认 `AWS_REGION` 与 bucket 实际 region 一致 |
+| `SignatureDoesNotMatch` | S3 region 不对 | 确认 Node 服务的 S3 region 与 bucket 实际 region 一致，并检查系统时间 |

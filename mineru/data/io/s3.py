@@ -1,6 +1,5 @@
 # Copyright (c) Opendatalab. All rights reserved.
-import boto3
-from botocore.config import Config
+from .node_s3 import SignedS3Client
 
 from ..io.base import IOReader, IOWriter
 
@@ -9,9 +8,9 @@ class S3Reader(IOReader):
     def __init__(
         self,
         bucket: str,
-        ak: str,
-        sk: str,
-        endpoint_url: str,
+        ak: str = '',
+        sk: str = '',
+        endpoint_url: str = '',
         addressing_style: str = 'auto',
     ):
         """s3 reader client.
@@ -22,21 +21,10 @@ class S3Reader(IOReader):
             sk (str): secret key
             endpoint_url (str): endpoint url of s3
             addressing_style (str, optional): Defaults to 'auto'. Other valid options here are 'path' and 'virtual'
-            refer to https://boto3.amazonaws.com/v1/documentation/api/1.9.42/guide/s3.html
+            Legacy credentials/endpoint arguments are ignored; configure NODE_SERVICE_URL and AUTH_API_KEY.
         """
         self._bucket = bucket
-        self._ak = ak
-        self._sk = sk
-        self._s3_client = boto3.client(
-            service_name='s3',
-            aws_access_key_id=ak,
-            aws_secret_access_key=sk,
-            endpoint_url=endpoint_url,
-            config=Config(
-                s3={'addressing_style': addressing_style},
-                retries={'max_attempts': 5, 'mode': 'standard'},
-            ),
-        )
+        self._s3_client = SignedS3Client()
 
     def read(self, key: str) -> bytes:
         """Read the file.
@@ -60,6 +48,10 @@ class S3Reader(IOReader):
         Returns:
             bytes: the content of file
         """
+        if limit == 0:
+            return b''
+        if offset < 0 or limit < -1:
+            raise ValueError('Invalid byte range')
         if limit > -1:
             range_header = f'bytes={offset}-{offset+limit-1}'
             res = self._s3_client.get_object(
@@ -76,9 +68,9 @@ class S3Writer(IOWriter):
     def __init__(
         self,
         bucket: str,
-        ak: str,
-        sk: str,
-        endpoint_url: str,
+        ak: str = '',
+        sk: str = '',
+        endpoint_url: str = '',
         addressing_style: str = 'auto',
     ):
         """s3 reader client.
@@ -89,21 +81,10 @@ class S3Writer(IOWriter):
             sk (str): secret key
             endpoint_url (str): endpoint url of s3
             addressing_style (str, optional): Defaults to 'auto'. Other valid options here are 'path' and 'virtual'
-            refer to https://boto3.amazonaws.com/v1/documentation/api/1.9.42/guide/s3.html
+            Legacy credentials/endpoint arguments are ignored; configure NODE_SERVICE_URL and AUTH_API_KEY.
         """
         self._bucket = bucket
-        self._ak = ak
-        self._sk = sk
-        self._s3_client = boto3.client(
-            service_name='s3',
-            aws_access_key_id=ak,
-            aws_secret_access_key=sk,
-            endpoint_url=endpoint_url,
-            config=Config(
-                s3={'addressing_style': addressing_style},
-                retries={'max_attempts': 5, 'mode': 'standard'},
-            ),
-        )
+        self._s3_client = SignedS3Client()
 
     def write(self, key: str, data: bytes):
         """Write file with data.

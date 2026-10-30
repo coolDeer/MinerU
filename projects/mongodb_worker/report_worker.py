@@ -24,7 +24,7 @@ import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-import boto3
+from mineru.data.io.node_s3 import SignedS3Client, upload_tree, download_source_file
 import httpx
 from loguru import logger
 from pymongo import MongoClient, ReturnDocument
@@ -89,10 +89,7 @@ MONGODB_DATABASE_URL = os.environ["MONGODB_DATABASE_URL"]
 MONGODB_DB = os.environ.get("MONGODB_DB")
 COLL_NAME = os.environ.get("MONGODB_COLL", "ResearchReportRecord")
 
-AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
-AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
-AWS_REGION = os.environ.get("AWS_REGION", "ap-southeast-1")
-S3_BUCKET = os.environ["AWS_S3_BUCKET_NAME"]
+S3_BUCKET = os.environ.get("AWS_S3_BUCKET_NAME", "")
 S3_PREFIX = os.environ.get("AWS_S3_PREFIX", "research-reports/parsed")
 
 MINERU_BACKEND = os.environ.get("MINERU_BACKEND", "hybrid-auto-engine")
@@ -195,12 +192,7 @@ def with_mongo_retry(description: str, func):
 
 
 def make_s3():
-    return boto3.client(
-        "s3",
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-        region_name=AWS_REGION,
-    )
+    return SignedS3Client()
 
 
 def _now() -> datetime:
@@ -274,16 +266,7 @@ def download_file(url: str, dest: Path) -> Path:
     for attempt in range(1, DOWNLOAD_RETRIES + 1):
         try:
             dest.unlink(missing_ok=True)
-            with httpx.stream(
-                "GET",
-                url,
-                timeout=DOWNLOAD_TIMEOUT_SECONDS,
-                follow_redirects=True,
-            ) as resp:
-                resp.raise_for_status()
-                with open(dest, "wb") as f:
-                    for chunk in resp.iter_bytes():
-                        f.write(chunk)
+            download_source_file(url, dest, DOWNLOAD_TIMEOUT_SECONDS)
             size = dest.stat().st_size
             if size == 0:
                 raise RuntimeError(f"下载为空: {url}")
@@ -419,94 +402,28 @@ def parse_local(source_file: Path, output_dir: Path) -> Path:
 
 
 # ========== S3 上传 ==========
-import re as _re
-
-
-def _rewrite_md_image_urls(content: str, md_s3_dir: str) -> str:
-    """把 markdown 里的相对图片路径替换为完整 S3 URL."""
-    base = md_s3_dir.rstrip("/")
-
-    def _replace(m: _re.Match) -> str:
-        alt, path = m.group(1), m.group(2)
-        if path.startswith("http://") or path.startswith("https://"):
-            return m.group(0)
-        full = base + "/" + path.lstrip("./")
-        return f"![{alt}]({full})"
-
-    return _re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", _replace, content)
-
-
-def s3_url(key: str) -> str:
-    return f"https://{S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{key}"
-
-
-def s3_upload(s3, local_path: str, key: str) -> str:
-    s3.upload_file(local_path, S3_BUCKET, key, ExtraArgs={"ACL": "public-read"})
-    return s3_url(key)
-
-
-def upload_result(
-    output_dir: Path,
-    research_id: str,
-    converted_pdf: Path | None = None,
-) -> dict:
-    """把解析产物扁平上传到 s3://{bucket}/{S3_PREFIX}/{research_id}/。
-
-    顶层文件名前面会加 "{research_id}_" 前缀,方便单文件识别所属 research;
-    images/ 子目录下的图片保持原名,以免破坏 markdown 里的相对图片链接。
-    """
-    s3 = make_s3()
-    key_prefix = f"{S3_PREFIX}/{research_id}"
-    uploaded: dict[str, str] = {}
-
-    def _key_for(rel: Path) -> str:
-        if rel.parent == Path("."):
-            name = rel.name
-            if not name.startswith(f"{research_id}_"):
-                name = f"{research_id}_{name}"
-            return f"{key_prefix}/{name}"
-        return f"{key_prefix}/{rel}"
-
-    # Word 转来的 PDF（原始文件已有 reportUrl，无需重复上传）
+def upload_result(output_dir: Path, research_id: str, converted_pdf: Path | None = None) -> dict:
+    from urllib.parse import quote, urlsplit
+    client = make_s3()
+    prefix = f"{S3_PREFIX}/{research_id}"
+    uploaded = {}
     if converted_pdf is not None:
-        conv_key = _key_for(Path(converted_pdf.name))
-        uploaded["converted_pdf"] = s3_upload(s3, str(converted_pdf), conv_key)
-
-    # do_parse 产物结构: output_dir/<stem>/<method>/{files, images/}
-    # 以含 .md 的那层目录为根，扁平上传到 key_prefix/
-    all_files = [p for p in output_dir.rglob("*") if p.is_file()]
-    md_files = [p for p in all_files if p.suffix == ".md"]
-    content_root = md_files[0].parent if md_files else output_dir
-
-    # 先上传非 .md 文件
-    for p in all_files:
-        if p.suffix == ".md":
-            continue
-        rel = p.relative_to(content_root)
-        key = _key_for(rel)
-        url = s3_upload(s3, str(p), key)
-        # 注意 v2 检查必须放在 v1 前面,因为 v2 的文件名 xxx_content_list_v2.json
-        # 也以 _content_list_v2.json 收尾,防御性匹配
-        if p.name.endswith("_content_list_v2.json"):
-            uploaded["content_list_v2_json"] = url
-        elif p.name.endswith("_content_list.json"):
-            uploaded["content_list_json"] = url
-        elif p.name.endswith("_layout.pdf"):
-            uploaded["layout_pdf"] = url
-
-    # 上传 markdown：把相对图片路径替换为完整 S3 URL
-    images_base = s3_url(f"{key_prefix}")
-    for md_path in md_files:
-        content = md_path.read_text(encoding="utf-8")
-        content = _rewrite_md_image_urls(content, images_base)
-        md_path.write_text(content, encoding="utf-8")
-        rel = md_path.relative_to(content_root)
-        key = _key_for(rel)
-        url = s3_upload(s3, str(md_path), key)
-        uploaded["markdown"] = url
-
-    uploaded["images_prefix"] = s3_url(f"{key_prefix}/")
-    logger.info(f"Uploaded to s3://{S3_BUCKET}/{key_prefix}/")
+        result = client.upload_file(str(converted_pdf), S3_BUCKET,
+                                    f"{prefix}/{research_id}_{converted_pdf.name}")
+        uploaded["converted_pdf"] = result['fileUrl']
+    md_files = list(output_dir.rglob('*.md'))
+    root = md_files[0].parent if md_files else output_dir
+    results = upload_tree(client, root, prefix, S3_BUCKET, research_id + '_')
+    for name, result in results.items():
+        if name.endswith('.md'): uploaded['markdown'] = result['fileUrl']
+        elif name.endswith('_content_list_v2.json'): uploaded['content_list_v2_json'] = result['fileUrl']
+        elif name.endswith('_content_list.json'): uploaded['content_list_json'] = result['fileUrl']
+        elif name.endswith('_layout.pdf'): uploaded['layout_pdf'] = result['fileUrl']
+    if results:
+        url = urlsplit(next(iter(results.values()))['fileUrl'])
+        uploaded['images_prefix'] = f"{url.scheme}://{url.netloc}/" + quote(f"images/mineru/{prefix}/", safe='/')
+    uploaded['bucket'] = client.bucket
+    logger.info(f"Uploaded parsed assets for {research_id}")
     return uploaded
 
 
@@ -558,7 +475,7 @@ def process_one(task: dict) -> None:
             record_id,
             parseStatus=STATUS_COMPLETED,
             parseSubStatus=None,
-            parsedS3Bucket=S3_BUCKET,
+            parsedS3Bucket=s3_keys.get("bucket"),
             convertedPdfS3=s3_keys.get("converted_pdf"),
             parsedMarkdownS3=s3_keys.get("markdown"),
             parsedContentListS3=s3_keys.get("content_list_json"),

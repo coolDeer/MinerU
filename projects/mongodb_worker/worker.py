@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
-import boto3
+from mineru.data.io.node_s3 import SignedS3Client, upload_tree, download_source_file
 import httpx
 from loguru import logger
 from pymongo import MongoClient, ReturnDocument
@@ -31,11 +31,8 @@ MONGO_COLL = os.environ.get("MONGO_COLL", "documents")
 MINERU_API_URL = os.environ.get("MINERU_API_URL", "http://127.0.0.1:8000")
 MINERU_BACKEND = os.environ.get("MINERU_BACKEND", "hybrid-auto-engine")
 
-S3_BUCKET = os.environ["S3_BUCKET"]
+S3_BUCKET = os.environ.get("S3_BUCKET", "")
 S3_PREFIX = os.environ.get("S3_PREFIX", "mineru-parsed")
-S3_ENDPOINT = os.environ.get("S3_ENDPOINT")  # None = AWS
-AWS_ACCESS_KEY = os.environ["AWS_ACCESS_KEY"]
-AWS_SECRET_KEY = os.environ["AWS_SECRET_KEY"]
 
 WORKER_ID = f"{socket.gethostname()}-{os.getpid()}"
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "5"))
@@ -50,12 +47,7 @@ def make_mongo():
 
 
 def make_s3():
-    return boto3.client(
-        "s3",
-        aws_access_key_id=AWS_ACCESS_KEY,
-        aws_secret_access_key=AWS_SECRET_KEY,
-        endpoint_url=S3_ENDPOINT,
-    )
+    return SignedS3Client()
 
 
 # ========== 核心逻辑 ==========
@@ -100,11 +92,7 @@ def download_source(url: str, dest: Path) -> Path:
     local_path = dest / f"source{suffix}"
 
     if parsed.scheme in ("http", "https"):
-        with httpx.stream("GET", url, timeout=300, follow_redirects=True) as resp:
-            resp.raise_for_status()
-            with open(local_path, "wb") as f:
-                for chunk in resp.iter_bytes():
-                    f.write(chunk)
+        download_source_file(url, local_path)
     elif parsed.scheme == "s3":
         # s3://bucket/key 格式
         s3 = make_s3()
@@ -173,29 +161,14 @@ async def parse_via_mineru(source_file: Path, workdir: Path) -> Path:
 
 
 def upload_to_s3(result_dir: Path, doc_id: str) -> dict:
-    """把解析结果上传到 S3,返回 key 映射。"""
-    s3 = make_s3()
+    client = make_s3()
     prefix = f"{S3_PREFIX}/{doc_id}"
-    uploaded = {}
-
-    for local_file in result_dir.rglob("*"):
-        if not local_file.is_file():
-            continue
-        rel = local_file.relative_to(result_dir)
-        key = f"{prefix}/{rel}"
-        s3.upload_file(str(local_file), S3_BUCKET, key)
-
-        name = local_file.name
-        if name.endswith(".md"):
-            uploaded["markdown"] = key
-        elif name.endswith("_content_list.json"):
-            uploaded["content_list_json"] = key
-        elif name.endswith("_layout.pdf"):
-            uploaded["layout_pdf"] = key
-
-    uploaded["images_prefix"] = f"{prefix}/images/"
-    uploaded["s3_bucket"] = S3_BUCKET
-    logger.info(f"Uploaded {len(list(result_dir.rglob('*')))} files to s3://{S3_BUCKET}/{prefix}/")
+    results = upload_tree(client, result_dir, prefix, S3_BUCKET)
+    uploaded = {"images_prefix": f"images/mineru/{prefix}/images/", "s3_bucket": client.bucket}
+    for name, result in results.items():
+        if name.endswith('.md'): uploaded['markdown'] = result['key']
+        elif name.endswith('_content_list.json'): uploaded['content_list_json'] = result['key']
+        elif name.endswith('_layout.pdf'): uploaded['layout_pdf'] = result['key']
     return uploaded
 
 

@@ -18,7 +18,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
-import boto3
+from mineru.data.io.node_s3 import SignedS3Client, upload_tree, download_source_file, IMAGE_EXTENSIONS
 import httpx
 import psycopg
 from loguru import logger
@@ -39,11 +39,8 @@ PG_DSN = os.environ["PG_DSN"]  # "postgresql://user:pass@host/db"
 MINERU_API_URL = os.environ.get("MINERU_API_URL", "http://127.0.0.1:8000")
 MINERU_BACKEND = os.environ.get("MINERU_BACKEND", "hybrid-auto-engine")
 
-S3_BUCKET = os.environ["S3_BUCKET"]
+S3_BUCKET = os.environ.get("S3_BUCKET", "")
 S3_PREFIX = os.environ.get("S3_PREFIX", "mineru")
-S3_ENDPOINT = os.environ.get("S3_ENDPOINT")
-AWS_ACCESS_KEY = os.environ["AWS_ACCESS_KEY"]
-AWS_SECRET_KEY = os.environ["AWS_SECRET_KEY"]
 
 EMBED_MODEL_NAME = os.environ.get("EMBED_MODEL", "BAAI/bge-m3")
 WORKER_ID = f"{socket.gethostname()}-{os.getpid()}"
@@ -60,12 +57,7 @@ def get_embedder() -> SentenceTransformer:
 
 
 def make_s3():
-    return boto3.client(
-        "s3",
-        aws_access_key_id=AWS_ACCESS_KEY,
-        aws_secret_access_key=AWS_SECRET_KEY,
-        endpoint_url=S3_ENDPOINT,
-    )
+    return SignedS3Client()
 
 
 def make_mongo():
@@ -198,26 +190,16 @@ async def parse_via_mineru(source_file: Path, workdir: Path) -> Path:
 
 
 def upload_assets_to_s3(result_dir: Path, doc_id: str, source_file: Path) -> dict:
-    s3 = make_s3()
+    client = make_s3()
     prefix = f"{S3_PREFIX}/docs/{doc_id}"
-
-    # 上传原文件
     source_key = f"{prefix}/source{source_file.suffix}"
-    s3.upload_file(str(source_file), S3_BUCKET, source_key)
-
-    # 上传解析产物
-    uploaded = {"source": source_key, "images_prefix": f"{prefix}/images/"}
-    for p in result_dir.rglob("*"):
-        if not p.is_file():
-            continue
-        rel = p.relative_to(result_dir)
-        key = f"{prefix}/{rel}"
-        s3.upload_file(str(p), S3_BUCKET, key)
-        if p.name.endswith(".md"):
-            uploaded["markdown"] = key
-        elif p.name.endswith("_layout.pdf"):
-            uploaded["layout_pdf"] = key
-
+    if source_file.suffix.lower() in IMAGE_EXTENSIONS:
+        source_key = "images/mineru/" + source_key
+    source = client.upload_file(str(source_file), S3_BUCKET, source_key)
+    uploaded = {"source": source['key'], "images_prefix": f"images/mineru/{prefix}/images/"}
+    for name, result in upload_tree(client, result_dir, prefix, S3_BUCKET).items():
+        if name.endswith('.md'): uploaded['markdown'] = result['key']
+        elif name.endswith('_layout.pdf'): uploaded['layout_pdf'] = result['key']
     return uploaded
 
 
@@ -300,11 +282,7 @@ def download_source(url: str, dest: Path) -> Path:
     suffix = Path(parsed.path).suffix or ".bin"
     local_path = dest / f"source{suffix}"
     if parsed.scheme in ("http", "https"):
-        with httpx.stream("GET", url, timeout=300, follow_redirects=True) as resp:
-            resp.raise_for_status()
-            with open(local_path, "wb") as f:
-                for chunk in resp.iter_bytes():
-                    f.write(chunk)
+        download_source_file(url, local_path)
     elif parsed.scheme == "s3":
         s3 = make_s3()
         s3.download_file(parsed.netloc, parsed.path.lstrip("/"), str(local_path))
