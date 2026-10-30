@@ -8,9 +8,9 @@ class S3DataReader(MultiBucketS3DataReader):
         self,
         default_prefix_without_bucket: str,
         bucket: str,
-        ak: str,
-        sk: str,
-        endpoint_url: str,
+        ak: str = '',
+        sk: str = '',
+        endpoint_url: str = '',
         addressing_style: str = 'auto',
     ):
         """s3 reader client.
@@ -22,7 +22,7 @@ class S3DataReader(MultiBucketS3DataReader):
             sk (str): secret key
             endpoint_url (str): endpoint url of s3
             addressing_style (str, optional): Defaults to 'auto'. Other valid options here are 'path' and 'virtual'
-            refer to https://boto3.amazonaws.com/v1/documentation/api/1.9.42/guide/s3.html
+            Legacy credentials/endpoint arguments are ignored; configure NODE_SERVICE_URL and AUTH_API_KEY.
         """
         super().__init__(
             f'{bucket}/{default_prefix_without_bucket}',
@@ -43,9 +43,9 @@ class S3DataWriter(MultiBucketS3DataWriter):
         self,
         default_prefix_without_bucket: str,
         bucket: str,
-        ak: str,
-        sk: str,
-        endpoint_url: str,
+        ak: str = '',
+        sk: str = '',
+        endpoint_url: str = '',
         addressing_style: str = 'auto',
     ):
         """s3 writer client.
@@ -57,7 +57,7 @@ class S3DataWriter(MultiBucketS3DataWriter):
             sk (str): secret key
             endpoint_url (str): endpoint url of s3
             addressing_style (str, optional): Defaults to 'auto'. Other valid options here are 'path' and 'virtual'
-            refer to https://boto3.amazonaws.com/v1/documentation/api/1.9.42/guide/s3.html
+            Legacy credentials/endpoint arguments are ignored; configure NODE_SERVICE_URL and AUTH_API_KEY.
         """
         super().__init__(
             f'{bucket}/{default_prefix_without_bucket}',

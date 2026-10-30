@@ -7,9 +7,9 @@ class S3Config(BaseModel):
     """S3 config
     """
     bucket_name: str = Field(description='s3 bucket name', min_length=1)
-    access_key: str = Field(description='s3 access key', min_length=1)
-    secret_key: str = Field(description='s3 secret key', min_length=1)
-    endpoint_url: str = Field(description='s3 endpoint url', min_length=1)
+    access_key: str = ''  # Deprecated: Node owns AWS credentials and endpoint.
+    secret_key: str = ''  # Deprecated: Node owns AWS credentials and endpoint.
+    endpoint_url: str = ''  # Deprecated: Node owns AWS credentials and endpoint.
     addressing_style: str = Field(description='s3 addressing style', default='auto', min_length=1)
 
 

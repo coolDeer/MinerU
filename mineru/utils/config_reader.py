@@ -31,21 +31,8 @@ def read_config():
 
 
 def get_s3_config(bucket_name: str):
-    """~/magic-pdf.json 读出来."""
-    config = read_config()
-
-    bucket_info = config.get('bucket_info')
-    if bucket_name not in bucket_info:
-        access_key, secret_key, storage_endpoint = bucket_info['[default]']
-    else:
-        access_key, secret_key, storage_endpoint = bucket_info[bucket_name]
-
-    if access_key is None or secret_key is None or storage_endpoint is None:
-        raise Exception(f'ak, sk or endpoint not found in {CONFIG_FILE_NAME}')
-
-    # logger.info(f"get_s3_config: ak={access_key}, sk={secret_key}, endpoint={storage_endpoint}")
-
-    return access_key, secret_key, storage_endpoint
+    """Legacy arguments are retained; Node now owns S3 credentials/configuration."""
+    return '', '', ''
 
 
 def get_s3_config_dict(path: str):
